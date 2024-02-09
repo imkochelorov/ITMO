@@ -1,5 +1,5 @@
 # ITMO
-Конспекты M3137 2023 года поступления, кафедра КТ, университет ИТМО
+Конспекты M3136-37 2023 года поступления, кафедра КТ, университет ИТМО
 ## 1 семестр
 _в процессе (а может и нет)_
 ## 2 семестр
@@ -13,4 +13,4 @@ _в процессе (а может и нет)_
 - [Конспект лекций](https://github.com/imkochelorov/ITMO/blob/main/notes/linear-algebra/s2/main.pdf)
 - [Конспект практик](https://github.com/imkochelorov/ITMO/blob/main/notes/linear-algebra/s2/practice.pdf)
 
-_Thanks to `_scarleteagle`_
+_Special thanks to_ [`_scarleteagle`](https://t.me/WeComeForWar)
