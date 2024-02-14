@@ -1,7 +1,7 @@
 #import "../../../template.typ": *
 
 #set page(margin: 0.4in)
-#set par(leading: 0.55em, first-line-indent: 0em, justify: true)
+#set par(leading: 0.55em, first-line-indent: 0em)
 #show par: set block(spacing: 0.55em)
 #show heading: set block(above: 1.4em, below: 1em)
 #show heading.where(level: 1): set align(center)
@@ -14,7 +14,7 @@
     "_scarleteagle",
     "imkochelorov"
   ),
-  date: "07.02.2023",
+  date: "07.02.2024",
 )
 
 //по файлику на лекцию??
