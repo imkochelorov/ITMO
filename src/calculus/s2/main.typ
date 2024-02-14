@@ -1,8 +1,10 @@
-#import "../../template.typ": *
+#import "template.typ": *
 
 #set page(margin: 0.55in)
 #set par(leading: 0.55em, first-line-indent: 0em, justify: false)
+#set text(font: "New Computer Modern")
 #set heading(numbering: "1.1.")
+#show raw: set text(font: "New Computer Modern Mono")
 #show par: set block(spacing: 0.55em)
 #show heading: set block(above: 1.4em, below: 1em)
 #show heading.where(level: 1): set align(center)
@@ -19,7 +21,7 @@
   title: "Математический анализ\nII семестр",
   authors: (
     "_scarleteagle",
-    "imkochelorov"
+    "ikochelorov"
   ),
   date: "зима/весна 2024",
   subtitle: "Лектор: Кохась Константин Петрович"
@@ -44,6 +46,8 @@
     strong("Следствие " + str(number.pos().at(0)) + ":")
   }
 }
+#let limsup = $overline(lim)$
+#let liminf = $underline(lim)$
 
 #outline(title: "Оглавление", indent: auto)
 
@@ -137,7 +141,7 @@ _Ослабленная площадь_ $sigma: cal(E)-> [0, +infinity)$:
 
 - Нормировка
 - Ослабленная аддитивность: $E in cal(E) quad E=E_1 union E_2$ (разбиение верт. отрезком) $=> sigma E=sigma E_1 + sigma E_2$
-// площадь сигма по КТ
+
 \
 *Новости* (хорошие и странные):\ Ослабленные площади существуют, ослабленных площадей много
 \ \
@@ -197,8 +201,7 @@ $-int_a^b abs(f) <= int_a^b f <= int_a^b abs(f)$\ \
 #def _интеграл с переменным верхним пределом_ \ $f in C([a, b]), Phi: [a, b] -> RR, Phi(x) = int_a^x f$ --- _интеграл с переменным верхним пределом_\ \
 
 #th (_Барроу_) \ $Phi$ --- интеграл с пер. верх. пределом, дифф на $[a, b]$, $forall x quad Phi'(x)=f(x)$ \ \
-// че там в начале написано
-// т1 из неопр интегралов, вернули долг
+
 #proof \
 $int_a^y f - int_a^x f = (int_a^x f + int_x^y f) - int_a^x f$\ \
 $y > x: lim_(y->x+0) (Phi(y)-Phi(x))/(y-x)=lim_(y->x+0) 1/(y-x) int_x^y f = lim_(y->x+0) f(c)=f(x)$\ \
@@ -225,7 +228,7 @@ $int_a^b f = Phi(b) - Phi(a) = (F(b)+C) - (F(a)+C)=F(b)-F(a)$
   $n_k = 1, 3, 5, dots => x_n_k -> -1$
 \
 #def _верхний предел / нижний предел_ \ $(x_n) subset RR, quad y_n = sup(x_n, x_(n+1), dots), quad z_n = inf(x_n, x_(n+1), dots) => z_n <= x_n <= y_n, quad y_(n+1) >= y_n,quad$$z_(n+1)<=z_n$ \ \
-_Верхний предел_ $overline(lim_(n->+infinity)) x_n= limits(limsup)_(n -> +inf) x_n =lim_(n->+infinity) y_n$\ \ _Нижний предел_ $underline(lim_(n->+infinity)) x_n= limits(liminf)_(n->+inf) x_n = lim_(n->+infinity) z_n$
+_Верхний предел_ $overline(lim_(n->+infinity)) x_n= limits(op("limsup"))_(n -> +inf) x_n =lim_(n->+infinity) y_n$\ \ _Нижний предел_ $underline(lim_(n->+infinity)) x_n= limits(op("liminf"))_(n->+inf) x_n = lim_(n->+infinity) z_n$
 \ \
 #th
 - $underline(lim) x_n <= overline(lim) x_n$
@@ -233,5 +236,98 @@ _Верхний предел_ $overline(lim_(n->+infinity)) x_n= limits(limsup)_
 - $forall n quad x_n <= tilde(x)_n => overline(lim) x_n <= overline(lim) tilde(x)_n, underline(lim) x_n <= underline(lim) tilde(x)_n$
 - $lambda >= 0 quad overline(lim) lambda x_n = lambda overline(lim) x_n, underline(lim) lambda x_n = lambda underline(lim) x_n$ ($lambda = 0 => underline(lim) lambda x_n=overline(lim) lambda x_n=0$)
 - $overline(lim) (-x_n) = -(underline(lim) x_n), underline(lim) (-x_n) = -(overline(lim) x_n)$
-- $overline(lim) (x_n + y_n) <= overline(lim) x_n + overline(lim) y_n, underline(lim) (x_n + y_n) >= underline(lim) x_n + underline(lim) y_n$
-// пиздец.
+- $overline(lim) (x_n + tilde(x)_n) <= overline(lim) x_n + overline(lim) tilde(x)_n$\
+  $underline(lim) (x_n + tilde(x)_n) >= underline(lim) x_n + underline(lim) tilde(x)_n$
+
+\ \
+// следующая лекция
+
+#pagebreak()
+$(x_n)$\
+$y_n = sup(x_n, x_(n+1), dots)$\
+$z_n = inf(x_n, x_(n+1), dots)$\
+$z_n <= x_n <= y_n$\
+$overline(lim) x_n eq.def lim y_n in overline(RR)$\
+$underline(lim) x_n = lim z_n$\
+$overline(lim) (x_n + tilde(x)_n) <= overline(lim) x_n + overline(lim) tilde(x)_n$\
+$sup(x_n + tilde(x)_n, x_n + tilde(x)_(n+1), dots) <= underbrace(sup(x_n, x_(n+1), dots), y_n) + underbrace(sup(tilde(x)_n, tilde(x)_(n+1), dots), tilde(y)_n)$
+
+\ 
+// пункт 6
+- $t_n -> l in RR => limsup (x_n + t_n) = limsup x_n + l$
+#proof
+По опр. предела $forall epsilon > 0 quad exists N_0: forall k > N_0 quad l-epsilon < t_k < l + epsilon$\
+$x_k + l - epsilon < x_k + t_k < x_k + l + epsilon$\
+$~~>_(sup "по" k >= N > N_0) quad y_N + l - epsilon <= limits(sup)_(k >=N) (x_k+t_k) <= y_N + l + epsilon$\
+$=> limsup x_n + l - epsilon <= limsup (x_n + t_n) <= limsup x_n + l + epsilon$\
+$epsilon -> 0 => limsup (x_n + t_n) = limsup x_n + l$\
+\
+// пункт 7
+- $t_n -> l > 0, l in RR quad limsup (x_n t_n) = limsup x_n dot l$
+Без доказательства\ // тудааааа
+#th (_Техническое описание верхнего предела_)\
+$(x_n)$ --- вещ. последовательность $=>$
+- $limsup x_n = +infinity <=> x_n$ не огр сверху
+
+- $limsup x_n = -infinity <=> x_n -> -infinity$
+- $limsup x_n = l in RR <=>$
+  - $forall epsilon > 0 quad exists N: forall n > N quad x_n < l + epsilon$
+  - $forall epsilon > 0 quad exists (n_i): forall i quad x_n_i > l - epsilon$ (т.е. существует бесконечно много n)
+#proof
+- Очевидно: $=>: y_n -> +infinity quad forall k quad exists y_n > k+1$ т.е. $sup(x_n,x_(n+1),dots)>k+1$ (т.е. $forall k quad exists x_i > k$)
+  $arrow.l.double: x_n$ не огр сверху $=> y_n equiv +infinity$
+- Очевидно: $x_n <= y_n$\
+  $=>: y_n -> -infinity => x_n -> -infinity$\
+  $arrow.l.double: forall Epsilon < 0 quad exists N: forall k > N quad x_k < Epsilon => y_(N+1) <= Epsilon$
+- $=>:$
+  - $y_n -> l, x_n <= y_n => forall epsilon > 0 quad exists N: forall n > N quad x_n <= y_n < l-epsilon$
+  - $y_n$ убывает, $y_n -> l => l <= y_n quad forall n$\
+    $forall epsilon > 0 quad forall n quad y_n = sup(x_n, x_(n+1), dots)$\
+    $exists x_k, k >= n: l - epsilon < x_k$\
+    Берём $n=1$, находим $k=k_1$\
+    Берём $n>k_1$, находим $k=k_2$\
+    Берём $n>k_2$, находим $k=k_3$\
+    И т.д.
+- $arrow.l.double:$\
+  - $space forall epsilon > 0 quad exists N: forall n > N quad x_n < l + epsilon => y_n <= l + epsilon, x_(n+1) < l + epsilon, x_(n+2) < l+epsilon, dots$\
+    $=> forall epsilon > 0 quad exists N: forall n > N quad y_n <= l + epsilon$\
+  - $forall epsilon > 0 quad forall n quad y_n >= l - epsilon$\
+    т.к. $y_n=sup(x_n, x_(n+1), dots), exists$ б.м. $x_i > l-epsilon$\
+    $=> forall n quad y_n >= l$
+  $=> y_n -> l$
+#th\
+$(x_n)$ --- вещ. последовательность $=> exists lim x_n in overline(RR) <=> limsup x_n = liminf x_n$ и если оба утв. верны, все 3 предела совпадают
+#proof
+- $=>: lim x_n = plus.minus infinity => $ очев.: $limsup x_n = +infinity$ ($x_n$ не огр сверху $=> limsup x_n = +infinity$)\
+  $liminf x_n = +infinity$ по тех. описанию, п.2\ \
+  Если $lim x_n = -infinity$ #emoji.face.smile.slight Аналогично\ \
+  Пусть $lim x_n = l in RR$, выполняется тех. описание $=> limsup x_n=l$\
+  Аналогично $liminf x_n = l$
+- $arrow.l.double: z_n <= x_n <= y_n, z_n -> l, y_n -> l => x_n -> l$
+#th (_о характеризации верхнего предела как частичного_)\
+$(x_n)$ --- вещ. последовательность $=>$
+- $forall l in overline(RR)$ --- частичный предел $x_n: liminf x_n <= l <= limsup x_n$
+- $exists n_k: x_n_k ->_(k->infinity) limsup x_n, exists m_j: x_m_j ->_(j->+infinity) liminf x_n$
+#proof
+- $n_k: x_n_k -> l quad z_n_k <= x_n_k <= y_n_k$\
+  $z_n_k -> liminf x_n, x_n_k -> l, y_n_k -> limsup x_n => liminf x_n <= l <= limsup x_n$
+- Про верхний: $limsup x_n = plus.minus infinity$ очев\
+  $limsup x_n = l in RR => exists n_k: l-1/k < x_n_k < l+1/k$ (из тех. описания)\
+  $l-1/k -> l, l+1/k -> l => x_n_k -> l$
+*Пример:*\
+$x_n = sin n$\
+$limsup sin n = 1$\
+$forall k quad sup(sin k, sin(k+1), dots)=1$\
+Будем блуждать по окружности с шагом $n_i$.\
+$n_0 = 1$\
+$n_1 = 6$\
+$n_1, 2n_1, 3n_1, dots$\
+$n_2 = n_1 k$ или $n_1 (k+1)$ (соответственно более короткой половинке дуги, которую делит 0)\
+$n_2, 2n_2, dots$\
+$n_3 = n_2 l$ или $n_2 (l+1)$ (аналогично)\
+и т.д.\
+Длина шага: $1, <1/2, <1/4, <1/8, dots$\
+$1/2^k < epsilon$\
+Существует б.много $sin x_k > 1-epsilon, sin x_k <= 1 forall k => limsup sin n = 1$\
+// стрим закончен
+// я ушел дышать перед смертью
