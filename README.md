@@ -8,7 +8,7 @@ _в процессе (а может и нет)_
 ### Дискретная математика
 - [Конспект лекций](https://github.com/imkochelorov/ITMO/blob/main/notes/discrete-math/s2/main.pdf)
 ### Алгоритмы и структуры данных
-- [1 лекция, дерево отрезков](https://github.com/imkochelorov/ITMO/blob/main/notes/algorithms/s2/to-refactor/l1.pdf)
+- [1 лекция, дерево отрезков](https://github.com/imkochelorov/ITMO/blob/main/notes/algorithms/s2/l1.pdf)
 - [2 лекция, дерево отрезков - отложенные операции](https://github.com/ikochelorov/ITMO/blob/main/notes/algorithms/s2/l2.pdf)
 ### Линейная алгебра
 - [Конспект лекций](https://github.com/imkochelorov/ITMO/blob/main/notes/linear-algebra/s2/main.pdf)
