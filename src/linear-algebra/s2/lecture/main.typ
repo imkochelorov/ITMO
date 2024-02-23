@@ -21,7 +21,7 @@
   title: "Линейная алгебра\nII семестр",
   authors: (
     "_scarleteagle",
-    "ikochelorov"
+    "imkochelorov"
   ),
   date: "зима/весна 2024",
   subtitle: "Лектор: 
@@ -32,6 +32,7 @@
 #let see = $angle.spheric quad$
 #let proof=par(strong("Доказательство:"))
 #let sum=$limits(sum)$
+#let product=$limits(product)$
 #let dp(first, second)=$angle.l #first, #second angle.r$
 #let def=strong("Определение:")
 #let nb=par(strong("Замечание: "))
@@ -53,12 +54,12 @@ _см. курс дискретной математики первого сем�
 
 == Пространство полилинейных форм (пространство ПЛФ)
 
-$make X(K)$ --- ЛП над $K$, $dim_K X=n, $\
-$make X^* (K)$ --- пр-во ЛФ над $X(K)$
+$make X(KK)$ --- ЛП над $KK$, $dim_KK X=n, $\
+$make X^* (KK)$ --- пр-во ЛФ над $X(KK)$
 \ \
 #def полилинейная форма \
 ПЛФ называется отображение \
-$u: limits(underbrace(X times X times dots times X))_p times limits(underbrace(X^* times X^* times dots times X^*))_q -> K$\
+$u: limits(underbrace(X times X times dots times X))_p times limits(underbrace(X^* times X^* times dots times X^*))_q -> KK$\
 Обладающее следующщими свойствами (полилинейность - _линейность по всем агрументам_):\
 1. $u(...space x_1 + x_2 space... ) = u (... space x_1 space ...) + u (... space x_2 space ...)$
 2. $u(dots, lambda x, dots) = lambda u(dots, x, dots)$
@@ -66,49 +67,47 @@ $u: limits(underbrace(X times X times dots times X))_p times limits(underbrace(X
 #nb пара $(p, q)$ --- валентность ПЛФ
 \ \
 #exs 
-1. $f in X^*(k)$ --- ПЛФ $(1, 0)$
+1. $f in X^*(KK)$ --- ПЛФ $(1, 0)$
 2. $hat(x) in X^(**)$ --- ПЛФ $(0, 1)$
-3. $E_3 quad g(x, space y) = dp(x, y)$ --- ПФЛ $(2, 0)$
+3. $E_3 quad g(x, space y) = dp(x, y)$ --- ПЛФ $(2, 0)$
 4. $E_3 quad omega (x, space y, space z)$ --- ПЛФ $(3, 0)$
 
 #nb $make Omega_p^q$ --- мн-во ПЛФ $(p, q)$
 \ \
 1. Равенство линейных форм
-$ u, v in Omega_p^q : u = v <=> u(x_1, space x_2, space dots, space y^1, space y^2, space dots, space y^q) = v(x_1, space x_2, space dots, space y^1, space y^2, space dots, space y^q) \ forall x_1, space dots,  x_p in X, space  y^1, space  dots, space  y^q in X^* $
+$ u, v in Omega_p^q : u = v <=> u(x_1, space x_2,dots, space x_p; space y^1, y^2, dots, space y^q) = v(x_1, space x_2,dots, space x_p; space y^1, y^2, dots, space y^q) \ forall x_1, space dots,  x_p in X, space  y^1, space  dots, space  y^q in X^* $
 
 2. Сумма линейных форм \
-$ omega = u + v <=> omega(x_1, space dots, space x_p, space y^1, space dots, space y^q)=(u+v)(x_1, space dots, space x_p, space y^1, space dots, space y^q) =\ u(x_1, space dots, space x_p, space y^1, space dots, space y^q) +v(x_1, space dots, space x_p, space y^1, space dots, space y^q) $\
-$forall u, space  v, space  omega quad u+(v+omega)=(u+v)+omega $ --- _ассоциативность_\
-  $exists theta in Omega_p^q quad theta(x_1, dots, x_p,y^1 dots y^q)=0, quad forall u quad u+theta=u=theta+u$ -- _существование нейтрального_\
-  $forall u quad exists (-u): u+(-u)=theta$ --- _существование обратного_
+$ omega = u + v <=> omega (x_1, dots, x_p; space y^1,dots, space y^q)=(u+v)(x_1, dots, space x_p; space y^1, dots, space y^q) =\ u(x_1, dots, space x_p; space y^1, dots, space y^q) +v(x_1, dots, space x_p; space y^1, dots, space y^q) \ forall x_1, dots,  x_p in X, space  y^1, dots, space  y^q in X^* $\
+$forall u,v,omega in Omega_p^q quad u+(v+omega)=(u+v)+omega $ --- _ассоциативность_\
+  $exists Theta in Omega_p^q quad Theta (x_1, dots, x_p;y^1, dots, y^q)=0, quad forall u in Omega_p^q quad u+Theta=u=Theta+u$ -- _существование нейтрального_\
+  $forall u in Omega_p^q quad exists (-u): u+(-u)=Theta$ --- _существование обратного_
 
-3. Произведение ПЛФ на скаляр  $ w=lambda u <=> w(x_1, space dots, space x_p, space y^1, space dots, space y^q)=(lambda u)(x_1, space dots, space x_p, space y^1, space dots, space y^q) = lambda u(x_1, space dots, space x_p, space y^1, space dots, space y^q) $ // не наврал?...
+3. Произведение ПЛФ на скаляр  $ w=lambda u <=> w(x_1,dots, x_p; y^1,dots,y^q)=(lambda u)(x_1,dots, x_p; y^1,dots,y^q) = lambda u(x_1,dots, x_p; y^1,dots,y^q) $ // не наврал?...
 
-#th \ $Omega_p^q = Omega_p^q (K)$ --- ЛП
+#th \ $Omega_p^q = Omega_p^q (KK)$ --- ЛП
 \ \
 #proof
 Проверка аксиом ЛП $qed$
 
 == Тензор ПЛФ
 
-$make {e_i}_(i=1)^n$ --- базис $X(K), {f^j}_(j=1)^n$ --- базис $X^* (K)$\
-$see (x_1, space dots, space x_p, space y^1, space dots, space y^q) eq.circle$\ \
-$x_1 = sum_(i_1 = 1)^n xi_1^(i_1) e_i_1 quad dots quad x_p=sum_(i_p=1)^n xi_1^(i_p) e_i_p$\ \
-$y_1 = sum_(i_1 = 1)^n mu_(j_1)^1 f ^(j_1) quad dots y^q = sum_(i_p=1)^n mu_(j_1)^(q) f^(j_q)$\ \
-$eq.circle u(sum_(i_1 = 1)^n xi_1^(i_1) e_i_1 dots =sum_(i_p=1)^n xi_1^(i_p) e_i_p; sum_(j_1 = 1)^n mu_(j_1)^1 f ^(j_1) dots sum_(j_q = 1)^n mu_(j_q)^1 f ^(j_q))$\ \
-$=sum_(i_1 = 1)^n dots sum_(i_p = 1)^n sum_(j_1 = 1)^n dots sum_(j_q = 1)^n xi_1^(i_1) dots xi_p^(i_p) mu_(j_1)^1 dots mu_(j_q)^q quad u(e_i_1 dots e_i_p f^(j_1) dots f^(j_q)) dots f^(j_q) = u_(i_1 dots i_p)^(j_1 dots j_q)$ --- _тензор линейной формы (сумма произведений координат)_\ \
-$=xi_1^(i_1) dots xi_p^(i_p) mu_(j_1)^1 dots mu_(j_q)^q u_(i_1 dots i_p)^(j_1 dots j_q)$
+$make {e_i}_(i=1)^n$ --- базис $X(KK), {f^j}_(j=1)^n$ --- базис $X^* (KK)$\
+$see u(x_1, space dots, space x_p, space y^1, space dots, space y^q) eq.circle$\ \
+$x_1 = sum_(i_1 = 1)^n xi_1^(i_1) e_i_1 quad dots quad x_p=sum_(i_p=1)^n xi_p^(i_p) e_i_p$\ \
+$y_1 = sum_(j_1 = 1)^n mu_(j_1)^1 f ^(j_1) quad dots quad y^q = sum_(j_p=1)^n mu_(j_1)^(q) f^(j_q)$\ \
+$eq.circle u(sum_(i_1 = 1)^n xi_1^(i_1) e_i_1 dots sum_(i_p=1)^n xi_p^(i_p) e_i_p; sum_(j_1 = 1)^n mu_(j_1)^1 f ^(j_1) dots sum_(j_q = 1)^n mu_(j_q)^q f ^(j_q))$\ \
+$=sum_(i_1 = 1)^n dots sum_(i_p = 1)^n sum_(j_1 = 1)^n dots sum_(j_q = 1)^n xi_1^(i_1) dots xi_p^(i_p) mu_(j_1)^1 dots mu_(j_q)^q u(e_i_1 dots e_i_p f^(j_1) dots f^(j_q)) = sum_(i_1 = 1)^n dots sum_(i_p = 1)^n sum_(j_1 = 1)^n dots sum_(j_q = 1)^n xi_1^(i_1) dots xi_p^(i_p) mu_(j_1)^1 dots mu_(j_q)^q u_(i_1 dots i_p)^(j_1 dots j_q).$ \ \ $u_(i_1 dots i_p)^(j_1 dots j_q)$ --- _тензор линейной формы_\ \
 
-\ \
 #lm
-Знание тензора $u_(i_1 dots i_p)^(j_1 dots j_q)$ в паре базисов пр-в $X$ и $X^*$ эквивалентно заданию самой ПЛФ $u$: $ u <->_({f^j})^({e_i}) u_(i_1 dots i_p)^(j_1 dots j_q) $
+Задание тензора $u_(i_1 dots i_p)^(j_1 dots j_q)$ в паре базисов пр-в $X$ и $X^*$ эквивалентно заданию самой ПЛФ $u$: $ u <->_({e^i})^({f_j}) u_(i_1 dots i_p)^(j_1 dots j_q) $
 #proof
 cм. выше. $qed$
 
 == Базис пространства ПЛФ
-$Omega_p^q (K)$ --- пространство ПЛФ над полем $K$
+$Omega_p^q (KK)$ --- пространство ПЛФ над полем $KK$
 \ \
-#nb $"Mat"_K (2) quad limits(mat(1,0;0,0))^(=e^1)_(=e_11), space limits(mat(0,1;0,0))^(=e_2)_(=e_12), space limits(mat(0,0;1,0))^(=e_3)_(=e_21), space limits(mat(0,0;0,1))^(=e_4)_(=e_22)$
+#nb $"Mat"_KK (2) quad limits(mat(1,0;0,0))^(=e^1)_(=e_11), space limits(mat(0,1;0,0))^(=e_2)_(=e_12), space limits(mat(0,0;1,0))^(=e_3)_(=e_21), space limits(mat(0,0;0,1))^(=e_4)_(=e_22)$
 
 \
 $(e_11)_(i j)=attach(e, bl: 11, tr: i j)$\ \
@@ -116,32 +115,32 @@ $(e_11)_(i j)=attach(e, bl: 11, tr: i j)$\ \
 $attach(e, bl: alpha beta, tr: i j) = delta_alpha^i delta_beta^j = cases(1\, i = alpha\, j = beta, 0\, "иначе")$\
 
 \ \
-$see {attach(W, tl: s_1 s_2 dots s_p space, bl: t_1 t_2 dots t_q space)}$ --- набор ПЛФ в $Omega_p^q (K)$\ \ 
-$attach(W, tl: s_1 s_2 dots s_p space, bl: t_1 t_2 dots t_q space ) (x_1 dots x_p; y^1 dots y^q)=xi_1^(s_1) xi_2^(s_2) dots xi_p^(s_p) xi_p^(s_p) mu_(t_1)^1 dots mu_t_q^q$
+$see {attach(W, tl: s_1 s_2 dots s_p space, bl: t_1 t_2 dots t_q space)}$ --- набор ПЛФ в $Omega_p^q (KK)$, такой, что:\ \ 
+$attach(W, tl: s_1 s_2 dots s_p space, bl: t_1 t_2 dots t_q space ) (x_1 dots x_p; y^1 dots y^q)=xi_1^(s_1) xi_2^(s_2) dots xi_p^(s_p) mu_(t_1)^1 dots mu_(t_q)^q$
 \ \
 #nb $attach(W, tl: s_1 dots s_p space, bl: t_1 dots t_q space, tr: space j_1 dots j_q, br: space  i_1 dots i_p) = delta_(i_1)^(s_1) dots delta_(i_p)^(s_p) delta_(t_1)^(j_1) dots delta_(t_q)^(j_q)$
 \ \
 #th \
-Набор ${attach(W, tl: s_1 s_2 dots s_p space, bl: t_1 t_2 dots t_q space)}$ --- базис в $Omega_p^q (K)$\ \ 
+Набор ${attach(W, tl: s_1 s_2 dots s_p space, bl: t_1 t_2 dots t_q space)}$ --- базис в $Omega_p^q (KK)$\ \ 
 #proof
 _Докажем полноту_\
-$exists u in Omega_p^q (K)$\
-$see u(x_1 dots x_p, y^1 dots y^q=xi_1^(i_1) dots xi_p^(i_p) mu_(j_1)^1 dots mu_(j_q)^q u_(i_1 dots i_p)^(j_1 dots j_q)=attach(W, tl: i_1 dots i_p space, bl: j_1 dots j_q space) (x_1  dots x_p y^1 dots y^q) u_(i_1 dots i_p)^(j_1 dots j_q)$\
+$make u in Omega_p^q (KK)$\
+$see u(x_1 dots x_p; y^1 dots y^q) = xi_1^(i_1) dots xi_p^(i_p) mu_(j_1)^1 dots mu_(j_q)^q u_(i_1 dots i_p)^(j_1 dots j_q)=attach(W, tl: i_1 dots i_p space, bl: j_1 dots j_q space) (x_1  dots x_p; y^1 dots y^q) u_(i_1 dots i_p)^(j_1 dots j_q)$\
 $=> u=attach(W, tl: i_1 dots i_p space, bl: j_1 dots j_q space) u_(i_1 dots i_p)^(j_1 dots j_q)$
 \ \
 _Докажем ЛНЗ_\
-$see attach(W, tl: s_1 s_2 dots s_p space, bl: t_1 t_2 dots t_q space) alpha_(s_1 dots s_p)^(t_1 dots t_q) = theta | (e_i_1 dots e_i_p, f^(j_1) dots f^(j_q))$\ \
-$attach(W, tl: s_1 s_2 dots s_p space, bl: t_1 t_2 dots t_q space) (e_i_1 dots e_i_p f^(j_1) f^(j_q)) alpha_(s_1 dots s_p)^(t_1 dots t_q) = 0$\ \
-$delta_(i_1)^(s_1) delta_(i_p)^(s_p) delta_(t_1)^(j_1) delta_(t_q)^(j_q) alpha_(s_1 dots s_p)^(t_1 dots t_q) = 0$\
-$alpha_(i_1 dots i_p)^(j_1 dots j_q) = 0 => alpha = 0 qed$
+$see attach(W, tl: s_1 s_2 dots s_p space, bl: t_1 t_2 dots t_q space) alpha_(s_1 dots s_p)^(t_1 dots t_q) = theta.$ Рассмотрим на поднаборе базисов $(e_i_1 dots e_i_p; f^(j_1) dots f^(j_q))$\ \
+$attach(W, tl: s_1 s_2 dots s_p space, bl: t_1 t_2 dots t_q space) (e_i_1 dots e_i_p ; f^(j_1) dots f^(j_q)) alpha_(s_1 dots s_p)^(t_1 dots t_q) = 0$\ \
+$delta_(i_1)^(s_1) dots delta_(i_p)^(s_p) delta_(t_1)^(j_1) dots delta_(t_q)^(j_q) alpha_(s_1 dots s_p)^(t_1 dots t_q) = 0 =>
+alpha_(s_1 dots s_p)^(t_1 dots t_q) = 0 qed$
 \ \
-#nb $dim_K Omega_p^q = n^(p+q)$
+#nb $dim_KK Omega_p^q = n^(p+q)$
 
 = Симметричные и антисимметричные ПЛФ
-$see Omega_p^0(K)$\
-#def симметрическая форма \ Форма $u in Omega_p^0 (K)$ --- симметрическая, если ее значения не зависят от порядка аргументов
+$see Omega_p^0(KK)$\
+#def симметрическая форма \ Форма $u in Omega_p^0 (KK)$ --- симметрическая, если ее значения не зависят от порядка аргументов
  
-$ u(x_sigma(1) x_sigma(2) dots x_sigma(p)) = u(x_1 space x_2 space dots space  x_p) \ forall sigma in S_P italic("(симметрическая группа перестановок)") $
+$ u(x_sigma(1), x_sigma(2), dots, x_sigma(p)) = u(x_1,x_2,dots,  x_p) \ forall sigma in S_p italic("(группа перестановок)") $
 \ \
 #ex \ $E_3 (RR) space g(x, y) = dp(x, y) quad g(x, y) = g(y, x)$
 \ \
@@ -150,48 +149,48 @@ $ u(x_sigma(1) x_sigma(2) dots x_sigma(p)) = u(x_1 space x_2 space dots space  x
 $make Sigma^p$ --- множество симметричных форм
 #image("1.png", width: 30%)
 \
-#lm  $Sigma^p = Sigma^p (K) <= Omega_p^0 (K)$
+#lm  $Sigma^p = Sigma^p (KK) <= Omega_p^0 (KK)$
 \ \
-#def антисимметричная форма \ $V in Omega_p^0 (K)$ --- антисимметричная, если $forall sigma in S_p quad v(x_(sigma(1)dots sigma(2))) = (-1)^([sigma] - "чётность") v(x_1 space x_2 dots x_p)$
+#def антисимметричная форма \ $V in Omega_p^0 (KK)$ --- антисимметричная, если $forall sigma in S_p quad v(x_(sigma(1)), dots, x_sigma(p)) = (-1)^([sigma] - "чётность") v(x_1, x_2, dots, x_p)$
 \ \
-#ex\  $E_3, omega(x, y, z) = (x, y, z), omega(x, z, y) = -omega(x, y, z)$
+#ex\  $E_3, omega(x, y, z) = (x, y, z), quad omega(x, z, y) = -omega(x, y, z)$
 \ \
 #lm Тензор антисимметричной формы антисимметричен по индексам $ v_(i_sigma(1) dots i_sigma(p)) = (-1)^([sigma]) v_(i_1 dots i_p) $
 \
-$make Lambda$ --- мн-во антисимм форм
+$make Lambda$ --- мн-во антисимметричных форм
 \ \
 #lm
-$Lambda^p = Lambda^p (K) <= Omega_p^0 (K)$
+$Lambda^p = Lambda^p (KK) <= Omega_p^0 (KK)$
 \ \
 #nb
-$Lambda^p sect Sigma^p = theta$
+$Lambda^p sect Sigma^p = Theta$
 \ \
 #lm
 $v in Lambda^p <=> v$ обнуляется на паре одинаковых аргументов 
 \ \
 #proof
 $arrow.l.double: see v(dots x_i dots x_i dots) = -v(dots x_i dots x_i dots) => v=0$\
-$=>: see v(dots x'_1 + x''_i dots x'_j+x''_j dots)=0$\
-$v(dots x'_1 dots x'_1 dots) + v(dots x'_1...x''_1 dots + v(dots x''_1 dots x'_1 dots) + v(dots x''_1 dots x''_1 dots) = 0$\
-$v(dots x'_1 dots x''_i dots) = -v(dots x''_1 dots x'_1 dots) qed$
+$=>: see v(dots x'_i + x''_i dots x'_i+x''_i dots)=0$\
+$v(dots x'_i dots x'_i dots) + v(dots x'_i...x''_i dots) + v(dots x''_i dots x'_i dots) + v(dots x''_i dots x''_i dots) = 0$\
+$v(dots x'_i dots x''_i dots) = -v(dots x''_i dots x'_i dots) qed$
 \ \
 #lm
-${x_i}_(i=1)^p$ --- ЛЗ $=> forall v in Lambda^p (K) quad v(x_1 dots x_p)=0$
+${x_i}_(i=1)^p$ --- ЛЗ $=> forall v in Lambda^p (KK) quad v(x_1, dots, x_p)=0$
 == Симметризация и антисимметризация
-$make W in Omega_p^0 (K), quad K : "char"  K = 0 quad (QQ$ и "больше") \ \
+$make W in Omega_p^0 (KK), quad KK : "char"  KK = 0 quad (QQ$ и "больше") \ \
 \
 #lm
 Следующая форма является симметричной
-$ u(x_1 dots x_p) = 1/p! sum_(sigma in s_p) W(x_sigma(1) dots x_sigma(p)) $
+$ u(x_1, dots, x_p) = 1/p! sum_(sigma in S_p) W(x_sigma(1), dots, x_sigma(p)) $
 
 #proof
-$see u(x_chi(1) dots x_chi(p)) = 1/p! sum_(sigma in s_p) W(x_(sigma chi(1)) dots x_(sigma xi(p))) = $\
+$see u(x_chi(1), dots, x_chi(p)) = 1/p! sum_(sigma in S_p) W(x_(sigma chi(1)), dots, x_(sigma chi(p))) = $\
 $angle.l sigma apply chi = phi, quad sigma = phi apply chi^(-1) angle.r$\
-$= 1/p! sum_(phi apply chi^(-1)\ phi in s_p) W(x_phi(1) dots x_phi(p)) = u(x_1 dots x_p) qed$
+$= 1/p! sum_(phi apply chi^(-1)\ phi in S_p) W(x_phi(1), dots, x_phi(p)) = u(x_1, dots, x_p) qed$
 \ \ \
 #def симметризация\
 Процесс изготовления симметрической формы из произвольной\
-$ ("Sym" W)(x_1 dots x_p) = 1/p! sum_(sigma in S_P)W(x_(sigma(1)) dots x_sigma(p)) $
+$ ("Sym" W)(x_1, dots, x_p) = 1/p! sum_(sigma in S_p)W(x_(sigma(1)), dots, x_sigma(p)) $
 \ \
 #nb Коэффициент $1/p!$ --- нормировка: $W in Sigma^p => "Sym" W = W$
 \ \
@@ -201,13 +200,13 @@ $"Sym" (u+v)="Sym" u + "Sym" v$\
 $"Sym" (lambda u) = lambda "Sym"(u)$
 \ \
 #lm
-Следующая форма является антисимметричной  $ v(x_1 dots x_p) = 1/p! sum_(sigma in S_p) (-1)^[sigma] W(x_sigma(1) dots x_sigma(p)) $\
+Следующая форма является антисимметричной  $ v(x_1, dots, x_p) = 1/p! sum_(sigma in S_p) (-1)^[sigma] W(x_sigma(1), dots, x_sigma(p)) $\
 \
 #def антисимметризация (альтернирование)\ 
 Процесс изготовления антисимметричной формы из произвольной
 
-$ ("Alt" W) (x_1 dots x_p) = 1/p! sum_(sigma in S_p) 
-(-1)^[sigma]W(x_sigma(1) dots x_sigma(p)) $
+$ ("Alt" W) (x_1, dots, x_p) = 1/p! sum_(sigma in S_p) 
+(-1)^[sigma]W(x_sigma(1), dots, x_sigma(p)) $
 \ \
 #nb
 $"Alt Alt"="Alt"$\
@@ -224,8 +223,8 @@ $A^((a)) = (A-A^T)/2$
 
 
 == Базис $Lambda^p$
-$dim _k Lambda ^p = space ?$\
-$make {attach(W, tl: s_1 dots s_p space)}$ --- базис в $Omega_p^0(K)$\ \
+$dim _KK Lambda ^p = space ?$\
+$make {attach(W, tl: s_1 dots s_p space)}$ --- базис в $Omega_p^0(KK)$\ \
 $see attach(F, tl: s_1 dots s_p)= p!"Alt"(attach(W, tl:s_1 dots s_p))$\ \ 
 ${attach(F, tl: s_1 dots s_p)}$ --- набор в $Lambda^p$ --- ПН, но не ЛНЗ
 \ \
@@ -402,4 +401,228 @@ $Lambda$ --- _градуированная алгебра_, если:\ #v(0.15cm
 $U in Lambda^P, V in Lambda^q => U dot V in Lambda^(p+q)$\
 $Lambda^p Lambda^q subset Lambda^(p+q)$
 \ \
-#ex \ \А\л\г\е\б\р\а \м\н\о\г\о\ч\л\е\н\о\в // \w\t\f why tho
+#ex \ \А\л\г\е\б\р\а \м\н\о\г\о\ч\л\е\н\о\в
+
+// а всех остальных уже отчислили?
+// ?
+// сколько там людей из 34-37
+// хз
+// но всего сидит 15 ровно
+
+#pagebreak()
+
+= Определитель
+$see dim_K Lambda^n=1 => {attach(F, tl: 12 dots n)}$ --- базис $Lambda^n$
+\ \
+#def определитель\
+Определитель набора векторов ${x_i}^n_(i = 1)$ --- "число" \
+$det{x_1 dots x_n} &= attach(F, tl: 12dots n)(x_1 x_2 dots x_n) \ &= n! "Alt" attach(W, tl: 12dots n)(x_1 x_2 dots x_n) \ & = n! dot 1/(n!) limits(sum)_(sigma in S_n) (-1)^[sigma] attach(W, tl: 12dots n)(x_sigma(1) x_sigma(2) dots x_sigma(n)) \ & = sum_(sigma in S_n) (-1)^[sigma] xi^1_sigma(1) xi^2_sigma(2) dots xi^n_sigma(n)$
+\ \
+#nb 
+Альтернативная форма:\ #v(0.2cm)
+$C := [x_1 x_2 dots x_n] = mat(delim: "[",
+xi_1^1, xi_2^1, dots, xi_n^1;
+xi_1^2, xi_2^2, dots, xi_n^2;
+dots.v, dots.v, dots.down, dots.v;
+xi_1^n, xi_2^n, dots, xi_n^n)$
+\ #v(0.2cm)
+$det C := det {x_1 dots x_n}$
+
+== Определитель как форма объёма
+$make {x_i}^n_(i = 1)$ --- набор в $X(K)$\ #v(0.2cm)
+#def параллелепипед, построенный на векторах набора ${x_i}^n_(i = 1)$\ #v(0.2cm)
+Множество следующего вида: $T_n{x_1 dots x_n} = {sum_(i = 1)^n lambda^i x_i | lambda^i in [0, space 1] space forall i}$\ #v(0.2cm)
+$make omega$ --- форма объёма в $X(K) space(K=RR)$\ #v(0.2cm)
+_Свойства:_ \
++ $"codom" omega in RR$
+
++ $omega T{dots x'_i + x''_i dots} = omega T {dots x'_i} + omega T {dots x''_i dots}$\
+  $omega T { dots lambda x_i dots} = lambda omega T {dots x_i dots}$
++ $omega T {x_1 dots x_n} = 0 <=> {x_i}_(i = 1)^n$ --- ЛЗ
+
+$=> omega in Lambda^n => omega tilde det$\
+_Вычисление определителя --- вычисление объёма параллелепипеда, построенного на векторах набора_
+
+== Свойства определителя
+#nb
+$det{x_1 dots x_n} = limits(sum)_(sigma in S_n) (-1)^[sigma] xi^1_sigma(1) xi^2_sigma(2) dots xi^n_sigma(n) = mat(delim: "|", 
+xi_1^1, dots, xi_1^n;
+xi_2^1, dots, xi_2^n;
+dots.v, dots.down, dots.v;
+xi_n^1, dots, xi_n^n)$\
+\
+*1.* \ $det C^T = det C$\ #v(0.2cm)
+#proof #v(0.2cm)
+$sum_(sigma in S_n) (-1)^[sigma] xi^1_sigma(1) xi^2_sigma(2) dots xi^n_sigma(n) = det C\
+= sum_(sigma in S_n) (-1)^[sigma] xi^sigma(1)_1 xi^sigma(2)_2 dots xi^sigma(n)_n eq.delta det C^T$\
+
+$display(mat(
+sum_(sigma) attach(W, tl: 1 2 dots n) (x_sigma(1) dots x_sigma(n)) = xi_sigma(1)^1 dots xi_sigma(n)^n;
+sum_(sigma) attach(W, tl: sigma(1) sigma(2) dots sigma(n)) (x_1 dots x_n) = xi^sigma(1)_1 dots xi^sigma(n)_n))$
+
+*2.* \ 
+$det {dots x'_i + x''_i dots} = det{dots x'_i dots} + det{dots x''_i dots } $\ 
+$det{dots lambda x_i dots} = lambda det{dots x_i dots} $ \
+$det{lambda C} = lambda^n det C $\
+$det(C_1 + C_2) eq.not det C_1 + det C_2$\
+*3.*\
+$det {dots x_i dots x_j dots} = det{dots x_i dots x_j + lambda x_i}$\
+*4.*\
+$det{dots x_i dots x_j dots} = - det{dots x_j dots x_i dots}$ \
+*5.*\
+_Рекуррентная формула_\ #v(0.2cm)
+$det C = sum_(i= 1)^n (-1)^(i + j) xi_j^i M ^i _j$ --- разложение по $j$-му столбцу\ #v(0.2cm)
+$det C = sum_(j= 1)^n (-1)^(i + j) xi_j^i M ^i _j$ --- разложение по $i$-ой строке
+#v(0.2cm)
+#proof #v(0.2cm)
+#columns(2, gutter: 6cm)[
+$det C &= attach(F, tl: 1 2 dots n)(x_1 x_2 dots x_n) = \ &= f^1 and f^2 and dots and f^n (x_1 x_2 dots x_n)$\ #v(0.2cm)
+$= f^1 and f^2 and dots and f^m and dots and f^n (x_1 dots x_m dots x_n)$\ #v(0.2cm)
+$= < x_m = sum_(i=1)^n xi_m^i e_i; f^j (e_i) = delta_i^j >$\
+$= f^1 and dots and f^m and dots and f^n (x_1 dots sum_(i 
+ = 1)^n xi_m^i e _i dots x_n)$\ #v(0.2cm)
+$=sum_(i=1)^n f^1 and dots and f^m and dots and f^n (x_1 dots limits(underline(e_i))_(m arrow.t.curve) dots x_n)$\ #v(0.2cm)
+$=sum_(i=1)^n xi_m^i (-1)^(i + m) f^1 and dots and f^(m - 1) and f^(m + 1) and dots and f^n (x_1 dots x_(m-1) x_(m+1) dots x_n))$\ #v(0.2cm)
+$=sum_(i=1)^n xi_m^i (-1)^(i + m) M_m^i quad quad quad quad quad quad quad quad quad quad quad quad quad quad quad quad quad quad quad quad quad  eq.circle$\
+#colbreak()
+$f and g = f dot g - g dot f$\ #v(0.2cm)
+$f and g and h &= f dot g dot h + h dot f dot g + g dot h dot f - \
+&- f dot h dot g - g dot f dot h - h dot g dot f$
+#align(center)[#image("2.png", width: 60%)]]
+
+#def алгебраическое дополнение\
+Алгебраическим дополнением элемента $xi_m^i$ называется "число": $ A_m^i = (-1)^(i+m) M_m^i $
+
+#nb #v(0.2cm) $det C = sum_(i=1)^n xi_m^i A_m^i$
+\ \
+#th (_Лапласа_)\
+_Определитель матрицы равен сумме произведений миноров матрицы на их алгебраических дополнениях_\ #v(0.2cm) 
+$det C = sum_(i_1 dots i_p) (-1)^(i_1 + dots + i_p + j_1 + dots j_p) M_(j_1 dots j_p)^(i_1 dots i_p) L_(j_1 dots j_p)^(i_1 dots i_p)$
+\ \
+#ex\   #v(0.2cm)
+$mat(delim: "|", 1,2,3,4;3,4,2,1;1,-1,2,1;0,1,2,3) = mat(delim: "|", 3,4;1,-1) dot (-1)^(2+3+1+2) mat(delim: "|", 3,4;2,3) + mat(delim: "|", 3,2;1,2) dot (-1)^(2+3+1+3) dot mat(delim: "|", 2,4;1,3) + dots$ ("_кому интересно, дома досчитаете_")\
+ \ #proof #v(0.2cm) 
+Продолжаем "доказательство" предыдущего свойства \
+#v(0.2cm) 
+$eq.circle sum_(i=1)^n xi_m^i (-1)^(i+m) sum_(j=1)^n xi_l^j (-1)^(j+l) M_(m l)^(i j) = sum_(i, j =1)^n underbracket(xi_m^i xi_l^j, L_(m l)^(i j)) (-1)^(i + m + j + l) M_(m l)^(i j)$
+
+#nb #v(0.2cm) 
+$det "diag" {lambda_1 dots lambda_n} = product_(i=1)^n lambda_i$\
+$det "diag" {C_1 C_2 dots C_m} = product_(i=1)^m det C_i$\
+$det mat(delim: "[", C_1, *, dots, *; 0, C_2, dots, *; dots.v, dots.v, dots.down, dots.v; 0, dots, dots, C_m) = product_(i=1)^m det C_i$
+
+#nb
+$sum_(i=1)^n xi^i a_i = b$ --- система Крамера\
+$=> xi^i = Delta_i/Delta$, где $Delta = det {a_i dots a_n}, Delta_i = det {a_1 dots limits(b)_(i arrow.t.curve) dots a_n}$
+#proof
+$Delta_i = det {a_1 dots b dots a_n} = det {a_1 dots sum_(i=1)^n xi^i a_i dots a_n} = det {a_1 dots xi^i a_i dots a_n} = xi^i Delta$ 
+
+= Ранг матрицы
+
+$make {x_i}_(i = 1)^n$ --- набор в $X(K)$\ #v(0.2cm)
+$det{x_1 dots x_n} = 0 => {x_i}_(i=1)^n$ --- ЛЗ\ #v(0.2cm)
+Сколько ЛНЗ векторов в наборе ${x_i}_(i = 1)^n ?$
+\ \
+#lm ${x_i}_(i = 1)^m$ --- ЛЗ $arrow.l.double forall V in Lambda^M space V (x_1 dots x_m)= 0$
+\ \ 
+#proof
+От противного: $make {x_i}_(i=1)^m$ --- ЛНЗ (при #sym.arrow.t этом условии)\
+$x_1 x_2 dots x_m$\
+$arrow.b space arrow.b space space arrow.b$\
+$e_1 e_2 quad e_m e_(m+1) dots e_n$ --- базис $X(K)$\ #v(0.2cm)
+$make {f^j}_(j=1)^n$ --- базис, сопряженный к ${e_i}_(i=1)^n$: $f^j (e_i) = delta_i^j$\ #v(0.2cm)
+$see f^1 and f^2 and dots and f^m (x_1 x_2 dots x_m) = sum_(sigma in S_m) (-1)^[sigma] f^sigma(1) dot f^sigma(2) dot dots dot f^sigma(m) (x_1 x_2 dots x_m) tilde$\ #v(0.2cm)
+$tilde C dot sum_(sigma in S_m) (-1)^[sigma] xi_1^sigma(1) xi_2^sigma(2) dots x_m^sigma(m) $\ #v(0.2cm)
+$= C dot delta_1^sigma(1) delta_2^sigma(2) dots delta_m^sigma(m) = C != 0$\ #v(0.2cm)
+Нашли $m$-форму, которая не обнуляется. Противоречие\
+$attach(F, tl: 1 2 dots m) = m! ("Alt" attach(W, tl: 1 2 dots m)) = m! 1/m! sum$
+
+#nb
+Если хотя бы одна $m$-форма отлична от нуля, то набор ${x_i}_(i=1)^m$ --- ЛНЗ\
+\
+$V in Lambda^m quad make {attach(F, tl: s_1 dots s_m)}$ --- базис $Lambda^m$
+
+#nb
+Для проверки ЛЗ достаточно проверить базисные формы\
+${x_i}_(i=1)^n: forall s_1 dots s_p, 1 <= s_1 < s_2 < dots < s_m <= n quad attach(F, tl: s_1 dots s_p) (x_1 dots x_m) = 0 => {x_i}_(i=1)^m$ --- ЛЗ\ \
+$see C = mat(delim: "[",
+xi_1^1, xi_2^1, dots, xi_m^1;
+xi_2^1, xi_2^2, dots, xi_m^2;
+dots.v, dots.v, dots.down, dots.v;
+xi_1^n, xi_2^n, dots, xi_m^n) <--$ сколько ЛНЗ\
+$attach(F, tl: s_1) quad attach(F, tl: s_1 s_2) quad attach(F, tl: s_1 s_2 s_3)$ // wtf is that
+\ \
+#def ранг матрицы\
+Рангом матрицы $C$ называется её наибольший порядок отличного от нуля минора\
+$"rg" (C) quad "rank"(C) quad "rk"(C)$
+\ \
+#ex\
+#columns(2)[
+#image("3.png", width: 60%)
+#colbreak()\ \
+$B = mat(delim: "[",
+b_1, *, *, dots, *;
+0, b_2, *, dots, *;
+dots.v, dots.v, dots.v, dots.down, dots.v;
+0, 0, 0, dots, b_c)$
+
++ $b_1 != 0 => "rank" C >= 1$ #v(0.2cm)
++ $b_1 b_2 != 0 => "rank" C >= 2$
+$dots.v$\ #v(0.2cm)
+$l. space product_(i=1)^l b_i != 0 => "rank" C >= l$\ #v(0.2cm)
+$l+1. space V space attach(L, tr: i_1 dots i_(l+1), br: j_1 dots j_(l+1)) => "rank" C = l$
+]
+\ \
+#def базисные столбцы (строки)\
+Базисными столбцами (строками) матрицы $C$ называются столбцы (строки), входящие в базисный минор
+\ \
+#lm
+Любая строка (столбец) матрицы $C$ является линейной комбинацией базисных строк (столбцов)
+#proof
+Очевидно. #emoji.face.cool
+\ \
+#th (_о ранге_)\
+Ранг матрицы равен кол-ву ЛНЗ строк или столбцов матрицы
+
+\ \ 
+*Свойства ранга:*\
+// стоп а где пункт 1 был
+// "пока не будем"
+1. ```py pass```
+2. 
+== Теорема Крамера и Кронекера-Капелли
+$make sum_(i=1)^n xi^1 a_1 = b$ --- СЛАУ\
+$A = [a_1 a_2 dots a_n], xi = vec(delim: "[", xi_1, xi_2, dots.v, xi_m)$\
+В матричной форме $A xi = b quad (*)$\
+#th (_Крамер_)\
+$(*)$ совместна и определена $<=> det A != 0$
+#proof
+$=>: {a_1 a_2 dots a_n}$ --- базис $K^n => {a_i}_(i=1)^n$ --- ЛНЗ $=> det {a_1 dots a_n} != 0$\
+$arrow.l.double: det {a_1 dots a_n} = det A != 0 => {a_i}_(i=1)^n$ --- ЛНЗ $=> max +$ ЛНЗ $=>$ базис $=>$ $exists$ решение $forall b$\
+$xi^i = Delta_i/Delta$\
+\
+#th (_Кронекера-Капелли_)\
+$see A xi = b quad (*)$\
+$A, [A | b]$ --- расширенная матрицы\
+Система $(*)$ совместна $<=> "rank" A = "rank" [A | b]$\
+#proof
+$=>: (*)$ совместна $=> b in angle.l a_1 dots a_n angle.r =>$ добавление столбца $b$ не меняет ранга $A$\
+$=> "rank" A = "rank" [A | B]$\
+$arrow.l.double: "rank" [A | b] = "rank" A => b in angle.l a_1 dots a_n angle.r =>$ совместна
+
+== Вычисление ранга
+#lm Гауссовы (элементарные) преобразования не меняют ранг матрицы
+1. Сложение строк (не меняет определитель)\
+2. Умножение строки на число $eq.not 0$ (определитель умножается на $lambda$)
+3. Перестановка строк (меняет только знак определителя)
+\ 
+*Приведение к верхнему треугольному виду*\ #v(0.2cm)
+$mat(delim: "[",
+a_1^1, a_2^1, dots, a_n^1;
+dots.v, dots.v, dots.down, dots.v;
+a_1^n, a_2^n, dots, a_n^n) tilde mat(delim: "[",
+tilde(a)_1^1, tilde(a)_2^1, dots, tilde(a)_n^1;
+0, tilde(a)_2^2, dots, tilde(a)_n^2;
+dots.v, dots.v, dots.down, dots.v;
+0, 0, dots, ?)$\
+$"rank" A$ --- кол-во отличных от нуля строк
