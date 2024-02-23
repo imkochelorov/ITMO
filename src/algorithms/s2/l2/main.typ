@@ -14,7 +14,7 @@
   title: "Алгоритмы и Структуры Данных. Лекция 2",
   authors: (
     "_scarleteagle",
-    "ikochelorov"
+    "imkochelorov"
   ),
   date: "14.02.2024",
 )

@@ -13,7 +13,7 @@
   title: "Алгоритмы и Структуры Данных. Лекция 1",
   authors: (
     "_scarleteagle",
-    "ikochelorov"
+    "imkochelorov"
   ),
   date: "07.02.2024",
 )
