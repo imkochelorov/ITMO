@@ -21,7 +21,7 @@
   title: "Математический анализ\nII семестр",
   authors: (
     "_scarleteagle",
-    "ikochelorov"
+    "imkochelorov"
   ),
   date: "зима/весна 2024",
   subtitle: "Лектор: Кохась Константин Петрович"
@@ -48,6 +48,8 @@
 }
 #let limsup = $overline(lim)$
 #let liminf = $underline(lim)$
+#let smile = emoji.face.smile.slight
+#let frown = emoji.face.frown.slight
 
 #outline(title: "Оглавление", indent: auto)
 
@@ -329,5 +331,163 @@ $n_3 = n_2 l$ или $n_2 (l+1)$ (аналогично)\
 Длина шага: $1, <1/2, <1/4, <1/8, dots$\
 $1/2^k < epsilon$\
 Существует б.много $sin x_k > 1-epsilon, sin x_k <= 1 forall k => limsup sin n = 1$\
-// стрим закончен
-// я ушел дышать перед смертью
+
+// тут должна быть 4 лекция
+#pagebreak()
+// скип
+
+//тут короче лекция скипнута, надо дотехать
+
+#pagebreak()
+// ты сегодня на удалёнке? ага
+
+$f: [a, b] -> RR$ --- кусочно непрерывная \
+$x_0 = a < x_1 , x_2 < dots < x_(n - 1) < b = x_n$\
+--- $forall k quad f$ --- непрерывная на $(x_(k - 1), x_k)$ \ 
+$exists $ конечный $lim_(x->x_k- 0) f, space lim_(x->x_(k-1)+0) f$\
+Тогда можно считать, что  $ forall k quad f in C([x_(k-1), x_k])$, $quad int_a^b f = sum_(k=1)^n int_(x_(k-1))^(x_k) f$\
+#def почти первообразная \ $F$ --- _почти первообразная_ $f(x)$, если \ $F in C[a, b]$, дифф. всюду кроме кон. числа точек, $F'(x) = f(x) space forall x$, где $F$ дифф.
+\ \
+#th\
+$f$ --- кус. непр., $F$ --- почти первообр.\
+Тогда:  $int_a^b = F(b) - F(a)$\ #v(0.1cm)
+$int_a^b f = sum_(k=1)^n space int_(x_(k-1))^(x_k) = sum_(k=1)^n F(x_k) - F(x_(k - 1)) = F(x_n) - F(x_0) = F(b) - F(a)$\ #v(0.1cm)
+На $(x_(k-1), x_k) F$ --- первообразная $f$\ #v(0.1cm) $quad space space[x_(k-1), x_k]  tilde(F): F = tilde(F)$ на $(x_k, x_(k-1))$
+
+#image("1.png", width: 30%)
+\ \
+*Пример:* неравенство Чебышева\
+$I_f dot I_g <= I_(f g) quad$ ($f, g$ --- возр), $space I_f = 1/(b-a) int_a^b f$
+\ \
+*Утверждение:*\
+$a_1 <= a_2 <= dots <= a_n$, $ space b_1 <= b_2 <= dots <= b_n$\ #v(0.2cm)
+Тогда $(1/n sum_(k=1)^n a_k) (1/n sum_(k=1)^n b_k) <= 1/n (sum_(k=1)^n a_k b_k)$\ #v(0.2cm)
+#proof
+#image("2.png", width: 30%)
+$f(x) = a_(ceil(x)), quad x in (0, n]$\
+На $(k-1, k) quad F(x) = x dot a_k, space x in [k-1, space k]$\
+$ F(x) = cases(delim: "[", a_1 x && x in [0, 1], a_2 x + (a_1-a_2) &quad& x in [1, 2], a_3 x + (a_1+a_2-2a_3) && x in [2, 3], dots dots) $
+
+= Правило Лопиталя
+_by_ Иоганн Бернулли
+== Лемма об ускоренной сходимости
+$f, g: D subset RR -> RR, space a$ --- предельная точка $D, space a in overline(RR)$\
+Пусть $exists dot(U) (a) quad f != 0, g != 0$\
+$lim_(x->a) f(x) = 0, lim_(x->a) g(x) = 0$\
+Тогда $forall (x_k), space x_k -> a, space x_k in D, space  x_k != a quad exists (y_k), space  y_k -> a, space y_k in D, space y_k != a: lim f(y_k)/g(y_k) = 0, space lim g(y_k)/g(x_k) = 0$
+#proof
+$y_k$ будем искать в посл. $(x_n)$ так, чтобы $abs(f(y_k)/g(x_k)) < 1/k, space abs(g(y_k)/g(x_k)) < 1/k, quad abs(f(y_k)) < 1/k abs(g(x_k)), quad abs(f(x_k)) < 1/k abs(g(x_k)) $\
+== Лемма 2
+Аналогичное верно для случая\
+$lim_(x->a) f = +infinity, space lim_(x->a) g = +infinity$\ #v(0.2cm)
+$forall (x_k), dots quad exists (y_k), dots: lim f(y_k)/g(x_k) = 0, dots = 0$
+== Правило Лопиталя
+$f, g: (a, b) -> RR, space a in overline(RR)$\
+дифф.\
+$g' != 0$ на $(a, b)$\ #v(0.2cm)
+$lim_(x->a + 0)f/g = [0/0, space infinity/infinity]$\ #v(0.2cm)
+Пусть $lim_(x->a+0) (f'(x))/(g'(x)) = A in overline(RR)$\ #v(0.2cm)
+Тогда $exists lim_(x->a+0) f/g = A$ // дошик среди теорем
+\ \
+#proof
+$g' != 0 => g' $ --- сохраняет знак (т. Дарбу) $=> g$ --- строго монотонно $=>$ в окр. точки $a space g != 0$\
+По Гейне $x_k-> a, space  x_k != a, space x_k in (a, b), space $ строим последовательность $y_k$ из леммы\ #v(0.2cm)
+$(f(x_k) - f(y_k))/(g(x_k) - g(y_k)) = (f'(xi_k))/(g'(xi_k)), space f(x_k) - f(y_k) = (f'(xi_k))/(g'(xi_k)) (g(x_k) - g(y_k))$\ #v(0.2cm)
+$f(x_k)/g(x_k) = limits(f(y_k)/g(x_k))_(arrow.b\ 0)+limits((f'(xi_k))/(g'(x_k)))_(arrow.b\ A) dot (1-limits(g(y_k)/g(x_k))_(arrow.b\ 0))$\ \
+*Пример:*\ #v(0.2cm)
+$lim_(x-> +infinity) x/(sqrt(x^2 + 1)) = lim_(x->+infinity) 1/(x/(sqrt(x^2 + 1))) = lim_(x -> + infinity) sqrt(x^2 + 1)/x=$#smile\ #v(0.2cm)
+$0 =lim_(x->0) (x^2 sin 1/x)/(sin x) = lim_(x->0) (2limits(x)^(0\ arrow.t) sin 1/x - cos 1/x)/limits(cos x)_(arrow.b\ 1)=$#frown\
+$lim_(x->0+) ln(x)/x = lim_(x->+0) (1/x)/1 = lim_(x->+0) 1/x = +infinity$\ \ \ \ \ \ \ \ \ \
+*Пример:*\ #v(0.2cm)
+$int_0^(+infinity) = sqrt(pi)/2$ --- интеграл Эйлера-Пуассона\ #v(0.2cm)
+$int_0^R e^(-x^2) dif x ->_(R->+infinity) sqrt(pi)/2$\
+$sqrt(pi)/2 - int_0^R e^(-x^2) ->_(R->+infinity) 0$\ #v(0.2cm)
+$1 = lim_(R->+infinity) (sqrt(pi)/2 - int_0^R e^(-x^2) dif x)/g(R) = [0/0] =lim_(R->+infinity) (-e^(-R^2))/(g'(R))=1$\ \
+I попытка:\
+$g(R)=e^(-R^2)$\
+$g' = -2R e^(-R^2)$\
+$(e^(-R^2))/(-2R e^(-R^2)) -> 0$\
+II попытка:\
+$g(R) = (e^(-R^2))/(2R)$\
+$(e^(-R^2))/(e^(-R^2) - (e^(-R^2))/limits(2R)_(=o(e^(-R^2)))) ->_(R->+infinity) 1$\
+$int_0^R e^(-x^2) dif x = sqrt(pi)/2 - (e^(-R^2))/(2R) + o((e^(-R^2))/R)$
+
+= Приложение определённого интеграла
+_Общая схема_ $ space dp(a, space b)$\
+$"Segm" (dp(a, space b)) = {[p, q]: [p, q] subset dp(a, b)}$\
+== Аддитивная функция промежутка
+#align(center)[#image("3.png", width: 20%)_представление Segm$[p, q] in $ Segm$(a, b)$, если $(p, q)$ лежит в заштрихованном треугольнике_] // 
+\
+$Phi: "Segm" dp(a, b) -> RR$\
+$forall [p, q] in "Segm" dp(a, b) quad forall c in [p, q] quad Phi([p, q]) = Phi([p,c]) + Phi([c, q])$\
+$[p, q] |-> int_p^q f$
+
+== Плотность аддитивной функции промежутка
+$Phi: "Segm" dp(a, b) -> RR, space f: dp(a, b) -> RR$\
+$f$ --- плотность $Phi$, если $forall Delta in "Segm": limits(min)_Delta f dot l_Delta <= Phi(Delta) <= limits(max)_Delta f dot l_Delta$\
+\ \
+*Теорема:* (о вычислении а. ф. п. по плотности)\
+$f: dp(a, b) -> RR, $ --- непрерывна\ $Phi: "Segm" dp(a, b) -> RR$ --- а.ф.п\
+$f$ --- плотность $Phi$\
+Тогда:\
+$forall [p, space q] in "Segm" quad Phi([p, q]) = int_p^q f(x)d x$
+
+#proof
+Не умаляя общности рассмотрим $[a, b]$\ #v(0.2cm)
+$F(x) = cases(delim: "[", 0\, &quad& x=a, Phi([a, x])\, &&x in (a, b])$\ #v(0.2cm)
+Проверим $F$ --- первообразная $f$\ #v(0.2cm)
+$(F(x + h) - F(x)) / h = (Phi[a, x+h] - Phi[a, x])/h = Phi([x, x+h])/h = f(x + Theta h), space 0 <= Theta <= 1$\ #v(0.2cm)
+$F'_+ = lim_(h->+0) dots = f(x)$\ #v(0.2cm)
+Аналогично $F'_- = f(x)$\ #v(0.2cm)
+$int_p^q f = F(q) - F(p) = Phi([p, q])$
+\ \
+*Пример 1:* площадь подграфика\ #v(0.2cm)
+$f: dp(a, b) -> R$, непр.\ #v(0.2cm)
+$f$ --- плотность, из монотонности площади\
+#image("4.png", width: 25%)
+$min f (q - p) <= sigma("ПГ"(f, [p, q])) <= max f (q-p)$\ #v(0.2cm)
+$Phi: "Segm" dp(a, b) -> RR$\ #v(0.2cm)
+$Phi([p, q]) = sigma("ПГ"(f, [p, q])) = int_p^q f$\ \
+*Пример:*\ #v(0.2cm)
+$x^2/a^2 + y^2/b^2 = 1$\
+#align(center)[#image("5.png", width: 25%) _График эллипса_]
+#align(center)[#image("6.png", width: 25%) _Геометрический способ поиска площади подграфика_] // из-за свойств симметрии синусоиды площадь подграфика равна половине площади прямоугольника
+
+$x=a cos t, t in [pi, 0]$\ #v(0.2cm)
+$y=b sin t$\ #v(0.2cm)
+$sigma_"элл" = int_(-a)^a y^+ (x) dif x = -int_pi^0 b sin t dot a sin t dif t=a b int_0^pi sin^2 t dif t = a b pi/2$\ \
+*Пример 2:* площадь криволинейного сектора
+$dp(a, b)$\
+$Phi: [p, q] |-> sigma "Сектор" ([p, q], r(phi))$\
+Проверим, что $1/2 r^2 (phi)$ --- плотность а.ф.п. $Phi$\
+$1/2 limits(min)_([p, q]) r^2 (phi) (q-p) <= Phi [p, q] <= 1/2 limits(max)_([p, q]) r^2 (phi) dot (q - p)$\
+Кр. сектор $([p, q], min r) subset$ Сектор $([p, q], r(phi)) subset$ Кр. сект. $([p, q], max r)$\
+Т.е. $Phi([p, q]) = 1/2 int_p^q r^2 (phi) dif phi$\
+\
+Посчитаем площадь круга\ #v(0.2cm)
+$sigma "Круга" = 1/2 int_0^(2pi) R^2 d phi = pi R ^2$ #smile\
+$phi=arctan g(t)/x(t)$\
+$r=sqrt(x^2+y^2)$\
+$S'=1/2 int_p^q r^2 (phi) d phi =_#smile 1/2 int_(t_p)^(t_q) = (x^2+y^2) dot 1/(1+(y^2(t))/(x^2(t))) dot (y'x - x'y)/(x^2) dif t=1/2 int_(t_p)^(t_q) y'(t)x(t)-x'(t)y(t)dif t$\ \
+$x=R cos t, t in [0, pi/2]$\
+$y=R sin t$\
+$S = R^2/2 int_0^(pi/2) cos^2 t + sin^2 t dif t = (pi R^2)/4$
+\
+\
+*Пример:* Изометрическое пространство\
+$G subset RR^2 space space G$ --- замкнутая выпуклая фигура. Диаметр $G = sup(rho(A, space B), space A, space B in G) =d<= 1$\
+Тогда $sigma(G) <= pi (d/2)^2 quad$ (равенство для круга $r = 1/2$)
+\ \
+#proof
+$f(x)$ --- вып., $x_0$ где $exists f'(x_0) => exists$ касательная\
+$Phi$ замк., вып. $=> r(phi)$ непр.
+$sigma = 1/2 int_(-pi/2)^(pi/2) r^2 (phi) dif phi=1/2 int_0^(pi/2) + int_(-pi/2)^0 = 1/2 int_0^(pi/2) r^2 (phi) dif phi + 1/2 int_0^(pi/2) r^2 (phi_"нов"-pi/2) dif phi_"нов"=$\
+$=1/2 int_0^(pi/2) r^2 (phi) + r^2 (phi - pi/2) dif phi=1/2 int_0^(pi/2) \"A B\"^2 dif phi<=1/2 int_0^(pi/2) d^2 dif phi = (pi d^2)/4$\ \
+#def циклоида --- траектория точки на окружности, катящейся по прямой\
+// см лекцию для объяснения этого треша
+$S_"черн" + S_"син" = S_"прям" + S_"лепестка"$\
+$S = 2 pi r^2 + pi r^2$\
+$S=3 pi r^2$\ \
+$ cases(x(phi) = r phi - r sin phi, y(phi) = r - r cos phi), phi in [0, 2pi] $\
+$S = int_0^(2pi r) y(x) dif x = int_0^(2pi) (r-r cos phi) (r-r cos phi) dif phi=r^2 int_0^(2pi) 1-2 cos phi + cos^2 phi dif phi = 2 pi r^2 + 0+pi r^2$
+// вместо изюминки вы прожевали доширак, я не знаю. чушь какая-то
