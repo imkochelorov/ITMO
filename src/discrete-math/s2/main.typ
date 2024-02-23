@@ -1,6 +1,6 @@
 #import "template.typ": *
 
-#set page(margin: 0.55in)
+#set page(margin: 0.55in, height: auto)
 #set par(leading: 0.55em, first-line-indent: 0em, justify: false)
 #set text(font: "New Computer Modern")
 #set heading(numbering: "1.1.")
@@ -21,7 +21,7 @@
   title: "Дискретная математика\nII семестр",
   authors: (
     "_scarleteagle",
-    "ikochelorov"
+    "imkochelorov"
   ),
   date: "зима/весна 2024",
   subtitle: "Лектор: Станкевич Андрей Сергеевич"
@@ -148,10 +148,9 @@ $(A_1 times Omega_2) sect (Omega_1 times A_2) = A_1 times A_2$
 == Условная вероятность
 _имеет смысл, если $P(B) eq.not emptyset$_\  \
 
-#columns(2)[
-$P(A|B) = P(A sect B)/P(B), quad P(B)!=0$\ \
+#columns(2)[$P(A|B) = P(A sect B)/P(B), quad P(B)!=0$\ \
 если $A$ и $B$ независимы, то \ $P(A|B)=(P(A) dot P(B))/P(B)=P(A)$\ \
-$p_B (omega)=p(omega)/P(B), quad P_B (A)=P(A sect B)/P(B))$ #image("image.png", width: 50%)]
+$p_B (omega)=p(omega)/P(B), quad P_B (A)=P(A sect B)/P(B))$ #colbreak() #image("1.png", width: 50%)]
 
 // Введение в теорию вероятностей. Вероятности не существует.
 // Введение в теорию формальных языков
@@ -195,7 +194,7 @@ $P(B|A_2)$ --- вероятность выполнения критерия, е�
 
 #def случайная величина\
 $angle.l Omega, space p angle.r$ --- вероятностное пространство\
-$xi: Omega -> RR$ --- _случайная величина (численная характеристика вероятностного эксперимента_
+$xi: Omega -> RR$ --- _случайная величина (численная характеристика вероятностного эксперимента)_
 \ \
 *Примеры:* \
 Игральная кость\
@@ -273,7 +272,7 @@ $ev c = c$\
 #th\
 $xi = c dot eta quad ev xi = c dot ev eta$\
 $xi = eta + zeta quad ev xi = ev eta + ev zeta$\ \
-$ev (eta + xi) = limits(sum)_(omega in Omega)(eta + zeta)(omega)= limits(sum)_(omega in Omega)(eta(omega) + zeta(omega)) =ev eta + ev zeta$
+$ev (eta + zeta) = limits(sum)_(omega in Omega)(eta + zeta)(omega)= limits(sum)_(omega in Omega)(eta(omega) + zeta(omega)) =ev eta + ev zeta$
 \
 \
 *Примечание:*\
@@ -339,10 +338,134 @@ _На английском:_ $"Var" xi$\ \
 
 
 $sd c xi = c^2 sd xi$\
-$sd (xi + eta) = ev(xi+eta)^2 - (ev(xi+eta))^2 = ev xi^2 + 2 ev xi eta + ev eta^2 - (ev xi)^2 + 2 ev xi ev eta - (ev xi)^2 = sd xi + sd eta + 2(ev xi eta - ev xi ev eta)$\ \
+$sd (xi + eta) = ev(xi+eta)^2 - (ev(xi+eta))^2 = ev xi^2 + 2 ev xi eta + ev eta^2 - (ev xi)^2 - 2 ev xi ev eta - (ev xi)^2 = sd xi + sd eta + 2(ev xi eta - ev xi ev eta)$\ \
 #def ковариация\
 $ev xi eta - ev xi ev eta = "Cov"(xi, space eta)$ --- _ковариация_
 
+#pagebreak()
+
+$Omega, space p$ --- вероятностное пространство\ #v(0.2cm)
+$xi: Omega -> RR$ ---  случайная величина _(численная характеристика вероятностного эксперимента)_\ #v(0.2cm)
+$E xi = limits(sum)_(omega in Omega) xi (omega) dot p(omega) = limits(sum)_a a dot p(xi = a)$ --- мат ожидание\ #v(0.2cm)
+$E(xi + eta) = E xi + E eta $ --- мат ожидание суммы равно сумме мат ожиданий\ #v(0.2cm)
+$F_xi (a) = P(xi <= a)$ --- функция распределения случайной величины\ #v(0.2cm)
+$f_xi (a) = P(xi = a)$ --- плотность случайной величины\ #v(0.2cm)
+$xi " и " eta$ --- независимые для $forall alpha space  beta$, если $[xi = alpha] " и " [eta = beta]$\ #v(0.2cm)
+$xi " и " eta$ --- независимые $=> E(xi, eta) = E xi dot E eta$\ #v(0.2cm)
+\
+$D xi = E(xi - E xi)^2 = E xi^2 - (E xi)^2$ --- дисперсия\ #v(0.2cm)
+$xi "и " eta$ независимые $=> D(xi + eta) = D xi + D eta$\ #v(0.2cm)
+$D(xi + eta) = D xi + D eta + 2(E xi eta - E xi dot E eta)$\ #v(0.2cm)
+$"Cov"(xi, space eta)= E xi eta - E xi dot E eta$ --- ковариация\ #v(0.2cm)
+$xi " и " eta $ независимые $=> "Cov"(xi, space eta) = 0$\ #v(0.2cm)
+$"Cov"(xi, xi) = E(xi dot xi) - E xi dot E xi = D xi$ \ #v(0.2cm)
+$"Cov"(xi, -xi) = - E xi^2 + (E xi)^2 = - D xi$ --- ковариация может быть отрицательной#v(0.1cm)
+\ \
+#th\ #v(0.2cm)
+$"Cov"(xi, eta)^2 <= D xi dot D eta$
+\ \
+#def корреляция\ #v(0.2cm)
+$"Corr"(xi, eta) = ("Cov"(xi, eta))/sqrt(D xi dot D eta)$ --- _корреляция_\ #v(0.2cm)
+$-1 <= "Corr"(xi, eta) <= 1$\
+\
+$D xi = 0 <=> E(xi - E xi)^2 = 0 <=> p(omega) > 0 => xi(omega) = E xi$\
+Корреляции с константой не бывает, иначе в формуле деление на ноль\
+
+\ \
+#th\ #v(0.2cm)
+$"Corr"(xi, eta) &= 1 quad <=> quad  xi = c dot eta, space &c > 0 \ &= -1 &c < 0 $
+\ \
+Корреляция не означает причинно-следственной связи
+\ \
+== Хвостовые неравенства
+
+#image("2.png", width: 50%)
+
+*Задача:*\
+Средняя зарплата 10 опрошенных человек --- 50  тысяч. Сколько максимум человек может иметь зарплату больше или равную 250 тысяч рублей?\
+Максимум 2 человека, в случае, если 8 остальных имеют нулевую зарплату
+\
+\
+*Неравенство Маркова* _"очень богатых не может быть очень много"_\ #v(0.2cm)
+$xi > 0 quad E xi$\ #v(0.2cm)
+$P(xi >= c dot E xi) <= 1/c$ #v(0.2cm)
+*Доказательство:*\ #v(0.2cm)
+$P(xi >= c dot E xi) = limits(sum)_(omega : xi >= c dot E xi) p(omega)$\ #v(0.2cm)
+$E xi = limits(sum)_omega p(omega) dot xi (omega) =$\ #v(0.2cm)
+$= limits(sum)_(omega: xi(omega) >= c dot E xi) p(omega) dot xi(omega) + limits(sum)_(omega: xi(omega) < c dot E xi) p(omega) dot xi(omega) >=$ \  #v(0.2cm)
+$>= limits(sum)_(omega : xi(omega) >= c dot E xi) p(omega) dot c dot E xi$\ #v(0.2cm)
+$E xi >= c dot E xi dot P (xi >= c dot E xi)$\ #v(0.2cm)
+$P(xi >= c dot E xi) <= 1/2$
+ 
+#columns(2)[
+#image("3.png") #colbreak() #image("4.png")]\
+
+$D xi = E(xi - E xi)^2$\ #v(0.2cm)
+$eta = (xi - e xi)^2$\ #v(0.2cm)
+$P(eta >= c ^ 2 E eta) <= 1/c^2$\ #v(0.2cm)
+$P((xi - E xi)^2 >= c^2 D xi) <= 1/c^2$\ #v(0.2cm)
+$P(|xi - E xi|) >= c dot sqrt(D xi)) <= 1/c^2$\ \
+
+
+#def среднеквадратическое отклонение\ #v(0.2cm)
+$sigma = sqrt(D xi)$\
+\
+#th неравенство Чебышева\ #v(0.2cm)
+$P(|xi - E xi| >= c dot sigma) <= 1/c^2$\
+\ \
+$P(eta >= alpha) quad alpha^2 = c^2 E eta quad c^2 = alpha^2 / (D xi)$\ #v(0.2cm)
+$P(|eta - E eta| <= alpha) <= (D xi) / alpha^2$\ \
+\
+$xi quad n$ раз $1/n limits(sum)^n_(i = 1) xi_i = eta$\ #v(0.2cm)
+$xi_i$ --- о. р. незав. сл. величины\ #v(0.2cm)
+$E eta = E xi$\ #v(0.2cm)
+$D eta = 1/n^2 dot n D xi = 1/n D xi$\
+\
+нет. м. о. $mu$\ #v(0.2cm)
+$P(|xi - mu| >= alpha) <= (D xi)/alpha^2 = epsilon$\ #v(0.2cm)
+$P(|eta - mu| >= alpha) <= (D eta)/ alpha^2 = epsilon/n$\
+\
+Для какого $alpha$\
+$P(|xi - mu| >= alpha) <= epsilon$\
+\
+$(D xi) / alpha^2 <= epsilon$\ #v(0.2cm)
+$alpha^2 >= 1/epsilon dot D xi$\ #v(0.2cm)
+$alpha >= sqrt(1/epsilon dot D xi) = N_0$\ #v(0.2cm)
+$alpha >= sqrt(1/epsilon D dot eta) = 1/sqrt(n) dot N_0$
+\ \
+
+#def распределение Бернулли\
+$0, 1 quad p(1) = p, space p(0) = q, quad xi_i $\ #v(0.2cm)
+$xi = limits(sum)_(i = 1)^n xi_i quad E xi = n p$\ #v(0.2cm)
+$P(|xi - n p| >= |1/2 n - n p|)$
+
+#image("5.png", width: 40%)
+
+$P_"err" <= P(|xi - n p| >= |1/2 n - n p|)$
+\ \ \
+
+$P(n p - xi >= n p - 1/2 n)$\
+$P(xi <= (1/2 n - n p) + n p)$\
+$P(xi <= n p ((1/(2p) - 1) + 1)) quad 1/(2p) - 1 = delta$\
+$P(xi <= n p (1 - delta))$\
+$P(xi >= n p (1 + delta))$ --- симметричная ситуация
+\ \
+#th граница Чернова\
+\
+$P(xi <= n p (1 - delta)) &\
+& quad <= e^(-delta^2/2 n p)  \
+P(xi >= n p (1 + delta)) &$
+
+\ \
+$e^(-1/(54) n) <= epsilon$\
+\
+$-1/54 n <= ln epsilon $\
+\
+$n >= 54 ln 1/epsilon$\ \ \
+
+$xi quad t quad eta = e^(t xi)$\ \
+$P(eta >= e^(t alpha)) <= (E eta) / e^(t alpha)$\ \
+$E eta = E e^(t xi) - E e^(t limits(sum)_(i = 1)^n xi_i) = E limits(product)_(i = 1)^n e^(t  xi_i) = limits(product)_(i = 1)^n E e^(t xi_i) = limits(product)_(i = 1) ^ n (p dot e^t + 1 - p)$
 
 /*
 = TODO: Теория формальных языков
