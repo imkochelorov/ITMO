@@ -17,6 +17,7 @@
   
 }
 
+
 #show: project.with(
   title: "Математический анализ\nII семестр",
   authors: (
@@ -26,6 +27,8 @@
   date: "зима/весна 2024",
   subtitle: "Лектор: Кохась Константин Петрович"
 )
+
+
 
 #let def = strong("Определение:")
 #let dp(first, second)=$angle.l #first, #second angle.r$
@@ -423,7 +426,7 @@ $forall [p, q] in "Segm" dp(a, b) quad forall c in [p, q] quad Phi([p, q]) = Phi
 $[p, q] |-> int_p^q f$
 
 == Плотность аддитивной функции промежутка
-$Phi: "Segm" dp(a, b) -> RR, space f: dp(a, b) -> RR$\
+$Phi: "Segm" dp(a, b) -> RR, space f: dp(a, b) -> RR$\ #v(0.2cm)
 $f$ --- плотность $Phi$, если $forall Delta in "Segm": limits(min)_Delta f dot l_Delta <= Phi(Delta) <= limits(max)_Delta f dot l_Delta$\
 \ \
 *Теорема:* (о вычислении а. ф. п. по плотности)\
@@ -491,3 +494,242 @@ $S=3 pi r^2$\ \
 $ cases(x(phi) = r phi - r sin phi, y(phi) = r - r cos phi), phi in [0, 2pi] $\
 $S = int_0^(2pi r) y(x) dif x = int_0^(2pi) (r-r cos phi) (r-r cos phi) dif phi=r^2 int_0^(2pi) 1-2 cos phi + cos^2 phi dif phi = 2 pi r^2 + 0+pi r^2$
 // вместо изюминки вы прожевали доширак, я не знаю. чушь какая-то
+
+#pagebreak()
+/*
+#columns(3)[
+  50 \
+  10\
+  40
+  #colbreak()
+  кр\
+  теор.опрос\
+  экзaмен
+  #colbreak()
+  30\
+  0\
+  30 из 40 = 75%\
+  #line()
+  60
+]
+*/
+
+// я час назад в первый раз за сем сел за прогу
+// пиздец
+// у нас main должен работать за O(log n) или binary search?
+// main
+// а, то есть нельзя пройтись по всем элементам и перекастовать в int?
+// а тут кста хз
+// я бы сказал что незя
+// но кажется у тех, кто так делал, принимали
+// а ты как делал?
+// переводил в инт только те элементы, которые бинпоиск смотрит, то есть логарифм
+// кринж но окэй
+// поч кринж то
+// int binarySearch(String[] args)
+// да
+// вопросы?
+// ставишь пред условием $forall i in [0, args.length): args[i] in {`parsable as integers strings`}$
+// насколько плохо кастовать x в int O(log n) раз?
+
+*Аналитические функции:* 
+$f(x) in C^infinity -->$ ф. Тейлора\ #v(0.2cm)
+$f(x) = limits(sum)_(k = 0)^(+ infinity) (f^((k)) (x_0))/k!(x - x_0)^k$\ #v(0.2cm)
+$e^x = limits(sum)^(+infinity)_(n = 0) x^n/n! $ --- всюду сходится с рядом Тейлора \ #v(0.2cm) 
+$ ln(1 + x) = x - x^2/2 + x^3 / 3- dots$ --- сходится с рядом Тейлора в точках из $[-1, 1]$
+\
+\
+*Пример неаналитической функции*\  #v(0.2cm)
+
+$ f(x) = cases(delim: "[", e^(-1/x^2)\, &quad x != 0, 0\, &quad x=0) $
+*Утверждение:* $forall n in NN quad exists f^((n)) (0) = 0$\ \
+*Доказательство:*\ #v(0.2cm)
+1)  $exists f'(0) quad$ если 
+$space exists limits(lim)_(x -> x_0 + 0) f'(x) = a$, то $f'_+(x_0) = a$ \
+ #v(0.2cm)#h(2.8cm) 
+$space exists limits(lim)_(x -> x_0) #h(0.45cm) f'(x) = a$, то $f'#h(0.1cm) (x_0)  = a$
+\ #v(0.2cm)
+$lim_(x->0) 2/(x^3) e^(-1/x^2) = #smile lim (2 (1/x^3) e^(-1/x^2))/(3x^2) = lim 2/3 dot (e^(-1/x^2))/x^5 = lim (2/x^3)/e^(1/x^3) = [infinity/infinity]=lim (-6/x^3)/(-1/x^3 dot e^(1/x^3)) = lim_(x->0) (6/x)/(e^(1/x^2)) = lim (-6/x^2)/(-1/x^3 e^(1/x^2)) = lim_(x->0) (6x)/(e^(1/x^2)) = 0$\
+#v(0.2cm)
+_Следствие:_ $forall k space limits(lim)_(x->0) e^(-1/x^2)/x^k = 0$\
+#v(0.2cm)
+Итак, $f'(0) = 0, quad$ то есть $f'(x) = cases(delim: "{", 1/x^3 e^(-1/x^2)\, &quad x != 0, 0 &quad x=0)$\ \
+Проверим по индукции по $n$
+$forall n quad exists P_n (x)$ --- многочлен: $f^((n)) (x) = cases(delim: "[", P_n (1/x) e^(-1/x^2)\, &quad x != 0, 0\, &quad x=0)$\ #v(0.2cm)
+База: $n= 0, space 1 $ см. раньше //??? // ??? //всм см раньше 1
+$ f^((n+1)) = cases(delim: "[", (P'_n (1/x) (-1/x^2) + P_n (1/x) dot (1/x^3)) e^(-1/x^2)\, &quad x != 0, ?\, &quad x=0) $\
+$ f^((n+1)) = limits(lim)_(x->0)(f^((n)) (x)) = limits(lim)_(x->0)P_(n+1)(1/x)e^(-1/x^2) = 0 $
+\ \
+
+
+$f$ --- плотность аддитивной функции промежутка $Phi$, если:\ #v(0.2cm)
+$forall Delta in "Segm" quad limits(min)_Delta f dot |Delta| <= Phi(Delta) <= limits(max)_Delta f dot |Delta| quad$ _(f непрерывна, в ином случае вместо min и max, inf и sup)_ \ \
+
+
+#align(center)[#image("7.png", width: 30%) $f = 1/2 r^2(phi)$]
+\
+#th
+$f$ --- плотность $Phi$ ($f$ --- непр) $=> Phi([p, q]) = int_p^q f$
+#v(0.2cm)
+
+#th (_обобщ. теорема о плотности_)\ #v(0.2cm)
+$Phi$ --- а.ф.п: $"Segm"(dp(a, b)) -> RR, f in C[a, b]$\ #v(0.2cm)
+Пусть $forall Delta in "Segm"(dp(a, b)) quad exists$ ф. пр-ка $m_Delta, M_Delta:$
+#columns(2)[
+- $m_Delta dot abs(Delta) <= Phi(Delta) <= M_Delta dot abs(Delta)$
+
+- $forall x in Delta quad m_Delta <= f(x) <= M_Delta$
+- $forall$ фикс. $x in dp(a, b) quad M_Delta - m_Delta -->_(abs(Delta) -> 0\ x in Delta) 0$\
+  т.е. $forall epsilon > 0 quad exists delta > 0: forall Delta in "Segm"dp(a, b): abs(Delta) < delta, x in Delta quad M_Delta - m_Delta < epsilon$
+  #v(0.2cm)
+#colbreak()
+#align(right)[#image("8.png", width: 80%)]
+]
+Тогда $f$ --- плотность $Phi$ $("и " forall [p, q] subset dp(a, b) quad Phi([p, q]) = int_p^q f)$
+\ \
+#proof\
+Не умаляя общности рассмотрим отрезок $[a, b]$, $quad F(x) = cases(delim: "[", 0\, &x = 0, Phi[a, x]\, space &x > a) quad ? F' = f$\ #v(0.2cm)
+Фиксируем $x$, Пусть $h >0 $ \ #v(0.2cm) $(F(x + h) - F(x))/h = Phi[x, space x+h]/h,$ то есть из (1) $quad m_[x, space x + h] < (F(x+h) - F(x))/h <= M_[x, space x + h] $\
+#v(0.2cm) #h(5.28cm) из (2)  $quad m_[x, space x+h] <= #h(0.7cm) f(x) #h(0.7cm) <= M_[x, space x+h]$\
+#v(0.2cm)
+Таким образом
+$quad |(F(x + h) - F(x)) / h - f(x)| <= M_[x, space x+ h] - m_[x, x+h] limits(-->)_(h -> 0) 0$\ #v(0.2cm)
+Т. е. $(F(x + h) - F(x)) / h limits(-->)_(h -> 0) f(x),$ т.е. $quad F'_+(x) = f(x)$\
+#v(0.2cm) #h(3.3cm) Аналогично $F'_- (x) = f(x)$
+\ \
+== Фигуры вращения  
+#columns(2)[
+I тип: $f >= 0$, непр.\
+$T([a, b]) = {(x, y, z) in RR^3: x in [a, b], y^2 + z^2 <= f^2 (x) }$\
+$$
+#colbreak()
+#align(right)[#image("9.png", width: 55%)]
+]
+#columns(2)[
+II тип:
+$U limits(([a, b]))_(0 <= a < b) = {(x, y, z) in RR^3; space a^2 <= x^2 + z^2 <= b^2, space 0 <= y <= f(sqrt(x^2 + z^2))}$\ \
+#colbreak()
+#align(right)[#image("10.png", width: 73%)]
+]
+
+а.ф.п. $[a, b] |-> Phi[a, b] = V(T[a, b])$\
+#v(0.2cm)
+#h(2.35cm)$Psi[a, b] = V(U[a, b])$
+\ \
+#th
+#v(0.2cm)
+1) $Phi[a, b] = pi int_a^b f^2 (x) dif x$
+#v(0.2cm)
+2) $Psi[a, b] = 2 pi int_a^b x f(x) dif x$
+\ \
+#proof
+#v(0.2cm)
+1) ИЕЯ
+#v(0.2cm)
+2) ? $2 pi x f(x)$ ---\
+  $quad U[a, b] subset $ Цилиндр над кольцом $quad a^2 <= x^2 + z^2 <= b^2, space$высоты $limits(max)_[a, space b] f$\ #v(0.2cm)
+  -  $Psi[a, b] <= (pi b^2 - pi a^2) max f = pi (b + a) max f (b - a) <= pi dot limits(max)_(x in [a, space b]) 2 x dot limits(max)_(x in [a, space b]) f dot (b-a)$\ #v(0.2cm)
+    $Psi[a, b] >= pi min 2x dot min f (b - a)$\
+    #v(0.2cm) $M_[a, space b] = pi dot limits(max)_(x in [a, space b]) = pi dot max 2x dot max f$\
+    #v(0.2cm) $m_[a, space b] = pi dot min 2x dot min f$\ 
+  -  $m_[a, space b] <= 2 pi x f(x) <= pi dot max 2x dot max f(x)$\
+  
+  -  $M-m -->_(x in Delta\ abs(Delta ->0)) 0$\ #v(0.2cm)
+    $max f -> f(x) <- min f$\ #v(0.2cm)
+    $limits(max)_(t in Delta) 2 t -> 2 x <- min 2 t$
+\
+*Посчитаем объём бублика:*\
+#v(0.4cm)
+$V_"бублика" = 2 dot 2pi int_(R-2)^(R+2) x sqrt(r^2 - (x-R)^2) dif x=4pi int_(R-2)^(R+2) (x-R) sqrt(r^2 - (x-R)^2) dif x + 4pi R int_(R-2)^(R+2) sqrt(r^2 - (x-R)^2) dif x$\ #v(0.4cm)
+$=0+4pi R dot (pi r^2)/2 = 2pi R dot pi r^2 = 2pi^2 R r^2$
+
+#align(center)[#image("11.png", width: 50%)]
+// до начала 6 дней  // начала чего? // стрима
+// начал же... // в waiting room было написано "начало 4 марта 13:30"
+
+== Интегральные суммы
+$f in C[a, space b]$\ \
+#columns(2)[
+#def дробление отрезка\ #v(0.2cm)
+_Дробление отрезка $[a, b]$_ --- набор точек $x_0 = a < x_1 < x_2 < dots < x_n = b$
+#colbreak()
+#align(right)[#image("12.png", width: 60%)]
+]\
+\ \
+#columns(2)[
+#def ранг дробления (мелкость)\ #v(0.2cm)
+_Ранг дробления_ --- $limits(max)_(1<=k<=n) (x_k - x_(k-1))$
+#colbreak()
+#align(right)[#image("13.png", width: 60%)]
+]
+\
+#columns(2)[
+#def оснащение\ #v(0.2cm)
+_Оснащение_ --- набор точек $xi_1, dots, xi_n: forall k quad xi_k in [x_(k-1), x_k]$
+#colbreak()
+#align(right)[#image("14.png", width: 60%)]
+]
+\
+#columns(2)[
+#def интегральная (риманова) сумма\  #v(0.2cm)
+_Интегральная сумма_ --- $sum_(k=1)^n f(xi_k) (x_k - x_(k-1))$
+#colbreak()
+#align(right)[#image("15.png", width: 60%)]
+]
+\
+#th (_об интеграле как о пределе интегральной суммы_)\ #v(0.2cm)
+$f in C[a, space b] quad $ Тогда\ #v(0.2cm)
+$forall epsilon > 0 space exists delta > 0 forall $ дробление $x_0 = a < x_1 < dots < x_n = b, $ где ранг дробления $< delta$\ #v(0.2cm)
+$ abs(int^b_a f - limits(sum)_(k = 1)^n f (x_(k - 1)) (x_k - x_(k-1) )) < epsilon $
+\ \
+#proof #v(0.2cm)
+Т. Кантора: $f$ --- непр. на $[a, b] => f$ --- равн. непр.\ #v(0.2cm)
+т.е. $display(forall epsilon > 0 quad exists delta > 0: forall x\, space overline(x): abs(x - overline(x)) < delta quad abs(f(x) - f(overline(x))) < epsilon/(b-a))$\ #v(0.4cm)
+$display(abs(int_a^b f - sum_(k=1)^n dots) = abs(sum_(k=1)^n int_(x_(k-1))^(x_k) (f(x) - f(x_(k-1))) dif x) <= sum abs(dots) <= sum_(k=1)^n int_(x_(k-1))^(x_k) abs(f(x) - f(x_(k-1))) dif x < sum int_(x_(k-1))^(x_k) epsilon/(b-a) dif x =)$\ #v(0.4cm)  $display(= sum_(k=1)^n epsilon/(b-a) abs(b-a) = epsilon)$\ \
+$f: [a, b] -> RR$\
+//что думаешь?
+//мне кажется, как минимум дроби можно в дисплее писать
+// можно
+
+\
+#def модуль непрерывности\ #v(0.2cm)
+$display(omega(delta) := limits(sup)_(x, f in [a, b]\ abs(x - t) < delta) abs(f(x) - f(t)))$ --- модуль непрерывности\ \
+Т. Кантора: $omega(delta) ->_(delta -> 0) 0$ [для непр. $f$]\ #v(0.2cm)
+$f$ --- дифф на $[a, space b] quad M = max abs(f') quad$ Тогда $omega(delta) <= M dot delta$\ #v(0.2cm)
+(теорема Лагранжа)\ #v(0.2cm)
+_Предыдущая теорема:_ если ранг дробления $< delta$, то $abs(int_a^b f - sum_(k=1)^n f(x_(k-1))(x_k - x_(k-1))) <= omega(delta) dot (b-a)$\
+$f in C^1 quad M = max abs(f') quad abs(int - sum) <= M delta(b - a)$
+#align(center)[#image("16.png", width: 40%)]
+\ \
+
+#th (_об интегральной сумме центральных прямоугольников_) #columns(2)[
+$f in C^2[a, space b] quad  a = x_0 < x_1 < x_2 < dots < x_n = b quad int = max(x_k, space x_(k - 1)), space xi_k = (x_(k-1) + x_k)/2$\ #v(0.2cm)
+Тогда $abs(int_a^b f - sum_(k=1)^n f(xi_k) (x_k - x_(k-1)))$
+\ \
+#proof #v(0.2cm)
+Упражнение
+
+#colbreak()
+#align(right)[#image("17.png", width: 30%)]
+]
+\ \
+#th (_формула трапеций_)\ #v(0.2cm) // да
+$f in C^2 [a, b] quad a = x_0 < x_1 < dots < x_n = b quad delta = max (x_k - x_(k-1))$\ #v(0.2cm)
+Тогда $abs(int_a^ f - limits(sum)_(k = 1)^n (f(x_(k-1)) + f(x_k)) / 2(x_k - x_(k-1))) <= delta^2/8 int_a^b abs(f'')$ \ \
+#proof #v(0.2cm) 
+$int_alpha^beta u'v = u v |_alpha^beta - int_alpha^beta v' u $\
+#v(0.4cm)
+$int_(x_(k-1))^(x_k) f = int_(x_(k-1))^(x_k) f(x) dif x = $ \ \ $display(mat(delim: "[", v=f, v=f'; u'=1, u=x-xi_k)) =f(x) (x-xi_k)|_(x=x_(k-1))^(x=x_k) - int_(x_(k-1))^(x_k) f'(x) (x-xi_k) dif x = (f(x_k) + f(x_(k-1))) (x_k - x_(k-1))/2 +$\ #v(0.4cm)  
+$+int_(x_(k-1))^(x_k) f' (-2(x-xi_k)) dif x = display(mat(delim: "[", v=f', f'=f''; u'=-2(x-xi_k), limits(u=(x-x_(k-1))(x_k-x))_("на" [x_(k-1), x_k])))=$\ #v(0.4cm)
+$=(f(x_k) + f(x_(k-1)))/2 (x_k - x_(k-1)) + 1/2 (u dot f'|_(x=x_(k-1))^(x=x_k) - int_(x_(k-1))^(x_k) f'' dot u(x) dif x)$, где $u(x) = (x-x_(k-1))(x_k - x)$\ \ \ #v(0.4cm)
+Суммируем эти формулы по $k=1,2,dots,n$\ #v(0.2cm)
+$int_a^b f = sum_(k=1)^n "трап" - 1/2 int_a^b f'' (x) u(x) dif x$\ #v(0.4cm)
+$abs(int_a^b f - sum "трап") = 1/2 abs(int_a^b f'' (x) u(x) dif x) <= 1/2 int_(a)^b abs(f'') u(x) dif x <= delta^2/8 int _a^b abs(f'')$\ \
+$= limits(sum)_(k = 1) epsilon / (b - a) (x_k - x_(k - 1)) = epsilon / (b - a) (b - a) = epsilon$
+\ \ \
+$[a, b] = [0, n], x_k = k$\
+Формула трапеций: $abs(int_a^b f(x) dif x - sum_(k=1)^n (f(x_k) + f(x_(k-1)))/2 dot 1) <= 1/8 int_0^n abs(f'')$\
+#smile $f(x) = x$\
+$abs(int_0^n x dif x - (0/2 + 1/2 + (1+2)/2 + (2+3)/2 + dots + ((n-1)+n)/2)) <= 0$\
+$=> 1+2+dots+n = n/2 + int_0^n x dif x = (n^2+n)/2$ #smile\
+Это частный случай формулы Эйлера-Маклорена
