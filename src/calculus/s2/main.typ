@@ -733,3 +733,23 @@ $[a, b] = [0, n], x_k = k$\
 $abs(int_0^n x dif x - (0/2 + 1/2 + (1+2)/2 + (2+3)/2 + dots + ((n-1)+n)/2)) <= 0$\
 $=> 1+2+dots+n = n/2 + int_0^n x dif x = (n^2+n)/2$ #smile\
 Это частный случай формулы Эйлера-Маклорена
+
+#pagebreak()
+
+== Простейший случай формулы Эйлера-Маклорена
+
+$m, space n in ZZ quad f in C^2 [m, space n] quad$ Тогда\
+$int_m^n f(x) d x = limits(sum)_(i = m)^n f(i) - 1/2 int_m^n f''(x) dot {x} (1 - {x}) d x$ \
+Это очевидно, АГА. Это формула трапеции\
+$limits(sum)_(k =  1)^n (f(x_(k - 1)) +f(x_k))/2 (x_k - x_(k-1))$\
+Дробим $[m, space n]$ на единичные отрезки\
+$psi(x) = (x - x_(k-1)) (x_k - x)$\
+$delta^2/8 int dots quad 1/2 f(m) + f(m+1) + dots + f(n - 1) + 1/2f(n)$\
+$-delta^2/2 int_a^b abs(f'') quad int f'' dot psi(x)$
+//TODO
+\
+\
+*Пример 1:* $f(x) = x^p, space p>-1$\
+$1^p + 2 ^p + dots + n^p = n^p/2 + 1/2 + int_1^n x^p d x + 1/2 int_1^n (x^p)'' {x}(1 0 {x})d x$
+
+//TODO
