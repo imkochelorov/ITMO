@@ -1,12 +1,12 @@
-#import "template.typ": *
+#import "../../../template.typ": *
 
-#set page(margin: 0.55in, height: auto)
-#set par(leading: 0.55em, first-line-indent: 0em)
+#set page(margin: 0.45in, height: auto)
+#set par(leading: 1em, first-line-indent: 0em)
 #set text(font: "New Computer Modern")
 #set heading(numbering: "1.1.")
 #show raw: set text(font: "New Computer Modern Mono")
 #show par: set block(spacing: 0.55em)
-#show heading: set block(above: 1.4em, below: 1em)
+#show heading: set block(above: .5em, below: 1em)
 #show heading.where(level: 1): set align(center)
 #show heading.where(level: 1): set text(1.44em)
 #show outline.entry.where(
@@ -44,6 +44,12 @@
 #let qed = $space qed$
 #let lm=par(strong("Лемма:"))
 #let apply=$space circle.small space$
+#let nl=v(0.2cm)
+#let sp=0.2cm
+
+
+#outline(title: "Оглавление", indent: auto)
+#pagebreak()
 
 // спойлеры: 1. Полилинеальная и тензорная геометрия, 2. Спектральная теория типов, 3. Евклидова геометрия
 
@@ -305,7 +311,7 @@ det {x_1 dots x_n} equiv det A$
 $make U in Omega_(p_1)^ q_1 (K) quad V in Omega_(p_2)^q_2(K)$ \
 #def произведение ПЛФ \ $U$ и $V$ --- ПЛФ $quad$ форма $W = U dot V$ --- _произведение ПЛФ_:\
 $W(x_1, dots, x_p, x_(p_1+1), dots, x_(p_1 + p_2) , y^1, dots, y^q, dots y^(q_1 + q_2) )$ // че
-\ $= U(x_1, dots, x_p; y^1, dots, y^(p_1)) dot V(x_(p_1 + 1), dots, x_(p_1 + p_2); y ^(q_1), dots, y^(q_1 + q_2)$
+\ $= U(x_1, dots, x_p; y^1, dots, y^(q_1)) dot V(x_(p_1 + 1), dots, x_(p_1 + p_2); y ^(q_1+1), dots, y^(q_1 + q_2)$
 \ \
 #nb
 $W$ --- ПЛФ $(p_1 + p_2, q_1 + q_2)$\
@@ -626,3 +632,354 @@ tilde(a)_1^1, tilde(a)_2^1, dots, tilde(a)_n^1;
 dots.v, dots.v, dots.down, dots.v;
 0, 0, dots, ?)$\
 $"rank" A$ --- кол-во отличных от нуля строк
+
+#pagebreak()
+
+= Тензорное произведение
+
+$make X(K), space Y(K)$ --- ЛП над $K$ #nl
+$dim_K X = n$ #nl
+$dim_K Y = m$ #nl
+$make Z(K)$ --- ЛП над $K$ #nl
+$make b: X times Y -> Z$ --- билинейное отображение #nl
+$forall x_1, x_2, x in X(K) quad y_1, y_2, y in Y(K) quad forall lambda in K$
+- $b(x_1 + x_2, y) = b(x_1, y) + b(x_2, y)$
+
+- $b(x, y_1 + y_2) = b(x, y_1) + b(x, y_2)$
+- $b(lambda x, y) = lambda b(x, y) = b(x, lambda y)$
+#nl
+#nb
+$x in X(K) quad exists {e_i}_(i=1)^n$ --- базис $X(K)$ #nl
+$display(y in Y(K) quad exists {g_j}_(j=1)^m)$ --- базис $Y(K)$ #nl 
+$x = display(sum_(i=1)^n xi^i e_i quad y = sum_(j=1)^m eta^j g_j)$ #nl
+$b(x, y) = sum_(i=1)^n sum_(j=1)^n xi^i eta^j b(e_i, g_j) = sum_(i=1)^n sum_(j=1)^n xi^i eta^j h_(i j), quad h_(i j) in Z(K)$
+#nl #nl #nl
+#nb
+$b(x_1, y_1) + b(x_2, y_2) = b(?, ?)$
+#nl#nl#nl // может следать переменную для длины и писать типа #v(3 f")?
+//ниасилил // 3*sp?
+#lm
+Следующие условия эквивалентны:
++ ${b(e_i, g_j)}_(i=1dots n)^(j=1dots m)$ --- базис $Z(K)$
+
++ $forall z in Z(K) quad exists! z = sum_(i=1)^n b(e_i, y_i), quad y_i in Y(K)$
++ $forall z in Z(K) quad exists! z = sum_(j=1)^m b(x_j, g_j), quad x_j in X(K)$
+#proof
+$(1) <=> (2)$:\
+${b(e_i, g_j)}$ --- базис $Z(K) => forall z quad z eq^! sum_(i=1)^n sum_(j=1)^m zeta^(i j) b(e_i, g_j) = sum_(i=1)^n b(e_i, sum_(j=1)^m zeta^(i j) g_j) = sum_(i=1)^n b(e_i, y_i)$
+$(1) <=> (3)$ аналогично.
+#v(3*sp)
+#def тензорное произведение #nl
+$X(K), space Y(K)$ --- линейные пространства #nl
+$times.circle: X times Y --> X times.circle Y$ --- билинейное отображение, такое что:#nl
+Если ${e_i}^n_(i = 1)$ --- базис $X(K)$ и ${g_j}_(j = 1)^m$ --- базис $Y(K)  quad => {e_i times.circle g_j}_(i = 1 dots n)^(j = 1 dots m)$ --- базис $T = X times.circle Y$
+#nl
+$T(K)= X(K) times.circle Y(K)$ --- _тензорное произведение_
+#v(0.6cm)
+#nb #nl
+$x in X(K), space y in Y(K)$#nl
+$x times.circle y = (sum_(i=1)^n xi^i e_i) times.circle (sum_(j=1)^m eta^j g _j) = sum_(i = 1)^n sum_(j = 1)^m limits(xi^i eta^j)_(" координаты тензора" z " ") limits((e_i times.circle j_j))_(" базис" T=X times.circle Y " ")$
+#v(0.6cm)
+#def разложимый (факторизуемый) элемент #nl
+Элемент $z in T$ называется разложимым, если $exists x in X(K), y in Y(K)$, что $z = x times.circle y$, иначе $z$ называется неразложимым
+#v(0.6cm)
+#ex #nl
+Неразложимый: $z = x_1 times.circle y_1 + x_2 times.circle y_2$ #nl
+Разложимый: $z = x_1 times.circle y_1 + x_1 times.circle y_2 = x_1 times.circle (y_1 + y_2)$\
+#v(0.6cm)
+#nb #nl
+Общий вид элемента $Z(K)$: #nl
+$z = sum_(i=1)^n sum_(j=1)^m zeta^(i j) e_i times.circle g_j$
+#v(0.6cm)
+#ex #nl
+$n=3, space m=2$#nl
+$[zeta^(i j)] = mat(delim: "[", 1, 2; 3, 1; 4, 2)$#nl
+$z=e_1 times.circle g_1 + 2 e_1 times.circle g_2 + 3 e_2 times.circle g_1 + e_2 times.circle g_2 + 4 e_3 times.circle g_1 + 2 e_3 times.circle g_2$
+#v(0.6cm)
+#nb #nl
+// ты хоть что-нибудь понимаешь? //? //ну я чё-то выпадаю из темы // я еще не вошел
+$dim_K T = dim_K X dot dim_K Y$
+#v(0.6cm)
+#th (_основная теорема тензорной алгебры_)#nl
+Для любого билинейного отображения $b: X times Y -> Z
+$#nl
+$exists! $ билинейное отбражение $tilde(b): X times.circle Y -> Z$ такое, что следующая диаграмма коммутативна
+#nl
+$X times Y -->^times.circle X times.circle Y$\
+$#h(0.6cm)b arrow.br Z arrow.bl tilde(b)$
+#nl
+#see $b space = space tilde(b) space circle.small space times.circle$
+#v(0.6cm)
+#proof #nl
+$tilde(b)(e_i times.circle g_j) = b(e_i, space g_j)$ и продолжим по линейности
+#v(0.6cm)
+#lm #nl
+$X times.circle Y tilde.eq Y times.circle X$ #nl
+$X times.circle (Y times.circle Z) tilde.eq (X times.circle Y) times.circle Z$
+#v(0.6cm)
+#nb #nl
+Обобщение теоремы: #nl
+$make X_1 dots X_p$ --- ЛП над $K$ #nl
+Для любого $p$-линейного отображения $omega space exists! space tilde(omega)$ --- линейное, такое что следующая диаграмма коммутативна:
+
+$x_1 times dots times x_p -->^times.circle x_1 times.circle dots times.circle x_p$\
+$#h(1.2cm)omega arrow.br quad z quad arrow.bl tilde(omega)$
+
+// можешь пока закидывать скриншоты лекции как диаграммы, я потом с этим что-нибудь сделаю
+// чем тебе это не нравится?
+
+#v(0.6cm)
+#nb #nl
+$make X^*(K), space Y(K)$ #nl
+$see X^* times Y -> X^* times.circle Y$ #nl
+$(alpha, space y) |-> alpha(*) y in "Hom"_K (X, Y)$ #nl
+$make x in X quad x|-> alpha(x)y$#nl
+#rect($X^* times.circle Y tilde.eq "Hom"_K (X, Y)$)
+$X^* tilde.eq "Hom" (X, K)$
+#v(0.6cm)
+#nb #nl
+$X^* (K), Y^* (K)$#nl
+$X^* times Y^* -> X^* times.circle Y^*$#nl
+$(alpha, beta) |-> alpha times.circle beta in "Hom"_K (X, Y; K)$\
+#rect($X^* times.circle Y^* tilde.eq "Hom" (X, Y; K)$)
+$alpha times.circle beta <-> omega in Omega_0^2 (K) quad omega(x, y) = alpha(x) dot beta(y)$
+#v(0.6cm)
+$X times Y -> X times.circle Y tilde.eq "Hom"(X^* Y^*; ???)$ #nl//?
+$(x, y) -> x times.circle y$ #nl
+$(x times.circle y) (alpha, beta) = alpha(x) dot beta(y)$\
+$alpha in X^*$\
+$beta in Y^*$\
+$x times.circle y <-> omega in Omega_0^2 (K)$\
+
+= Пространство тензоров
+
+#def пространство тезноров#nl
+$make X(K)$ --- ЛП над $K$ #nl
+$limits(underbrace(X^* times.circle X^* times.circle dots times.circle X^*))_p times.circle limits(underbrace(X times.circle X times.circle dots times.circle X))_q$
+#v(0.6cm)
+#nb #nl
+Обозначение $T_q^p (K) (Omega_p^q)$\
+#v(0.6cm)
+#ex\
+$T_0^1 (K) = X^*$ #nl
+$T_1^0 (K) = X$ #nl
+$T_1^1 = X^* times.circle X tilde.eq "End"_K (X)$
+#v(0.6cm)
+#def тензор ранга $(p, q)$#nl
+Тензором ранга $(p, q)$ называется элемент пространства тензоров $T_q^p (K)$ #nl
+#v(0.6cm)
+#ex #nl
+#let tens = $op(times.circle)$
+$alpha^1 tens alpha^2 tens dots tens alpha^P tens y_1 tens y_2 tens dots tens y_q in T^p_q (K)$
+#v(0.6cm)
+== Операции с тензорами
++ Транспонирование #nl
+  $t_(i j): T^p_q -> T^p_q$ #nl
+  $dots tens x_i tens dots tens x_j tens dots |-> dots tens x_j tens dots tens x_i tens dots$#nl
+  $t^(i j): T^p_q -> T^p_q$#nl
+  $dots tens alpha^i tens dots tens alpha^j tens dots |-> dots tens alpha^j tens dots tens alpha^i tens dots$#nl
+  
++ Свёртка #nl
+  $hat(c)_j^i: T^p_q -> T^(p-1)_(q-1)$ #nl
+  $dots tens alpha^i tens dots tens x_j tens dots |-> dots tens alpha^i(x_j) in K tens dots$#nl
+
++ $make T$ --- пр-во вех тензоров (всех рангов) #nl
+  $u =  alpha^1 tens alpha^2 tens dots tens alpha^(p_1) tens x_1 tens dots tens x_(q_1) $#nl
+  $v =  beta^1 tens beta^2 tens dots tens beta^(p_2) tens y_1 tens dots tens y_(q_2) $#nl
+  $u tens v =  alpha^1 tens dots tens alpha^(p_1) tens beta^1 tens dots tens beta^(p_2) tens x_1 tens dots tens x_(q_1) tens y_1 tens dots tens y_(q_2)$#nl
+#v(0.6cm)
+#lm #nl
+$Omega_p^q (K) tilde.eq T_q^p (K)$ #nl
+#v(0.6cm)
+#proof
+$make omega in T_q^p (K) => omega =  alpha^1 tens dots tens alpha^p tens y_1 tens dots tens y_q$ #nl
+$#h(0.25cm) make W in Omega_p^q (K)$ #nl
+$x_1, dots, x_p in X; quad beta^1, dots, beta^q in X^*$\ #nl
+$W(x_1, x_2, dots, x_p, beta^1, beta^2, dots, beta^q) eq.circle alpha^1 (x_1) alpha^2 (x_2) dots alpha^p (x_p) beta^1 (y_1) beta^2 (y_2) dots beta^q (y_q)$
+#v(0.6cm)
+#nb
+Базис $T^p_q (K)$: $f^(i_1) tens f^(i_2) tens dots tens f^(i_p) tens e_(j_1) tens e_(j_2) tens dots tens e_(j_q)$\ #nl
+Базис $Omega_p^q (K)$: $f^(i_1) dot f^(i_2) dot dots dot f^(i_p) dot hat(e)_(j_1) dot hat(e)_(j_2) dot dots dot hat(e)_(j_q)$\
+#v(0.6cm)
+#ex\ #nl
+$hat(c)^i_j: X^* tens X -> K$\ #nl
+$#h(0.65cm)alpha tens x |-> alpha(x)$ #nl
+// бля
+// я даже если перестаю конспектить и просто пытаюсь понять не догоняю
+// ебать че происходит
+// это были последние строчки этого конспекта...
+$see T^0_p (K)$\ #nl
+$x_1 tens x_2 tens dots tens x_p$\ #nl
+$"char" K = 0$\ #nl
+$"Sym": T^0_p (K) -> Sigma_p (K)$\ #nl
+$"Sym" (x_1 tens x_2 tens dots tens x_p) = 1/p! sum_(sigma in S_p) x_sigma(1) tens x_sigma(2) tens dots tens x_sigma(p)$\ #nl
+$"Alt": T_p^0 (K) -> Lambda_p (K)$\ #nl
+$"Alt" (x_1 tens x_2 tens dots tens x_p) = 1/p! sum_(sigma in S_p) (-1)^[sigma] x_sigma(1) tens x_sigma(2) tens dots tens x_sigma(p)$\
+#nl #nb
+$make omega in T^p_q (K)$\ #nl
+$v = underbracket(tilde(v)_(i_1 i_2 dots i_p)^(j_1 j_2 dots j_q), "коорд.тензора"\ omega "в базисах" {e_i}_(i=1)^n\ и {f^j}_(j=1)^n) space f^(i_1) tens f^(i_2) tens dots tens f^(i_p) tens hat(e)_(j_1) tens dots tens hat(e)_(j_q)$\ #nl #nl
+$v = tilde(v)_(i_1 i_2 dots i_p)^(j_1 j_2 dots j_q) quad attach(W, tl: i_1 dots i_p, bl: j_1 dots j_q)$\ #nl #nl
+$(1, 2, 3)^T <-> 1 + 2 t + 3 t^2$\ #nl
+#v(0.2cm)
+== Тензорная алгебра
+$make X(K)$ --- ЛП над $K$\ #nl
+$see T^p_q (K) = (limits(times.circle.big)_(i=1)^p X^*) tens (limits(times.circle.big)_(j=1)^q X)$\ #nl
+$see T(K) = limits(plus.big)_(p=0)^infinity limits(plus.big)_(q=0)^infinity T^p_q (K)$\ #nl
+#v(0.4cm)
+#ex\ #nl
+$make X, Y$ --- ЛП\ #nl
+$#h(0.4cm)X plus.circle Y$ --- ЛП\ #nl
+$#h(0.4cm) (x_1, y_1) + (x_2, y_2) = (x_1 + x_2, y_1 + y_2)$\ #nl
+$#h(0.4cm) lambda(x, y) = (lambda x, lambda y)$\ #nl
+$(T, +, tens, lambda)$ --- тензорная алгебра\
+$omega_01 in T^0_1, v_01 in T^0_1 => omega_01 tens v_01 in T^0_2$\
+$x tens (y+z)=x tens y + x tens z$\
+$(Lambda, +, and, lambda)$ --- алгебра антисимм. тензоров\
+$(Sigma, +, or, lambda)$ --- алгебра симметр. тензоров\
+// допишешь? мне еще до итмо добраться надо
+// welp
+
+#pagebreak()
+
+// я пришедший без ручек и листочков
+
+
+//no way Lev Tsvey
+// и ушёл
+// :(
+// Лев привет
+
+= Определитель линейного оператора
+
+$make X(K), space Y(K)$ --- ЛП над $K$\
+$see phi: X(K) -> Y(K)$ --- линейное\
+$forall space x_1, space x_2, space x in X(K)$\
+$phi(X_1 + x_2) = phi(x_1) + phi(x_2)$\
+$phi(lambda x) = lambda phi(x)$\ \
+#nb
+$phi in "Hom"_K (X, Y)$\
+$"Hom"_K (X, X) =: "End"_K (X)$\
+
+// пиздец заебался болеть
+
+== Тензорное произведение операторов
+#def тензорное произведение линейных операторов\
+$make phi in "End"_K (X), space psi in"End"(Y)$\
+$chi: phi times.circle psi$ --- _тензорное произведение линейных операторов_, если\ 
+$chi: X tens Y -> X tens Y$\
+$chi(x tens y) |-> (chi tens psi) (x tens y) = phi(x) tens psi(y)$\ \
+#lm 
+$chi in "End"_(X tens Y)$\ \
+#proof 
+- $chi(x tens (y_1 + y_2)) = chi(x tens y_1 + x tens y_2)$\ 
+  $chi(x tens (y_1 + y_2)) = phi(x) tens psi(y_1 + y_2) = phi(x) tens (psi(y)_1 + psi(y_2))=phi(x)tens psi(y_1) + psi(x) tens psi(y_2)=$\
+  $=chi(x tens y_1 + chi(x tens y_2))$\
+$chi(lambda x tens y) = chi ((lambda x) tens y) = phi(lambda x) tens psi(y) = lambda[phi(x) tens psi(y)] = lambda dot chi(x tens y)$
+\ \
+== Матрица линейного оператора
+$make {e_i}^n_(i = 1)$ --- базис X
+$make phi in "End"_K (X)$\
+$e_i = sum_(j=1)^n a_i^j e_j$\ \
+#def матрица линейного оператора\
+Набор $A_phi = norm(a_i^j)$ --- матрица линейного оператора в базисе $(e_i)_(i=1)^n$\ #v(0.5cm)
+$A_phi = limits(display(mat(delim: "[", 
+a_1^1, a_2^1, dots, a_n^1;
+a_1^2, a_2^2, dots, a_n^2;
+dots.v, dots.v, dots.down, dots.v;
+a_1^n, a_2^n, dots, a_n^n)))_(arrow.t quad quad  arrow.t quad quad quad space arrow.t\ phi e_1 space phi e_2 space dots space space phi e_n)$\
+#v(0.5cm)
+$make {g_l}^m_(l=1)$ --- базис $Y(K)$\
+$make psi in "End"_K (Y)$\
+$make B_psi = ||b_l^k||$ --- матрица $psi$ в базисе ${g_l}_(l=1)^m$
+\ \
+#nb
+#grid(
+  columns: (95pt, 1fr),
+  [${e_i}_(i=1)^n$ --- базис $X$\
+${g_j}_(j=1)^m$ --- базис $Y$\ ],
+[#v(0.35cm)
+#align(left)[
+$=> {e_i tens g_j}_(i=1 dots n)^(j=1 dots m)$ --- базис $X tens Y$\
+]]) #v(0.2cm)
+$(phi tens psi)(e_i tens g_j) = phi(e_i) tens psi(g_j) = (sum_(k=1)^n a_i^k e_k) tens (sum_(l=1)^m) b_j^l g_l = sum_(k=1)^n sum_(l=1)^m a_i^k b_j^l (e_k tens g_l)$\
+$C_(phi tens psi) = norm(a_i^k tens b_j^l)_(i,k=1 dots n)^(j,l=1 dots m)$ --- матрица тензорного произведения.\
+В кронекеровской форме:\
+$display(mat(delim: "[",
+a_1^1 B_psi, a_2^1 B_psi, dots;
+a_2^1 B_psi, a_2^2 B_psi, dots;
+dots.v, dots.v, dots.down))$
+\ \
+== Тензорная степень
+$make X(k)$ --- ЛП над $K$\
+$phi in "End"_K (X)$\
+$see T_p (K) = limits(times.circle.big)_(i=1)^n X := underbrace(X tens X tens dots tens X, p)$ // крокодильчик
+\ \
+#nb Элементы (разложимые) имеют вид:\
+$x_1 tens x_2 tens dots x_p$
+\ \
+#def тензорная степень\
+Тензорная степень оператора $phi$ --- линейное отображение вида:\
+$ phi^(tens p): limits(times.circle.big)_(i=1)^p X -> limits(times.circle.big)_(i=1)^p X $
+$ phi ^(tens p) (x_1 tens x_2 tens dots tens_p) = phi x_1 tens phi x_2 tens dots tens phi x_p $
+\
+== Внешняя степен#text(fill: rgb(80%, 80%, 80%))[ь] оператора //(ь)??? а ты посмотри что на доске // ахаха, степен //пиздец
+
+$see Lambda^p := underbrace(X and X and dots and X, p) = limits(and.big)_(i=1)^p X$\ #v(0.5cm)
+$dim_K X = n quad => quad dim_K Lambda^p = C_n^p$
+\ \
+#nb Элементы $Lambda^p$ имеют вид:\
+$ x_1 and x_2 and dots x_p $
+\
+#def определитель набора векторов\ 
+Определителем набора векторов ${x_i}_(i=1)^n$ называется величина такая, что в базисе ${e_i}_(i=1)^n$ имеет место
+\
+$ x_1 and x_2 and dots and x_n = det [x_1 x_2 dots x_n] e_1 and e_2 and dots and e_n $
+
+#lm
+$det {x_1 dots x_n} = det [x_1 dots x_n]$\ \
+#proof
+$x_1 and x_2 and dots and x_n = xi_1^(i_1) e_i_1 and xi_2^(i_2) e_i_2 and dots and xi_n^(i_n) e_i_n = xi_1^(i_1) xi_2^(i_2) dots xi_n^(i_n) e_i_1 and e_i_2 and dots and e_i_n$
+\
+$=display( sum_(sigma in S_n) (-1)^[sigma] xi_1^sigma(1)  xi_2^sigma(2) dots  xi_3^sigma(3) e_1 and e_2 and dots and e_n) = det {x_1 dots x_n}e_1 and e_2 and dots and e_n $
+\ \
+#nb
+$det [x_1 dots x_n]$ зависит от базиса\
+$make z in Lambda^n => z = alpha dot e_1 and e_2 and dots and e_n$
+#image("4.png", width: 20%)
+// да, кста, лев
+// сюда картинки на изи через контроол-в закидываются
+// переименовывать только
+${e'_j}_(j=1)^n <-^T {e_i}_(i=1)^n, e'_j = sum_(i=1)^n tau^i_j e_i$\ 
+$e'_1 and e'_2 and dots and e'_n = tau_1^(i_1) e_i_1 and tau_2^(i_2) e_i_2 and dots and tau_n^(i_n) e_i_n = tau_1^(i_1) tau_2^(i_2) dots tau_n^(i_n) e_i_1 and e_i_2 and dots and e_i_n=$\
+$=sum_(sigma in S_n) tau_1^sigma(1) tau_2^sigma(2) dots tau_n^sigma(n) e_1 and e_2 and dots and e_n$
+\ \ 
+\ 
+#def внешняя степень оператора\
+Внешняя степень оператора $phi$ --- лиphiйное отображение вида:
+$ t phi(and p): and.big_(i=1)^p X -> and.big_(i=1)^p X $\
+$ phi^(and p) (x_1 and x_2 and dots and x_p) = phi x_1 and phi x_2 and dots and phi x_p $
+\
+#def определитель линейного оператора\
+Определитель линейного оператора $phi$ --- величина $det phi$, такая, что:
+$ phi(e_1 and e_2 and dots and e_n) = phi e_1 and phi e_2 and dots and phi e_n = det phi e_1 and e_2 and dots and e_n $
+\
+#lm
+$phi, psi in "End"_K (X) => det (phi apply psi) = det (phi) dot det (psi)$ \ \
+#proof
+$(phi apply psi) (e_1 and e_2 and dots and e_n) = (phi apply psi) e_1 and (phi apply psi) e_2 and dots and (phi apply psi) e_n = phi(psi(e_1)) and phi(psi(e_2)) and dots and phi(psi(e_n))=$\
+$=phi^(and n) (psi e_1 and psi e_2 and dots and psi e_n = det phi dot (psi e_1 and psi e_2 and dots and psi e_n)= det psi dot psi^(and n) (e_1 and e_2 and dots and e_n)=$\
+$=det phi dot det psi (e_1 and e_2 and dots and e_n)$
+\ \
+#nb
+Определитель $det phi$ равен определителью матрицы $A_phi$ соответствующего оператора в базисе ${e_i}_(i=1)^n$
+\ \
+#lm
+$det phi$ сто пудов не зависит от базиса // сто пудов это тяжело
+\ \
+#proof 
+$make z in Lambda^n quad => quad phi^(and n) z = det phi dot z $\
+если $z = underbracket(alpha space underbracket(e_1 and e_2 and dots and e_n, "верно"), "верно")$
+\ \
+*ДЗ:* \
+// выучить ебаные команды 
+$tilde(A)phi - S A_phi T quad quad det S = (det T)^(-1)$
