@@ -1,4 +1,4 @@
-#import "template.typ": *
+#import "../../template.typ": *
 
 #set page(margin: 0.55in)
 #set par(leading: 0.55em, first-line-indent: 0em, justify: false)
@@ -753,3 +753,167 @@ $-delta^2/2 int_a^b abs(f'') quad int f'' dot psi(x)$
 $1^p + 2 ^p + dots + n^p = n^p/2 + 1/2 + int_1^n x^p d x + 1/2 int_1^n (x^p)'' {x}(1 0 {x})d x$
 
 //TODO
+
+#pagebreak()
+// скип
+#pagebreak()
+
+= ?
+== Неравенство Йенсена
+#th\
+$f$ --- выпуклое, непр. $dp(A, B)$\
+$phi: [a, b] -> dp(A, B)$, непр.\
+$lambda: [a, b] -> [0, +infinity)$, непр., $int_a^b lambda = 1$\
+Тогда $f(int_a^b lambda(t) phi(t) dif t) <= int_a^b lambda(t) f(phi(t)) dif t$\ \
+$(*) phi != "const" => m < c < M$
+#proof
+$m = min phi, M = max phi$\
+$c = int_a^b lambda(t) phi(t) dif t <= M int_a^b lambda(t) dif t = M$\
+$c >= m$\
+Берём в точек $c in dp(A, B)$ опорную прямую $y = alpha x + beta quad (*)$\
+#image("18.png", width: 40%)
+$f(c) = alpha c + beta=alpha int_a^b lambda(t) phi(t) dif t + beta int_a^b lambda(t) dif t = int_a^b lambda(t) (alpha phi(t) + beta) dif t <= int_a^b lambda(t) f(phi(t)) dif t$ (в силу выпуклости)\ \
+Комментарий по $(*)$: мы не хотим, чтобы опорная прямая была вертикальной, поэтому мы берём $c$ не на конце отрезка. Можно это записать так: $c = int_a^b lambda(t) phi(t) dif t < M int_a^b lambda(t) dif t$ вместо нестрогого неравенства.\ \
+*Пример:* (неравенство Коши)\
+$f in C[a, b], f > 0$\
+Тогда $exp(1/(b-a) int_a^b ln f dif x) <= 1/(b-a) int_a^b f(x) dif x$\
+(сравниваем с $root(n, a_1 dots a_n) <= (a_1 + dots + a_n)/n$)\
+_Упражнение:_ (написать интегральные суммы)\
+$f^* <-> exp$\
+$lambda <-> 1/(b-a)$\
+$phi <-> ln$\
+$norm(dot)_p$\ // ??? 
+== Неравенство Гёльдера
+#th\
+$p > 1, q > 1, 1/p + 1/q = 1, a_i, b_i > 0, i = 1 dots n$\
+Тогда $sum_(i=1)^n a_i b_i <= (sum a_i^p)^(1/p) (sum b_i^q)^(1/q)$
+#proof
+$f(x) = x^p$ --- вып. на $[0, +infinity) quad quad  f'' = p(p-1)x^(p-2) >= 0$\
+Нер-во Йенсена: $(sum alpha_i x_i)^p <= sum alpha_i x_i^p$\
+$alpha_i =display((b_i^q)/(sum b_i^q))$\
+$x_i = a_i b_i^(-1/(p-1)) (sum b_i^q)$\ \
+$alpha_i x_i = a_i b_i^(q - 1/(p-1)) = a_i b_i$\ \
+$alpha_i x_i^p = display(cancel(b_i^q)/(sum b_i^q)) a_i^p cancel(b_i^(-p/(p-1))) (sum b_i^q)^p = a_i^p (sum b_i^q)^(p-1)$\
+$(sum a_i b_i)^p <= (sum a_i^p) (sum b_i^q)^(p-1)$\
+$(sum a_i b_i) <= (sum a_i^p)^(1/p) (sum b_i^q)^((p-1)/p=1/q)$\ \
+*Наблюдение 1:* неравенство работает для нулевых слагаемых\
+*Наблюдение 2:*\
+$a_i, b_i in RR$\
+$abs(sum a_i b_i) <= sum abs(a_i b_i) <= (sum abs(a_i)^p)^(1/p) (sum abs(b_i)^q)^(1/q)$\
+*Замечание для нер-ва Йенсена:* \
+$f(sum alpha_i x_i) <= sum alpha_i f(x_i)$, $f$ --- строго выпукла, $alpha_i != 0$. Равенство достигается при $x_1 = x_2 = dots = x_n$\ \
+Идя по док-ву нер-ва Гёльдера, заметим, что если нет нулей, то $f(x)=x^p$ --- строго выпукла на $(0, +infinity)$. Равенство достигается тогда, когда:\
+$forall i quad a_i b_i^(-1/(p-1)) = lambda$\
+$#h(0.77cm)a_i^p b_i^(-p/(p-1))=lambda^p=lambda_0$\
+$#h(0.77cm)a_i^p = lambda_0 b_i^q$\
+$#h(0.77cm) (a_1^p dots a_m^p) arrow.t arrow.t (b_1^q dots b_n^q)$\ \
+== Интегральное нер-во Гёльдера
+#th\
+$p > 1, q > 1, 1/p + 1/q = 1, f, g in C[a, b]$\
+Тогда $abs(int_a^b f g) <= (int_a^b abs(f)^p)^(1/p) (int_a^b abs(g)^q)^(1/q)$
+#proof
+$[a, b]$ дробим на $n$ равных частей: $x_k = a + k (b-a)/n = a + k Delta x_k$\
+Дискретное неравенство Гёльдера:\
+$a_k = f(x_k) (Delta x_k)^(1/p)$\
+$b_k = g(x_k) (Delta x_k)^(1/q)$\
+$a_k b_k = f(x_k) g(x_k) Delta x_k$\
+$sum abs(f(x_k) g(x_k)) Delta x_k <= (sum abs(f(x_k))^p Delta x_k)^(1/p) (sum abs(g(x_k))^q Delta x_k)^(1/q)$\ \
+$n -> +infinity: int_a^b f(x) g(x) dif x <= (int_a^b abs(f)^p)^(1/p) (int_a^b abs(g)^q)^(1/q)$\
+Из-за предельного перехода равенство найти не получится #frown \ \
+Неравенство Гёльдера, случай $n=2$:\
+$sum a_i b_i <= (sum a_i^2)^(1/2) (sum b_i^2)^(1/2)$ --- нер-во Коши-Буняковского\ \
+$p -> 1, q -> +infinity$:\
+$sum a_i b_i <= sum a_i lim_(q -> +infinity) (sum b_i^q)^(1/q) = sum a_i max(b_i)$\
+== Неравенство Минковского
+#th\
+$p >= 1, a_i, b_i in RR$\
+Тогда $(sum_(i=1)^n abs(a_i + b_i)^p)^(1/p) <= (sum abs(a_i)^p)^(1/p) + (sum abs(b_i)^p)^(1/p)$\
+$p=1$ --- очев\
+$p>1$ --- $(a_1 dots a_n) |-> (sum abs(a_i)^p)^(1/p)$ --- норма в $RR^n$
+#proof
+$sum a_i abs(a_i + b_i)^(p-1) <= (sum a_i^p)^(1/p) (sum abs(a_i+b_i)^(q (p-1)=p))^(1/q)$\
+$sum b_i abs(a_i + b_i)^(p-1) <= (sum b_i^p)^(1/p) (sum abs(a_i + b_i)^p)^(1/q)$\ \
+$sum(a_i + b_i) abs(a_i + b_i)^(p-1) = (sum (a_i + b_i)^p)^1 <=((sum abs(a_i)^p)^(1/p) + (sum abs(b_i)^p)^(1/p)) (sum abs(a_i + b_i)^p)^(1/q)$\
+$(sum (a_i + b_i)^p)^(1/p) <= dots$\ \ \
+Смысл интегрального н-ва Минковского: $f |-> (int_a^b abs(f)^p)^(1/p)$ --- норма\
+#th (инт. н-во Минковского)\
+$f, g in C[a, b], p >= 1$. Тогда $(int_a^b abs(f+g)^p)^(1/p) <= (int_a^b abs(f)^p)^(1/p) + (int_a^b abs(g)^p)^(1/p)$
+#proof
+Вариант 1. Переписать дискр. доказательство.\
+Вариант 2. Интегральные суммы\
+
+В н-ве Гёльдера в предельном переходе $(sum b_i^q)^(1/p) -> max abs(b_i)$\
+$(b_1, dots, b_n) |-> max abs(b_i)$ --- норма
+
+= Конечные $epsilon$-сети
+#def $epsilon$-сеть\
+$(x, rho)$ --- МП, $D subset X$\
+Мн-во $N subset X$ называется $epsilon$-сетью для $D quad forall x in D quad exists n in N: rho(x, n) < epsilon$\
+#def сверхограниченность\
+$D$ --- сверхограниченно, если $forall epsilon > 0$ в $X quad exists$ конечная $epsilon$-сеть $N$ для мн-ва $D$\
+#lm\
+$D$ --- сверхограниченно в $X <=> D$ --- сверхограниченно в $D$\
+#proof
+$arrow.l.double:$ тривиально\
+$=>:$ Берём конечную $epsilon/2$-сеть в $X$\
+$forall n in N$ рассмотрим шар $B(n, epsilon/2)$. Отметим в каждом шаре точку $d_n$ --- конечное число. Тогда ${d_n}$ --- $epsilon$-сеть, лежащая в $D$.\
+#lm\
+Сверхограниченность сохраняется при р. непр. отображениях.\
+Т.е. $D subset X$ --- сверхогр., $f: X -> Y$ --- равн. непр. ($forall epsilon > 0 quad exists delta > 0: forall x_1, x_2: rho(x_1, x_2) < delta => rho(f(x_1), f(x_2)) < epsilon$)\
+Тогда $f(D)$ --- св.огр. в $Y$\
+Так как $f(delta"-сеть")=epsilon$-сеть\ \
+$L = {(x_1, x_2, dots), abs(overline(x)) = sum_(i=1)^(+infinity) abs(x_i)}$\ \
+$D = (e_1,e_2, dots) subset overline(B(arrow(0), 1))$\
+$e_k = (underbrace(0\, dots\, 0, (k-1)), 1, 0, dots)$\
+$rho(e_k, e_j) = norm(e_k - e_j) = 2$\
+#lm\
+$D$ --- сверхогр. $=>$ замыкание $D$ тоже\
+$D subset limits(union.big)_N B(n, epsilon) => overline(D) subset limits(union.big)_N B(n, 2epsilon) => N$ --- $2epsilon$-сеть для $overline(D)$\
+#lm\
+$D$ --- сверхогр. $<=> forall$ посл. точек из $D$ содержит фунд. подпосл-ть\
+Фундаментальная посл-ть: $x_n$ --- фунд. $<=> forall epsilon > 0 quad exists N: forall m, k > N quad rho(x_n, x_k) < epsilon$
+#proof
+$=>: epsilon := 1$. Строим конечную 1-сеть $N_1$\
+$limits(union.big)_(a in N_1) B(a, 1) supset D$\
+$exists a_1 in N_1:$ в $B(a_1, 1)$ сод. беск. много $x_n$\
+Берём эту подпосл. $(x_n^((1)))$, возьмём член $x_n_1$\
+$epsilon = 1/2$, строим конечную $1/2$-сеть $N_2$\
+$limits(union.big)_(a in N_2) B(a, 1/2) supset D$\
+$exists a_2 in N_2:$ в $B(a_2, 1/2)$ сод. беск. подпосл. $x_n^((1))$\
+Берём эту подпосл. $(x_n^((2)))$, возьмём член $x_n_2 (n_2 > n_1)$\
+$dots.v$\
+$(x_n_i)$ --- фундаментальная\
+$arrow.l.double: epsilon$. Нет $epsilon$-сети?\
+$x_1, x_2 in.not B(x_1, epsilon), x_3 in.not B(x_1, epsilon) union B(x_2, epsilon)$\
+Построим посл-ть: $forall x_k, x_m quad rho(x_k, x_m) >= epsilon$\
+У посл-ти $(x_n)$ нет фунд. подпосл. Противоречие в определении для обсуждаемого $epsilon$.\
+#lm\
+$X$ --- сверхогр. $=>$ в $X$ имеется счётное всюду плотное подмн-во. $Q$ (т.е. $X$ --- сепарабельное)\
+#proof
+$Q = limits(union.big)_(n=1)^(+infinity) (1/n"-сеть")$\ \
+#th\
+$(X, rho)$ --- МП. Эквивалентны:
++ $X$ --- компактно
++ $X$ --- полно и сверхогр.
+#proof
+*Замечание:* в МП комп. $<=>$ секв. комп.\
+$(1)=>(2):$\
+$X$ --- неполно $=> exists$ фунд. посл., не имеющая предела $=> forall$ подпосл. верно, что она тоже не имеет предела $=>$ это противоречит секв. комп.\
+$X$ --- не сверхогр. $=>$ по л.4 $exists$ посл., у которой $exists.not$ фунд. подпосл. $=>$ у этой посл. нет сход. подпосл. $=>$ противоречит секв. комп.\
+$(2)=>(1):$\
+$X$ --- сверхогр. $=> forall$ посл. точек из $X quad exists$ фунд. подпосл. $=>_(X" - полное")forall$ посл. точек из $X$ имеет сход. подпосл., т.е. это секв. комп.
+= Несобственный интеграл
+#def несобственный интеграл\
+$f:[a, b) -> RR quad (-infinity < a < b <= +infinity)$\
+$f$ --- допустима, если $forall A: a < A < b quad f$ --- кусочно-непрерывна на $[a, A]$\ \
+$Phi(A)=int_a^A f(x) dif x$, где $A in [a, b)$\
+Если $exists lim_(A->b-0) Phi(A) in overline(RR)$, то величина называется несобственным интегралом $int_a^(arrow b) f(x) dif x$\
+Если $exists.not lim_(A->b-0) Phi(A) in overline(RR)$, то несобств. инт. не существует.\
+Если $lim Phi(A) in RR$, то интеграл сходится.\
+Если $lim Phi(A) = {plus.minus}$ или не сущ., то интеграл расходится.\
+*Пример:*\
+$int_1^(+infinity) 1/x dif x$\ \
+$int_1^A 1/x dif x = ln A ->_(A -> +infinity) +infinity$\ \
+$int_0^1 1/x dif x = lim_(A->+0) int_A^1 1/x dif x = -ln A ->_(A->+0) +infinity$\
+$int_1^(+infinity) (dif x)/x^2 = lim_(A -> +infinity) (-1)/x |_(""_1)^""^A = lim_(A -> +infinity) -1/A + 1 -> 1$\
+$int_1^(+infinity) sin x dif x = lim_(A->+infinity) int_1^A sin x = lim_(A->+infinity) -cos A + cos 1$ не существует
