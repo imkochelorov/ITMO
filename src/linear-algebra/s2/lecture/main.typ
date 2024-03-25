@@ -1,5 +1,4 @@
-#import "../../../template.typ": *
-
+#import "template.typ": *
 #set page(margin: 0.45in, height: auto)
 #set par(leading: 1em, first-line-indent: 0em)
 #set text(font: "New Computer Modern")
@@ -43,7 +42,7 @@
 #let proof=par(strong("Доказательство:"))
 #let qed = $space qed$
 #let lm=par(strong("Лемма:"))
-#let apply=$space circle.small space$
+#let apply=$op(circle.small)$
 #let nl=v(0.2cm)
 #let sp=0.2cm
 
@@ -255,7 +254,7 @@ _ПН_: $make U in Lambda^p$\ \
 $U = attach(W, tl: s_1 dots s_p) u_(s_1 dots s_p)$\ \
 $"Alt" U = U = "Alt" (attach(W, tl: s_1 dots s_p) u_(s_1 dots s_p))$\
 \ $=("Alt" attach(W, tl: s_1 dots s_p)) u_(s_1 dots s_p)$\
-\ $=1/p! attach(F, tl: s_1 dots s_p) u_(s_1 dots s_p)=1/p! sum_arrow(s) sum_(sigma in S_p) attach(F, tl: s_sigma_((1)) dots s_sigma_((p))) u_(s_sigma_((1)) dots s_sigma_((p)))$\
+\ $=1/p! attach(F, tl: s_1 dots s_p) u_(s_1 dots s_p)=1/p! sum_arrow(s) sum_(sigma in S_p) attach(F, tl: s_sigma(1) dots s_sigma(p)) u_(s_sigma(1) dots s_sigma(p))$\
 \ $=1/p! sum_arrow(s) sum_(sigma in S_p) (-1)^[sigma] attach(F, tl: s_1 dots s_p) (-1)^[sigma] u_(s_sigma_((1)) dots s_sigma_((p))) = 1/p! p! sum_arrow(s) attach(F, tl: s_1 dots s_p) u_(s_sigma_((1)) dots s_sigma_((p)))$\ 
 \
 _ЛНЗ_: #see $attach(F, tl: arrow(s)) alpha_arrow(s) = theta quad | (e_i_1 dots e_i_p)$\ \
@@ -981,5 +980,294 @@ $make z in Lambda^n quad => quad phi^(and n) z = det phi dot z $\
 если $z = underbracket(alpha space underbracket(e_1 and e_2 and dots and e_n, "верно"), "верно")$
 \ \
 *ДЗ:* \
-// выучить ебаные команды 
+// выучить ебаные команды // можешь это в принципе поделать :)
 $tilde(A)phi - S A_phi T quad quad det S = (det T)^(-1)$
+
+// Привет Тимур
+// привет
+// че происходит
+// ваня опзадывает
+// а ты тоже дома?
+// да
+// интересно получилось)))
+// я встал минут 15 назад
+// +++ я проспал, и решил что нахер оно надо идти, Ваня точно трансляцию сделает
+// :DDDDDD
+// че, расходимся?
+//это пиздец
+//я встал в 9:50
+//в 10 я уже был на улице
+//я никогда так быстро не бегал с тяжёлым ноутом за спиной
+// в принципе даже успел
+#pagebreak()
+= Линейный оператор
+== Основные определения
+$make X(K), Y(K)$ --- ЛП над $K$\
+$see X(K) -> Y(K)$ --- отображения\
+$forall x, x_1, x_2 in X(K) quad forall alpha in K$\
+1. $phi(x_1 + x_2) = phi(x_1) + phi(x_2)$
+2. $phi(alpha x) = alpha phi(x)$
+
+#ex
+#columns(2)[
++ $make I: X(K) -> X(K) - "тождественный оператор" $\ 
+  $forall x in X(K) quad I x =x $\
+
++ $Theta: X(K) -> X(K):$ \ $forall x in X(K) quad Theta x = 0_x$
++ $make f in X^(*) (RR) $ \ $space f:X -> RR $
++ $X(K) = L xor M => forall x in X$\
+  $see cal(P)_L^(parallel M) (x) = x_L$ --- проектор,\ аналогично $cal(P)_M^(parallel L) (x) = x_M$
++ $X = K[x]_n$\
+  $see D: X(K) -> X(K)$\
+  $forall p in K[x]_n quad (D p)(x) = (dif p)/(dif x)$
++ $X(K) = "Mat"_K (n)$\
+  $tau: X(K) -> X(K)$\
+  $forall A in "Mat"_K (n) quad tau(A) = A^T$
++ $X = C[a, b] в$\
+  $(L f)(x) = display(limits(integral)_a^b) underbrace(l(x, y), " ядро инт.\nоператора\n   (core)") f(y) dif y$\
+  #ex\
+  $f(x) = sin x$\
+  $l(x, y) = e^(x + y)$\
+  $(L f)(x) = display(limits(integral)_0^pi) e^(x + y) sin y dif y$
+#colbreak()
+  $"Ker" I = {0}$\ 
+  $"Im" I = X$\
+  #v(0.3cm)
+  $"Ker" Theta = {X}$\ 
+  $"Im" Theta = {0}$\
+  #v(0.3cm)
+  $dim_K "Ker" f = n-1$\ 
+  $dim_K "Im" f = L$\
+  #v(0.3cm)
+  $"Ker" cal(P)_L^(parallel M)  = M$\ 
+  $"Im" cal(P)_L^(parallel M)  = L$\
+  #v(01cm)
+  $"Ker" D = {q in K[x]_n | deg q = 0}$\
+  $"Im" D = K[x]_(n-1)$\
+  #v(0.7cm)
+  $"Ker" tau = {0}$\
+  $"Im" tau = "Mat"_K (n)$\
+]
+ \
+#nb Обозначение $phi in "Hom"_K (X, Y), phi in "End"_K (X)$
+\ \
+#def _Ядро линейного оператора_ \
+$phi in "Hom"_K(X,Y)$ --- множество: $"Ker"phi = {x in X(K) | phi(x) = 0_Y}$
+\ \
+#lm $"Ker" phi <= X(K)$
+\ \
+#def _Образ линейного опреатора_\
+Образ линейного оператора --- это множество $"Im"phi = {phi(x) | x in X(K)} = phi(X)$
+\ \
+#lm $"Im" phi <= Y(K)$
+\ \
+== (Первая) теорема о ядре и образе
+$make L(K) <= X(K)$ --- подпространство\
+$see X slash L$ --- фактор-пространство вида ${limits(underbrace(x + L))_overline(x) | x in X}$\
+$make{overline(v)_j}_(j = 1)^m$ --- базис фактора $X slash L$\ #v(0.4cm)
+$#h(18.5pt) arrow.t$ ЛНЗ в $X slash L => sum_(j = 1)^m lambda^j overline(v) = overline(0)<=> lambda^j = 0$\
+#h(18.5pt) $arrow.t$ ПН\ 
+#h(18.5pt) _Переформулируем:_\ #v(0.2cm)
+#h(18.5pt) 
+#box(stroke: 1pt, inset: (x: 3pt, y: 9pt))[$limits(sum)_(j = 1)^m lambda^j v_j in L <=> lambda^j = 0$] $#pad(top: -25pt, $(*)$)$
+\ \
+#def ЛНЗ относительно L\ //написано же уже здесь
+Набор ${v_j}_(j = 1)^m$, обладающий свойством (\*) //называется ЛНЗ относительно L
+\ \
+#def "порождает" $X$ относительно $L$\
+${v_j}_(j = 1)^m$ порождает $X$ относительно $L <=>$ любой элемент может быть представлен в виде ЛК ${v_j}_(j = 1)^m$ и элементов из $L$
+\ \
+#th _следующие условия эквивалнтны_\
++ ${v_j}_(j = 1)^m$ порождает $X$ относительно $L$
+
++ ${overline(v)_j}_(j = 1)^m$ --- базис $X slash L$
++ $X = angle.l v_1 dots v_m angle.r_K plus.circle L$\
+\
+#nb
+$dim_K X = dim_K L + dim_K X slash L quad (**)$
+\ #v(0.4cm)
+$make phi: X(K) -> Y(K)\ #h(27pt)X slash "Ker"tilde.eq "Im" phi$ _(теорема об изоморфизме)_
+\ \
+#th (О ядре и образе)\
+$dim_K "Ker" phi + dim_K "Im" phi = dim_K X$
+\ \
+#proof В формуле ($* *$) положим $L = "Ker" Y$ и вспомним теорему об изоморфизме
+\ \
+#nb
+$"Hom"_K(X, Y)$ --- линейное пространство над $K$\
+$make phi, psi in "Hom"_K(X, Y)$\
++ $phi = psi <=> forall x in X(K) quad phi(x) = psi(x)$
+
++ $zeta  = phi + psi,space$если\
+  $zeta(x) = (phi + psi)(x) = phi(x) + psi(x)$
+// + $xi = lambda dot phi,space$если\
+//   $xi(x) = (lambda dot phi)(x) = lambda dot phi(x)$\
++ $chi = lambda dot phi$, если\ $chi(x) = (lambda dot phi)(x) = lambda dot phi(x)$
+\ 
+$quest quad dim_K"Hom"(X, Y) = space ?$\
+#columns(2)[
+$make {e_i}_(i = 1)^n$ --- базис $X(K)$\
+$make {g_j}_(j=1)^m$ --- базис $Y(K)$
+#colbreak()
+$phi(e_i) = sum_(j=1)^m a_i^j g_j$\
+]
+\
+#def матрица линейного оператора\
+Набор $norm(a_i^j) = A_phi$ называется матрицей линейного оператора в паре базисов ${e_i}_(i=1)^n$ и ${g_j}_(j=1)^m$
+\ \
+$see x in X(K) quad x = sum_(i=1)^n xi^i e_i space => space$
+$phi(x) = phi(sum_(i=1)^n xi^i e_i) = sum_(i=1)^n xi^i phi(e_i) = sum_(i=1)^n sum_(j=1)^m xi^i a_i^j g^j$\
+\ $phi(x) = y in Y(K) quad y = sum_(j=1)^m eta^j g_j => eta^j = sum_(i=1)^n a_i^j xi^i => eta = A_phi xi$\
+\ \
+#def оператор матричной единицы\
+${attach(epsilon, bl: j, tl: i)}: space attach(epsilon, bl: j, tl: i)(x) = xi^i g_j, space x = limits(sum)_(i = 1)^n xi^i e_i$
+\ \
+#lm $attach(epsilon, bl: j, tl: i) in "Hom"_K (X, Y)$ \ \ 
+#proof
+$forall x_1, x_2 in X(K): quad  attach(epsilon, bl: j, tl: i)(x_1 + x_2) = (xi_1 + xi_2)&i g_j = xi_1^i g_j + xi_2^i g_j =attach(epsilon, bl: j, tl: i)(x_1) + attach(epsilon, bl: j, tl: i) (x_2)$\
+$forall x in X(K) quad forall lambda in K: quad attach(epsilon, tl: i, bl: j) (lambda x) = (lambda xi)^i g_j = lambda dot xi^i g_j = lambda attach(epsilon, tl: i, bl: j) (x)$\
+\
+#nb
+$A_phi = [phi(e_1) space phi(e_2) space dots space phi(e_n)] quad quad attach(epsilon, bl: j, tl: i)(e_k) = e^i_k g_j = delta^i_k g_j$\
+#h(45pt)$dots.v$#h(20pt)$dots.v$#h(45pt)$dots.v$\
+#h(44pt)$arrow.t$#h(17pt)$arrow.t$#h(42pt)$arrow.t$\
+#h(20pt)координаты в базисе $Y(K)$
+\ \
+#th\
+${attach(epsilon, bl: j, tl: i)}_(i = 1 dots n)^(j = 1 dots m)$ --- базис $"Hom"_K (X, Y)$ \ \
+#proof
+ПН:\
+$make phi in "Hom"_K (X, Y)$\
+$see phi(x) = sum_(i=1)^n sum_(j=1)^m xi^i a_i^j g_j = sum_(i=1)^n sum_(j=1)^m a_i^j dot attach(epsilon, tl: i, bl: j) (x) => phi = sum_(i=1)^n sum_(j=1)^m attach(epsilon, tl: i, bl: j) dot a_i^j$\ \
+
+ЛНЗ:\
+$see sum_(i=1)^n sum_(j=1)^m  attach(epsilon, bl: j, tl: i) beta_i^j  = Theta quad | e_k$\ \
+$sum_(i=1)^n sum_(j=1)^m attach(epsilon, tl: i, bl: j) (e_k) beta_i^j = 0$\ \
+$sum_(i=1)^n sum_(j=1)^m delta_k^i g_j beta_i^j = 0$\ \
+$sum_(j = 1)^m g_j beta_k^j = 0 => beta_j^j = 0 space forall j$
+\ \ 
+
+//#quote("За 10 минут мы ничего не узнаем, а вот в столовку опоздаем", attribution: "Трифанов", block: true)
+
+$attach(epsilon, tl:i, bl: j)$ --- базис $"Hom"_K (X, Y)$\ \
+#nb $dim_K "Hom" (X, Y) = m n$\
+\
+#nb
+$make phi in "End"_K (X)$\ #v(0.4cm)
+$make {e_i}_(i=1)^n -->^T {tilde(e)_j}_(j=1)^n$ --- базисы $X$\
+$#h(20pt)arrow.t#h(50pt)arrow.t$\
+$#h(18pt)A_phi#h(40pt)tilde(A)_phi$\
+#box(stroke: 1pt, inset: (x: 3pt, y: 9pt))[$tilde(A)_phi = S A_phi T$]
+\ \
+#proof\
+$phi(tilde(e)_j) = phi(limits(sum)_(i = 1)^n tau^i_j e_i) = limits(sum)_(i = 1)^n tau_j^i phi(e_i) = limits(sum)_(i = 1)^n limits(sum)_(s = 1)^n tau_j^i a_i^s e_s$\ \
+$phi(tilde(e)_j) = sum_(i=1)^n tilde(a)_j^i tilde(e)^i = sum_(i=1)^n sum_(s=1)^n tilde(a)_j^i tau_i^s e_s$ \ \
+$limits(sum)_(i = 1)^n limits(sum)_(s = 1)^n tau_j^i a_i^s e_s = limits(sum)_(i=1)^n limits(sum)_(s=1)^n tilde(a)_j^i tau_i^s e_s$
+\ \
+$A_phi T = T tilde(A)_phi => tilde(A)_phi = S A_phi T $ \ \
+
+#quote("Представьте себе, что у вас все гораздо хуже")\ \
+*Д/З:*\
+$phi in "Hom"_K (X, Y)$\
+${e_i}_(i=1)^n -->^(T_1) {tilde(e)_j}_(j=1)^n$\
+${g_s}_(s=1)^m -->^(T_2) {tilde(g)_t}_(t=1)^m$\ \
+$A_phi -->^? tilde(A)_phi$\ \
+// ДЗ писать вообще?
+
+= Алгебра линейных операторов
+$#make X(K), space Y(K), space Z(K)$\ 
+$make phi in "Hom"_K (X, Y), space psi in "Hom"_K (X, Y)$
+$ X -->^phi Y -->^psi Z $
+#def коядро\
+$Y slash "Im" phi = "coker" phi$ --- коядро\ \
+#def _композиция операторов_\
+Композицией операторов $phi$ и $psi$ называется отображение $chi = psi apply phi$, такое что\ $forall x in X(K) quad chi(x)=(psi apply phi)(x) = psi(phi(x))$\ \
+#lm $chi in "Hom"_K (X, Z)$\ \
+#proof
+$chi(x_1 + x_2) = (psi apply phi)(x_1 + x_2) = psi(phi(x_1 + x_2)) = psi(phi(x_1) + phi(x_2)) = psi(phi(x_1)) + psi(phi(x_2)) = chi(x_1) + chi(x_2)$\
+$chi(lambda x) = (psi apply phi)(lambda x) = psi(phi(lambda x)) = psi(lambda phi(x)) = lambda psi(phi(x)) = lambda chi(x)$\ \
+$make {e_i}_(i=1)^n$ --- базис $X$\
+$make {g_j}_(j=1)^m$ --- базис $Y$\
+$make {h_s}_(s=1)^p$ --- базис $Z$\ \
+${e_i}_(i=1)^n -->^(phi <-> A_phi) {g_j}_(j=1)^m$\
+${g_j}_(j=1)^m -->^(psi <-> B_psi) {h_s}_(s=1)^p$\
+${e_i}_(i=1)^n -->^(chi <-> ? space C_chi) {h_s}_(s=1)^p$\
+$chi(e_i) = (psi apply phi)(e_i) = psi(phi(e_i)) = psi(sum_(j=1)^n a_i^j g_j) = sum_(j=1)^m a_i^k psi(g_j) = sum_(j=1)^m sum_(s=1)^p a_i^j b_j^s h_s$\
+$chi(e_i) = sum_(s=1)^p c_i^s h_s$\ \
+$=> c_i^s = sum_(j=1)^m a_i^j b_j^s$\
+#box(stroke: 1pt, inset: (x: 3pt, y: 7pt))[$C_chi = B_psi A_phi$]\
+\ \
+$phi in"End"_K(X)$ \ \
+*Свойства* "$apply$" на $"End"_K (X)$:
++ $forall phi, psi, chi in "End"_K (X) quad phi apply (psi apply chi) = (phi apply psi) apply chi$
++ $exists I in "End"_K (X): forall phi in "End"_K (X) quad I apply phi = phi = phi apply I$
+#nb $("End"_K (X), apply)$ --- моноид + абелева группа, а значит кольцо операторов над $X(K)$, а значит $"End"_K(X)$ --- алгебра эндоморфизмов пространства $X$.\
+$phi apply psi != psi apply phi$ --- некоммутативная алгебра \ \
+#nb 
+$A$ --- алгебра (например $RR, CC, HH$)\ \
+*Кватернионы*\
+$z = a + i b, space a,b in RR$\
+$q = z + j w, space z,j in CC$\
+$i space j quad i dot j =: k$\
+$q = a + b i + c j + d k$\
+Таблица Кэли для произведения:
+#grid(inset: 4pt, align: center, stroke: 1pt, columns: (auto, auto, auto, auto, auto),
+$dot$, $1$, $i$, $j$, $k$,
+$i$, $i$, $-1$, $k$, $-j$,
+$j$, $j$, $-k$, $-1$, $i$,
+$k$, $k$, $j$, $-i$, $-1$)
+\ \
+$make {e_j}_(j = 1)^n$ --- базис $A$\ \
+$x = sum_(i = 1)^n xi^i e_i quad y = sum_(j = 1)^n eta^u e_j$\
+$x dot y = (sum_(i = 1)^n xi^i e_i) dot (sum_(j = 1)^n eta^u e_j) = sum_(i = 1)^n sum_(j = 1)^n xi^i eta^j overbrace((e_i dot e_j), =sum_(s=1)^n m_(i j)^s e_s)$\ \
+$norm(m_(i j)^s)$ --- структурные константы алгебры\
+$"End"_K (X)$ --- алгебра\
+? $(phi + psi) apply chi = phi apply chi + psi apply chi$\
+? $phi apply (lambda psi) = (lambda phi) apply psi = lambda (phi apply psi)$\
+$"End"_K (X) tilde.eq "Mat"_K(n), quad n = dim_k X$\
+$phi quad {e_j}_(j=1)^n quad attach(epsilon, tl: i, bl: j) quad phi = attach(epsilon, tl: i, bl: j) a_i^j --> A = norm(a_i^j)$\
+$phi <--> A_phi, space psi <--> B_psi => phi + psi <--> A_psi + B_psi,  space phi apply psi <--> A_phi dot B_psi$\
+$"Mat"_K (n)$ --- алгебра матриц $n times n$\
+$cal(P)_L x = cal(P)_L (x_L + x_M) = x_L$\ \
+// В этой алгебре есть ВСЁ)
+_Обратный оператор_\
+$make phi in "Hom"_K (X)$\
+$attach(see, tl: ?) tilde(phi): "Im" phi --> X$ --- отображение\
+$forall x in X quad (tilde(phi) apply phi) x = x$\
+$forall y in "Im" phi quad (tilde(phi) apply phi) y = y$\
+$see phi(tilde(phi)(y_1) +tilde(phi)(y_2)) = phi(tilde(phi)(y_1)) + phi(tilde(phi)(y_2)) = y_1 + y_2$\
+$tilde(phi)(y_1) + tilde(phi)(y_2) = tilde(phi)(y_1 + y_2)$\ \
+#def Обратимый оператор\
+Оператор $phi$ называется обратимым, если существует оператор $tilde(phi)$, обладающий всеми перечисленными выше свойствами\ \
+#def Обратный оператор\
+Оператор $phi^(-1)$ называется обратным к оператору $phi$, если:\
++ $forall x in X  quad (phi^(-1) apply phi)x = x <=> phi ^(-1) apply phi = id_X$
++ $forall y in Y quad (phi apply phi^(-1)) y = y <=> phi apply phi^(-1) = id_Y$
+
+\
+#lm
+Чтобы существовал обратный оператор, необходимо, чтобы $Y tilde.eq X$\ \
+#proof
+$exists phi^(-1) => phi$ --- биекция $=> phi$ --- изоморфизм
+\ \
+#th $exists space phi^(-1) <=> $ выполнено одно из (эквивалентных) условий:
++ $"Ker" phi = {0}$
++ $dim_K "Im"_Y = dim_K X$
+
+// победа
+// можно собираться ехать на праку
+// можете комм сверху посмотреть? 1231
+//так и что, этот комм просто я по приколу написал
+// так не, чуть выше
+// так трифанов сказал
+// строчечка какая
+// про дз?
+#pagebreak()
+//хрррр... ми-ми-ми
+(-\_- $)^(z space z space z dots)$
+```
+      z z z...
+(_ _ )
+```
+#image("image.png", width: 10%)
+// understandable, have a nice night
