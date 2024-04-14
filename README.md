@@ -13,6 +13,7 @@ _в процессе (а может и нет)_
 - [3 лекция, двоичное дерево поиска, AVL-дерево](https://github.com/ikochelorov/ITMO/blob/main/notes/algorithms/s2/l3.pdf)
 - [4 лекция, Splay-дерево](https://github.com/ikochelorov/ITMO/blob/main/notes/algorithms/s2/l4.pdf)
 - [5 лекция, декартово дерево](https://github.com/ikochelorov/ITMO/blob/main/notes/algorithms/s2/l5.pdf)
+- [7 лекция, хэш-таблицы](https://github.com/ikochelorov/ITMO/blob/main/notes/algorithms/s2/l7.pdf)
 ### Линейная алгебра
 - [Конспект лекций](https://github.com/imkochelorov/ITMO/blob/main/notes/linear-algebra/s2/main.pdf)
 - [Конспект практик](https://github.com/imkochelorov/ITMO/blob/main/notes/linear-algebra/s2/practice.pdf)
