@@ -1,4 +1,4 @@
-#import "template.typ": *
+#import "../../../template.typ": *
 #set page(margin: 0.45in, height: auto)
 #set par(leading: 1em, first-line-indent: 0em)
 #set text(font: "New Computer Modern")
@@ -45,6 +45,7 @@
 #let apply=$op(circle.small)$
 #let nl=v(0.2cm)
 #let sp=0.2cm
+#let slash=$op(slash)$
 
 
 #outline(title: "Оглавление", indent: auto)
@@ -954,7 +955,7 @@ $=sum_(sigma in S_n) tau_1^sigma(1) tau_2^sigma(2) dots tau_n^sigma(n) e_1 and e
 \ \ 
 \ 
 #def внешняя степень оператора\
-Внешняя степень оператора $phi$ --- лиphiйное отображение вида:
+Внешняя степень оператора $phi$ --- лиphiйное отображение вида: // лирhiйное отображение?
 $ t phi(and p): and.big_(i=1)^p X -> and.big_(i=1)^p X $\
 $ phi^(and p) (x_1 and x_2 and dots and x_p) = phi x_1 and phi x_2 and dots and phi x_p $
 \
@@ -1068,13 +1069,14 @@ $make{overline(v)_j}_(j = 1)^m$ --- базис фактора $X slash L$\ #v(0.
 $#h(18.5pt) arrow.t$ ЛНЗ в $X slash L => sum_(j = 1)^m lambda^j overline(v) = overline(0)<=> lambda^j = 0$\
 #h(18.5pt) $arrow.t$ ПН\ 
 #h(18.5pt) _Переформулируем:_\ #v(0.2cm)
+#h(18.5pt) Мы знаем, что $overline(v)_j = v_j + L, space overline(0) = L$, тогда\
 #h(18.5pt) 
 #box(stroke: 1pt, inset: (x: 3pt, y: 9pt))[$limits(sum)_(j = 1)^m lambda^j v_j in L <=> lambda^j = 0$] $#pad(top: -25pt, $(*)$)$
 \ \
 #def ЛНЗ относительно L\ //написано же уже здесь
 Набор ${v_j}_(j = 1)^m$, обладающий свойством (\*) //называется ЛНЗ относительно L
 \ \
-#def "порождает" $X$ относительно $L$\
+#def набор "порождает" $X$ относительно $L$\
 ${v_j}_(j = 1)^m$ порождает $X$ относительно $L <=>$ любой элемент может быть представлен в виде ЛК ${v_j}_(j = 1)^m$ и элементов из $L$
 \ \
 #th _следующие условия эквивалнтны_\
@@ -1084,7 +1086,7 @@ ${v_j}_(j = 1)^m$ порождает $X$ относительно $L <=>$ люб
 + $X = angle.l v_1 dots v_m angle.r_K plus.circle L$\
 \
 #nb
-$dim_K X = dim_K L + dim_K X slash L quad (**)$
+$dim_K X = dim_K L + dim_K X slash L quad (**)$\ 
 \ #v(0.4cm)
 $make phi: X(K) -> Y(K)\ #h(27pt)X slash "Ker"tilde.eq "Im" phi$ _(теорема об изоморфизме)_
 \ \
@@ -1094,7 +1096,7 @@ $dim_K "Ker" phi + dim_K "Im" phi = dim_K X$
 #proof В формуле ($* *$) положим $L = "Ker" Y$ и вспомним теорему об изоморфизме
 \ \
 #nb
-$"Hom"_K(X, Y)$ --- линейное пространство над $K$\
+$"Hom"_K (X, Y)$ --- линейное пространство над $K$\
 $make phi, psi in "Hom"_K(X, Y)$\
 + $phi = psi <=> forall x in X(K) quad phi(x) = psi(x)$
 
@@ -1144,7 +1146,7 @@ $see phi(x) = sum_(i=1)^n sum_(j=1)^m xi^i a_i^j g_j = sum_(i=1)^n sum_(j=1)^m a
 $see sum_(i=1)^n sum_(j=1)^m  attach(epsilon, bl: j, tl: i) beta_i^j  = Theta quad | e_k$\ \
 $sum_(i=1)^n sum_(j=1)^m attach(epsilon, tl: i, bl: j) (e_k) beta_i^j = 0$\ \
 $sum_(i=1)^n sum_(j=1)^m delta_k^i g_j beta_i^j = 0$\ \
-$sum_(j = 1)^m g_j beta_k^j = 0 => beta_j^j = 0 space forall j$
+$sum_(j = 1)^m g_j beta_k^j = 0 => beta_k^j = 0 space forall j$
 \ \ 
 
 //#quote("За 10 минут мы ничего не узнаем, а вот в столовку опоздаем", attribution: "Трифанов", block: true)
@@ -1161,7 +1163,7 @@ $#h(18pt)A_phi#h(40pt)tilde(A)_phi$\
 \ \
 #proof\
 $phi(tilde(e)_j) = phi(limits(sum)_(i = 1)^n tau^i_j e_i) = limits(sum)_(i = 1)^n tau_j^i phi(e_i) = limits(sum)_(i = 1)^n limits(sum)_(s = 1)^n tau_j^i a_i^s e_s$\ \
-$phi(tilde(e)_j) = sum_(i=1)^n tilde(a)_j^i tilde(e)^i = sum_(i=1)^n sum_(s=1)^n tilde(a)_j^i tau_i^s e_s$ \ \
+$phi(tilde(e)_j) = sum_(i=1)^n tilde(a)_j^i tilde(e)_i = sum_(i=1)^n sum_(s=1)^n tilde(a)_j^i tau_i^s e_s$ \ \
 $limits(sum)_(i = 1)^n limits(sum)_(s = 1)^n tau_j^i a_i^s e_s = limits(sum)_(i=1)^n limits(sum)_(s=1)^n tilde(a)_j^i tau_i^s e_s$
 \ \
 $A_phi T = T tilde(A)_phi => tilde(A)_phi = S A_phi T $ \ \
@@ -1176,7 +1178,7 @@ $A_phi -->^? tilde(A)_phi$\ \
 
 = Алгебра линейных операторов
 $#make X(K), space Y(K), space Z(K)$\ 
-$make phi in "Hom"_K (X, Y), space psi in "Hom"_K (X, Y)$
+$make phi in "Hom"_K (X, Y), space psi in "Hom"_K (Y, Z)$
 $ X -->^phi Y -->^psi Z $
 #def коядро\
 $Y slash "Im" phi = "coker" phi$ --- коядро\ \
@@ -1192,7 +1194,7 @@ $make {h_s}_(s=1)^p$ --- базис $Z$\ \
 ${e_i}_(i=1)^n -->^(phi <-> A_phi) {g_j}_(j=1)^m$\
 ${g_j}_(j=1)^m -->^(psi <-> B_psi) {h_s}_(s=1)^p$\
 ${e_i}_(i=1)^n -->^(chi <-> ? space C_chi) {h_s}_(s=1)^p$\
-$chi(e_i) = (psi apply phi)(e_i) = psi(phi(e_i)) = psi(sum_(j=1)^n a_i^j g_j) = sum_(j=1)^m a_i^k psi(g_j) = sum_(j=1)^m sum_(s=1)^p a_i^j b_j^s h_s$\
+$chi(e_i) = (psi apply phi)(e_i) = psi(phi(e_i)) = psi(sum_(j=1)^n a_i^j g_j) = sum_(j=1)^m a_i^j psi(g_j) = sum_(j=1)^m sum_(s=1)^p a_i^j b_j^s h_s$\
 $chi(e_i) = sum_(s=1)^p c_i^s h_s$\ \
 $=> c_i^s = sum_(j=1)^m a_i^j b_j^s$\
 #box(stroke: 1pt, inset: (x: 3pt, y: 7pt))[$C_chi = B_psi A_phi$]\
@@ -1217,24 +1219,26 @@ $i$, $i$, $-1$, $k$, $-j$,
 $j$, $j$, $-k$, $-1$, $i$,
 $k$, $k$, $j$, $-i$, $-1$)
 \ \
-$make {e_j}_(j = 1)^n$ --- базис $A$\ \
+*Об алгебре*\
+$make {e_j}_(j = 1)^n$ --- базис алгебры $A$\ \
 $x = sum_(i = 1)^n xi^i e_i quad y = sum_(j = 1)^n eta^u e_j$\
-$x dot y = (sum_(i = 1)^n xi^i e_i) dot (sum_(j = 1)^n eta^u e_j) = sum_(i = 1)^n sum_(j = 1)^n xi^i eta^j overbrace((e_i dot e_j), =sum_(s=1)^n m_(i j)^s e_s)$\ \
+$x dot y = (sum_(i = 1)^n xi^i e_i) dot (sum_(j = 1)^n eta^j e_j) = sum_(i = 1)^n sum_(j = 1)^n xi^i eta^j overbrace((e_i dot e_j), =sum_(s=1)^n m_(i j)^s e_s)$\ \
 $norm(m_(i j)^s)$ --- структурные константы алгебры\
 $"End"_K (X)$ --- алгебра\
 ? $(phi + psi) apply chi = phi apply chi + psi apply chi$\
 ? $phi apply (lambda psi) = (lambda phi) apply psi = lambda (phi apply psi)$\
-$"End"_K (X) tilde.eq "Mat"_K(n), quad n = dim_k X$\
+$"End"_K (X) tilde.eq "Mat"_K (n), quad n = dim_k X$\
 $phi quad {e_j}_(j=1)^n quad attach(epsilon, tl: i, bl: j) quad phi = attach(epsilon, tl: i, bl: j) a_i^j --> A = norm(a_i^j)$\
 $phi <--> A_phi, space psi <--> B_psi => phi + psi <--> A_psi + B_psi,  space phi apply psi <--> A_phi dot B_psi$\
 $"Mat"_K (n)$ --- алгебра матриц $n times n$\
 $cal(P)_L x = cal(P)_L (x_L + x_M) = x_L$\ \
 // В этой алгебре есть ВСЁ)
 _Обратный оператор_\
-$make phi in "Hom"_K (X)$\
+$make phi in "Hom"_K (X, Y)$\
 $attach(see, tl: ?) tilde(phi): "Im" phi --> X$ --- отображение\
 $forall x in X quad (tilde(phi) apply phi) x = x$\
 $forall y in "Im" phi quad (tilde(phi) apply phi) y = y$\
+Получилось, что $tilde(phi)$ --- линейный операторр:\
 $see phi(tilde(phi)(y_1) +tilde(phi)(y_2)) = phi(tilde(phi)(y_1)) + phi(tilde(phi)(y_2)) = y_1 + y_2$\
 $tilde(phi)(y_1) + tilde(phi)(y_2) = tilde(phi)(y_1 + y_2)$\ \
 #def Обратимый оператор\
@@ -1252,16 +1256,10 @@ $exists phi^(-1) => phi$ --- биекция $=> phi$ --- изоморфизм
 \ \
 #th $exists space phi^(-1) <=> $ выполнено одно из (эквивалентных) условий:
 + $"Ker" phi = {0}$
-+ $dim_K "Im"_Y = dim_K X$
++ $dim_K "Im" phi = dim_K X$
 
 // победа
 // можно собираться ехать на праку
-// можете комм сверху посмотреть? 1231
-//так и что, этот комм просто я по приколу написал
-// так не, чуть выше
-// так трифанов сказал
-// строчечка какая
-// про дз?
 #pagebreak()
 //хрррр... ми-ми-ми
 (-\_- $)^(z space z space z dots)$
@@ -1271,3 +1269,551 @@ $exists phi^(-1) => phi$ --- биекция $=> phi$ --- изоморфизм
 ```
 #image("image.png", width: 10%)
 // understandable, have a nice night
+
+залил на гит прямо со спунами
+#pagebreak()
+
+= Обратная матрица
+== Общие положения
+$A(K)$ --- алгебра над $K$\
+#columns(2)[
+#def унитальная алгебра\
+Алгебра A(K) --- _унитальная_, если\
+$exists space 1 in A(K)$\
+$forall a in A(K): quad a dot 1 = a = 1 dot a$\
+
+#colbreak()
+*Примеры единиц:*
+
++ $RR quad 1_RR = 1$
+
++ $CC quad 1_CC = (1, 0) <-> 1+0_i$\
++ $HH quad 1_HH = (1, 0p, 0) <-> 1+0_i + 0_j + 0_k$\
++ $K[x] quad 1_(K[x]) = 1 + 0t + 0t^2 + dots$
++ $X, "End"_K(X) quad 1 = id_x$\
++ $"Mat"_K (n) quad 1 = E = "diag"{1 space 1 space dots space 1}$\
+\
+]
+#columns(2)[
+#def обратный элемент\
+Элемент $b$ называется обратным к элементу $a in A$, если\
+$a b = 1_A$ (правый обратный)\
+$с a = 1_A$ (левый обратный)\
+#colbreak()
+#nb Если $b$ является правым обратным и левым обратным, то\
+$b = c = : a^(-1)$
+]\
+== Обратимость в $"Mat"_k (n)$
+$make A in "Mat"_K (n)$\
+#columns(2)[
+#def обратимая матрица\
+$A$ --- _обратимая матрица_, если\
+$exists space B, C in "Mat"_K (n): quad A B = E quad C A = E$\ \
+#colbreak()
+#nb $B = C =: A^(-1)$
+]
+#columns(2)[
+#th\
+$exists space A^(-1) <=> det A eq.not 0$\ \
+#colbreak()
+#nb $A$, если $det A eq.not 0$ называется _невырожденной_
+]
+#proof 
+$=> quad make exists B: quad A B = E$\ #v(0.4cm)
+$A = norm(a_j^i) quad B = norm(b_j^i) quad E = norm(delta_j^i)$ --- _символ Кронекера_\ #v(0.4cm)
+$sum_(j = 1)^n a_j^i dot b _k^j = delta_k^i, quad make k$ --- фиксированный\ #v(0.4cm)
+$make b_k^j = : xi^j, quad delta_k^i = c^i = (0 space 0 space dots space limits(1)^limits(or)^k space 0 space 0)$\ #v(0.4cm)
+$<=>$ $sum_(j = 1)^n a_j^i dot xi^j = c^i$ --- СЛАУ на $k$-й столбец $B$\
+#columns(2)[
+#h(3.1cm) - неоднородная (по построению)\
+#h(3.1cm) - совместная\
+#h(3.1cm) - определенная (по условию)\
+#colbreak()
+\
+#v(0.4cm)
+$=>$ Система Крамера
+]
+$<=>$ по теореме Крамера $det norm(a_j^i) = det A eq.not 0$\ \
+#nb $exists space  c ? quad C A = E space quad A^T C^T = E^T = E quad space  det A^T = det A eq.not 0$
+\ \
+== Вычисления обратной матрицы
+#columns(2)[
+=== Метод Крамера
+#v(0.2cm)
+$A^(-1) = 1/(det A) dot tilde(A)^T,$ где $tilde(A)$ --- матрица алгебраического дополнения матрицы $A$\ #v(0.4cm)
+$A = norm(a_j^i), space tilde(A) = norm(A_j^i), space A_j^i = (-1)^(i + j)M_j^i$\ #v(0.4cm)
+$(star)$ --- система Крамера\ #v(0.4cm)
+$xi^j = (Delta j)/Delta = det(c -> a_j)/(det A)$\ #v(.55cm)
+$det(c -> a_j) = 
+display(attach(mat(delim: "|",
+dots, dots, 0, dots, dots;
+dots, dots, 0, dots, dots;
+dots, dots, dots.v, dots, dots;
+dots, dots, 1, dots, dots;
+dots, dots, dots.v, dots, dots;
+dots, dots, 0, dots, dots;
+), br: #pad(top: -65.5pt)[$<- k$], b: arrow.t\ k))
+= A_j^k$
+\ \
+#colbreak()
+=== Метод Гаусса
+$(A|E) limits(-->)_("преобразования Гаусса (элементарные)") (E|A^(-1))$\ #v(0.4cm)
+*Элементарные преобразования*
+1. перестановка строк\
+
+2. умножение строки на число $!= 0$
+
+3. составление линейной комбинации строк
+
+$see A dot B = C <--> C_k^i = sum_(j=1)^n a^i_j b^j_k$\
+$attach(display(mat(delim: "[", #text(white)["t"], #text(white)["t"] ; #text(white)["t"], #text(white)["t"] ; #text(white)["t"], #text(white)["t"])), tl: #pad(top: 10pt)[$j -->$]) attach(limits(display(mat(delim: "[", #text(white)["t"], #text(white)["t"] ; #text(white)["t"], #text(white)["t"] ; #text(white)["t"], #text(white)["t"]))), b: arrow.t\ k) = attach(limits(display(mat(delim: "[", #text(white)["t"], #text(white)["t"] ; #text(white)["t"], #text(white)["t"] ; #text(white)["t"], #text(white)["t"]))), b: arrow.t\ k, tr: #pad(top: 10pt)[$<-- j$])$
+\ \
+#lm
++ Перестановка строк в A ведёт ту же перестановку в $C$
++ Если строку $A$ умножить на $lambda in K =>$ то же происходит в $C$
++ Составление линейной комбинации строк в $A =>$ то же в матрице $C$
+#proof
+Очевидно.
+]
+\ \
+
+#def элементарная матрица\
+$Q$ --- _элементарная_ матрица, если получена из матрицы $E$ элементарными пребразованиями\ #v(0.4cm)
+$Q = display(mat(delim: "[",
+  1, "", "", "";
+  "", 1, "", "";
+  "", "", dots.down, "";
+  "", "", "", 1
+)) quad quad attach(underline(Q'), bl: 1) = display(mat(delim: "[", augment: #(vline: 2, hline: 2),
+  0, 1, "", "", "";
+  1, 0, "", "", "";
+  "", "", 1, "", "";
+  "", "", "", dots.down, "";
+  "", "", "", "", 1
+))$\
+$attach(underline(Q''), bl: 2) = display(mat(delim: "[",
+  lambda, "", "", "", "";
+  "", 1, "", "", "";
+  "", "", 1, "", "";
+  "", "", "", dots.down, "";
+  "", "", "", "", 1
+)) quad quad attach(underline(Q'''), bl: 3) = display(mat(delim: "[",
+  1, 0, 0, dots, dots;
+  lambda, 1, 0, dots, dots;
+  #text(white)["t"], "", "", "", "";
+  "", "", "", #text(white)["t"], "";
+  "", "", "", "", #text(white)["t"]
+))$\
+
+$A |-> underbrace(Q_n Q_(n-1) Q_(n-2) dots Q_1, A^(-1)) A = E$\
+$E |-> A^(-1) E = A^(-1)$
+\ \
+= Сопряженный оператор
+#columns(2)[
+$make phi in "Hom"_K (X, Y)$\ #v(0.4cm)
+$make X^*$ --- пространство, сопряженное $X$\ #v(0.4cm)
+$make Y^*$ --- пространство, сопряженное $Y$\ #v(0.4cm)
+$see phi^*: quad forall f in Y^* quad forall x in X$\ #v(0.4cm)
+#h(1.9cm)#box(stroke: 1pt, inset: 6pt)[$f(phi x) = (phi^* f) (x)$]\ #v(0.4cm)
+*Замечание: * $space phi^*: Y^* -> X^*$
+#colbreak()
+*Лемма: * $space phi^*$ --- линейное отображение\
+$see phi^*(f + g) /*limits(=)^? */ = phi^* f + phi^* g$\ #v(0.4cm)
+$forall x #h(.2cm) [phi^*(f + g)] (x) = (f+g)(phi x) = f(phi(x)) + g(phi(x)) = (phi^* f) (x) + (phi^* g)(x) = (phi^* f + phi^*g)(x)$\ #v(0.4cm)
+$see phi^*(lambda f) = lambda(phi^* f)$\ #v(0.4cm)
+$forall x  #h(.2cm) [phi^* (lambda f)](x) = (lambda f)(phi(x)) = lambda(phi^* f) (x)$\ \
+*Замечание: * $phi^* in "Hom"_K (Y^*, space X^*)$
+]
+#def сопряженный оператор\
+Линейный оператор $phi^*$ называется сопряженным к $phi$\ \
+$make {e_j}_(j=1)^n$ --- базис $X(K)$\
+$make {g_i}_(i=1)^m$ --- базис $Y(K)$\
+$phi <--> A_phi$\
+$make {f^s}_(s=1)^n$ --- базис $X^* (K)$\
+$make {h^t}_(t=1)^m$ --- базис $Y^* (K)$\
+$phi^* <--> A_(phi^*)$\
+$A_(phi^*) =^? dots A_phi$\ \
+$f(phi(x)) = sum_(t=1)^m eta_t sum_(i=1)^n a^t_i xi^i = sum_(i=1)^n sum_(t=1)^m eta_t a^t_i xi^i = eta^T A_phi xi$\
+$f <--> (eta_1 eta_2 dots eta_m)$\
+$x <--> (xi^1 xi^2 dots xi^n)^T$\
+
+// 1:03:39
+#image("image.png")
+#pagebreak()
+= Алгебра скалярных полиномов
+#columns(2)[
+$make phi in "End"_K (X)$\
+*Определены*:\
+- $phi + phi = 2 phi$
+- $lambda phi, quad lambda in K$
+- $phi^0 = id_X, phi^i = phi^(i-1) apply phi$\ 
+#colbreak()
+#nb
+В $"End"_K (X)$ возникает кольцо $R_phi$:\
+$ R_phi =  {p(phi) | p in K[x]} =: K[phi] $
+#nb
+$make p in K[x]: p(phi) = Theta$
+]\ \
+== Основные конструкции
+#v(0.4cm)
+$K[x] = {sum_(n=0)^N a_n x^n | a_n in K, N in NN}$ --- кольцо многочленов над $K$\ #v(0.4cm)
+$forall p, q in K[x]:$
+#columns(3)[
+- $p + q in K[x]$\
+  $(p+q)(x) = p(x)+q(x)$ 
+#colbreak()
+- $lambda p in K[x]$\
+  $(lambda p)(x) = lambda p(x)$
+#colbreak()
+- $p q in K[x]$\
+  $(p q)(x) = p(x) q(x)$
+]
+Получилась коммутативная алгебра.\
+- $0 in K[x] quad$
+  $0(t) = 0 + 0x + dots$\
+  $1 in K[x] quad$  $1(t) = 1 + 0x + dots$\
+  \
+#def идеал в $K[x]$\
+Идеалом в алгебре $K[x]$ называется линейное подпространство $J$/*от Jideal*/, которое обрадает следующим свойством: $ forall p in K[x] quad forall q in K quad p q in J\ J K[x] subset.eq J, 1 in K[x] => J K[x] = J $
+#ex
++ $J_alpha = {p in K[x] | p(alpha) = 0}$
++ $J_q = q K[x] = {p in K[x] | p op(dots.v) q}$\
+  $J_alpha = (x-alpha) K[x]$\ \
+#def главный идеал\
+Идеал вида $J_q = q K[x]$ называется _главным идеалом_: $ (q) = J_q = {q p | p in K[x]} $\
+*Контрпример:* не главный идеал:\ #v(0.2cm)
+$(q_1 q_2) = {p_1 q_1 + p_2 q_2 | p_1, p_2 in K[x]}$\ \
+#th\
+$K[x]$ --- кольцо главных идеалов (PID)
+\ \
+#proof #v(0.2cm)
+$K[x]$ --- евклидово кольцо: $deg p$\ #v(0.4cm)
+$forall p, q in K[x] quad exists p = g q + r, deg r < deg q$\ #v(0.4cm)
+$see J lt.eq.tri K[x]$\ #v(0.4cm)
+$make q in J, deg q$ --- наименьший в $J$\ #v(0.4cm)
+$see p in J => exists! p_(in J) = underbracket(g q, in K) + r_(in J), quad deg r < deg q$\ #v(0.4cm)
+$=> r = 0 => p = g dot q in q dot K[x]$\ \
+
+$see J_q = q K[x]$\
+\
+#def порождающий многочлен идеала\
+Многочлен $q$ называется порождающим многочленом идеала $J_q$\ \
+*Контрпример:* Не PID: $K[x, y]$\
+$(x, y) = alpha x + beta y + gamma x y + dots$\ \
+#nb
+$J_q equiv (q)$ --- существует мин. многочлен $p = min(J_q)$\ \
+#lm
+$q tilde p$ ($exists alpha in K[x]^*: p = alpha q$)\ \
+#proof
+$q op(dots.v) p$, т.к. $p$ --- $min$\
+$p op(dots.v) q arrow.l.double p in q K[x] quad exists g in K[x]: p = q g$\ \
+#nb
+$q$ будем называть минимальным порождающим полиномом идеала $J_q$\
+\
+== Операции с идеалами
+$make alpha, beta lt.eq.tri K[x]$\
+#def сумма идеалов\
+$alpha + beta = {p = p_1 + p_2 | p_1 in alpha, p_2 in beta}$\ \
+#lm
+$alpha + beta lt.eq.tri K[x]$\ \
+#proof
+$make q in K[x], p in alpha + beta => p = p_1 + p_2$\
+$q p = underbrace(q p_1, in alpha) + underbrace(q p_2, in beta) = tilde(p_1) + tilde(p_2)$\
+$make p, p' in alpha + beta => p = p_1 + p_2, p' = p'_1 + p'_2 => p + p' = (p_1 + p'_1) + (p_2 + p'_2)$\ \
+#def пересечение идеалов\
+$alpha sect beta = { p | p in alpha, p in beta}$\ \
+#lm $alpha sect beta lt.eq.tri K[x]$\ \
+#proof
+$make q in K[x], p in alpha sect beta => p in alpha sect p in beta$\
+$q p in alpha, q p in beta => q p in alpha sect beta$\ \
+#def произведение идеалов\
+$alpha dot beta = {sum p_i q_i | p_i in alpha, q_i in beta}$\
+$alpha dot beta subset.eq alpha sect beta$\
+$alpha dot beta = alpha sect beta <=> alpha + beta = 1$\ \
+#def радикал идеала\
+$r(alpha) = sqrt(alpha) = {p in K[x] | p^n in alpha, n in NN}$\ \
+// "зачем я вам вообще это рассказываю?"
+#def частное идеалов\
+$(a : b) = {p in K[x] | beta p subset.eq alpha}$\
+\
+#lm
+$make alpha = (p), beta = (q)$, тогда $alpha subset.eq beta => p op(dots.v) q$\ \
+#proof
+$p in alpha subset.eq beta => p in beta = q K[x] => exists g in K[x], p = g q$\ \
+#lm
+$alpha = (p), beta = (q)=> alpha + beta = (r), r = gcd(p, q)$\ \
+#proof
+$tilde(r) = gcd(p, q)$\
+$r in alpha + beta$, но $alpha + beta in.rev alpha => p op(dots.v) r$\
+#h(2.32cm)$alpha + beta in.rev beta => q op(dots.v) r$\
+$=> r = "cd"(p, q)$\
+$p op(dots.v) tilde(r), q op(dots.v) tilde(r) => tilde(r) in alpha + beta, tilde(r) = p_(op(dots.v) r) a + q_(op(dots.v) r) b => tilde(r) op(dots.v) r => tilde(r) tilde r$\ \
+#ex\
+$alpha = (8), beta = (6) => alpha + beta = (2)$\
+$alpha = (5), beta = (4) => alpha + beta = (1) = ZZ$\ \
+#lm
+$alpha = (p), beta = (q) => alpha sect beta = (r) => r = "lcm"(p,q)$\ \
+#proof
+$tilde(r) = "lcm"(p, q)$\ 
+$alpha sect beta subset.eq alpha quad r op(dots.v) p$\
+$alpha sect beta subset.eq beta quad r op(dots.v) q$\
+$=> r = "cm"(p, q)$\
+$tilde(r) in alpha sect beta => tilde(r) op(dots.v) r$\ \
+#nb
+$make p_1, p_2 in K[x]: gcd(p_1, p_2) = d => exists q_1, q_2 in K[x]: p_1 q_1 + p_2 q_2 = d$\ \
+#proof
+$alpha = (p_1), beta = (p_2)$\
+$alpha + beta = (d)$\ \
+#lm
+$make p_1, p_2 in K[x]: gcd(p_1, p_2) = 1 => exists q_1 q_2 subset.eq K[x]: p_1 q_1 + p_2 p_2 = 1$\ \
+#th\
+$make p_1, p_2, dots, p_m in K[x]: gcd(p_i, p_(j!=i)) = 1 => exists {q_i}_(i=1)^m in K[x]: sum_(i=1)^m p'_i q_i = 1, quad p'_i = p/p_i = (p_1 p_2 dots p_m)/p_i$\ \
+
+#pagebreak()
+
+= Кольцо операторных полиномов
+
+== Введение
+$K[x]$ --- кольцо (алгебра) скалярных полиномов\
+$K[x]$ --- кольцо главных идеалов\
+
+$forall J lt.eq.tri K[x] quad exists p_J in K[t] quad J = (p_J)$\
+($p_J$ --- минимальный порождающий полином идеала $J$)\
+\
+#lm 
+$make p_1, p_2 in K[t]: gcd(p_1, p_2) = 1 =>$\
+$exists q_1, q_2 in K[t] quad p_1 q_1 + p_2 q_2 = 1$\
+\
+$make X(K)$ --- линейное пространство над $K$\
+$make phi in "End"_K (X)$\
+$forall sigma_phi quad K[x] --> "End"_K (X)$\
+$p(x) = sum_(m=0)^infinity a_m x^m |->p(phi) = sum_(m=0)^infinity a_m phi^m$
+\ \
+#lm 
+$sigma_y in "Hom"(K[x], "End"_K (x))$\ \
+#proof
+$forall p, q in K[x]$\
+$sigma_phi (p+q) = sigma_phi (p) + sigma_phi (q)$\
+$sigma_phi (1) = cal(I) quad sigma_phi (1) = sigma_phi (x^0) = phi^0 = cal(I)$\
+$sigma_phi (lambda p) = lambda sigma_phi (p)$
+\ \
+#nb $"Im" sigma_phi = K[phi] lt.eq.tri "End"_K (X)$
+\ #v(0.2cm)
+#nb $"Ker" sigma_phi = {p in K[x] | p(phi) = theta}$\
+$"Ker" sigma_phi$ --- пространство полиномов, аннулирующих оператор $phi$
+\ \
+#lm $"Ker" sigma_phi$ --- нетривиально\
+#proof
+$make dim_K X = n => dim_K "End"_K (x) = n^2$\
+$see {cal(I), phi, phi^2, dots, phi^n^2}$ --- ЛЗ набор $=> exists {lambda_m}_(m=0)^n^2: sum_(m=0)^n^2 lambda_m phi^m = theta => p(x) = sum_(m=0)^n^2 lambda_m x^m in "Ker" sigma_phi$
+
+#nb $"Ker" sigma_phi lt.eq.tri K[t] => exists p_phi in "Ker" sigma_phi: "Ker" sigma_phi = (p_phi)$
+
+#def минимальный аннулирующий многочлен\
+Многочлен $p_phi$ называется _минимальным аннулирующим многочленом_ оператора $phi$.\
+$ p_phi (phi) = theta $
+#nb $make p, q in K[t] quad p-q quad p_phi <=> p(phi) = q(phi)$\
+$make p = g p_phi + r => p(phi) = r(phi)$\
+#box(stroke: 1pt, inset: 6.5pt)[$K[phi] tilde.eq K[t] slash (p_phi)$]
+
+== Структурная теорема
+$make phi in "End"_K (X)$\
+$make p_phi$ --- мин. аннулир. полином $phi$\
+$make p_phi = p_1 p_2: gcd(p_1, p_2) = 1$\ \
+#lm $X = "Ker" p_1 (phi) xor "Ker" p_2 (phi)$
+#proof
+$exists q_1, q_2 in K[x]: p_1 q_1 + p_2 q_2 = 1$\
+#box(stroke: 1pt, inset: 6.5pt)[$p_1 (phi) + q_1 (phi) + p_2 (phi) q_2 (phi) = cal(I)$]\
+$forall x in X(K)$\
+$see cal(I) x = underbracket(p_1 (phi) q_1 (phi) x, x_2) + underbracket(p_2 (phi) q_2 (phi) x, x_1) = x_1 + x_2$\
+$see p_1 (phi) x_1 = p_1 (phi) p_2 (phi) q_2 (phi) x = p_phi (phi) q_2 (phi) x = theta q_2 (phi) x = 0 => underline(x_1 in "Ker" p_1 (phi))$\
+$p_2 (phi) x_2 = p_2 (phi) p_1 (phi) q_1 (phi) x = p_phi (phi) q_1 (phi) x = 0 => underline(x_2 in "Ker" p_2 (phi))$\
+Итак, $forall x in X(K) quad x in "Ker" p_1 (phi) + "Ker" p_2 (phi)$\ \
+$make z in "Ker" p_1 (phi) sect "Ker" p_2 (phi) => z in "Ker" p_1 (phi) and z in "Ker" p_2 (phi) => p_1 (phi) z = 0, p_2 (phi) z = 0$\
+$z = p_1 (phi) q_1 (phi) z + p_2 (phi) q_2 (phi) z = 0$\ \
+#lm $"Ker" p_1 (phi) = "Im" p_2 (phi)$\
+$"Ker" p_2 (phi) = "Im" p_1 (phi)$\
+#nb $p_phi (phi) = theta quad forall x in X(k) quad p_phi (phi) x = 0$\
+$p_1 (phi) underbracket(p_2 (phi) x, in "Im" p_2 (phi)) = 0$\
+$=> "Im" p_2 (phi) subset.eq "Ker" p_1 (phi)$
+#proof
+$dim_K (X) = dim_K "Ker" p_1 (phi) + dim_K "Ker" p_2 (phi)$ (из пред. леммы)\
+$dim_K (X) = dim_K "Ker" p_2 (phi) + dim_K "Im" p_2 (phi)$\
+$dim_K "Ker" p_1 (phi) = dim_K "Im" p_2 (phi) => "Ker" p_1 (phi) tilde.eq "Im" p_2 (phi) =>^((*)) "Ker" p_1 (phi) = "Im" p_2 (phi)$\ \
+#nb $X = "Ker" p_1 (phi) xor "Ker" p_2 (phi) = "Im" p_1 (phi) xor "Im" p_2 (phi)$, но $"Im" p_i (phi) tilde.eq X slash "Ker" p_i (phi)$\
+$X tilde.eq X slash "Ker" p_1 (phi) xor X slash "Ker" p_2 (phi)$\ \
+#lm $p_1 (phi) q_1 (phi)$ --- проектор на $"Ker" p_2 (phi)$\
+$p_2 (phi) q_2 (phi)$ --- проектор на $"Ker" p_1 (phi)$\
+#proof
+$cal(P)_1 = p_2 (phi) q_2 (phi), cal(P)_2 = p_1 (phi) q_1 (phi)$\
++ $cal(P)_i cal(P)_i = cal(P)_i space (i = 1,2)$\
+  $cal(P)_1 = cal(I) cal(P)_1 = (underbracket(p_1 (phi) q_1 (phi), cal(P)_2) + underbracket(p_2 (phi) q_2 (phi), cal(P)_1)) cal(P_1) = (cal(P)_2 + cal(P)_1) cal(P)_1 = cal(P)_1 cal(P)_1$\
+  $cal(P)_1 cal(P)_2 = p_1 (phi) q_1 (phi) p_2 (phi) q_2 (phi) = p_phi (phi) q_1 (phi) q_2 (phi) = theta$\
+  $cal(P)_1 + cal(P)_2 = cal(I) <=> forall x in X(K) quad x = x_1 + x_2 = cal(P)_1 x + cal(P)_2 x = (cal(P)_1 + cal(P)_2) x = cal(I) x$\ \
+
+#th $make phi in "End"_K (x)$\
+$make p_phi in K[x]: p_phi = theta$\
+$make p_phi = p_1 p_2: gcd(p_1, p_2) = 1$\
+Тогда:
++ $X = L_1 xor L_2, L_i = "Ker" p_1 (phi)$
++ $cal(P)_1 = p_2 (phi) q_2 (phi)$ --- проектор на $L_1$\
+  $cal(P)_2 = p_1 (phi) q_1 (phi)$ --- проектор на $L_2$
++ $"Ker" p_1 (phi) = "Im" p_2 (phi) quad X = "Ext" (L_1, L_2)$
+
+#nb По индукции получаем:\
+$p_phi = product_(i=1)^m p_i: gcd(p_i, p_(j!=i)) = 1$\
+Тогда:
++ $X = limits(plus.circle.big)_(i=1)^m L_i$, где $L_i = "Ker" p_i (phi)$
++ $cal(P)_i = p'_i (phi) q_i (phi)$ --- проектор на $L_i$\
+  $p'_i = p_phi slash p_i$
++ $sum_(i=1)^m cal(P)_i = cal(I) <=> exists q_i in K[x]: sum_(i=1)^m p_i q_i = 1$
+
+= Инвариантные подпространства
+
+$make X(K)$ --- ЛП над $K$\
+$make phi in "End"_K (X)$\
+#def инвариантное подпространство\
+Подпространство $L(K) lt.eq X(K)$ называется инвариантным подпространством оператора $phi$, если $ forall x in L(K) quad phi(x) in L(x) <=> phi(L) subset.eq L $
+#exs
++ $cal(I) x = x$ --- любое подпространство $X$ является инвариантным
++ $theta x = 0$ --- любое подпространство $X$ является инвариантным
++ $X = L_1 xor L_2, cal(P)_1$ --- проектор на $L_1$\
+  $L_1$ и $L_2$ --- инвариантны для $cal(P)_1$
++ $K^n quad A = "diag"(lambda_1, lambda_2, dots, lambda_n)$ --- в базисе ${e_i}_(i=1)^n$
+  $L_i = <e_i>$ --- инвариантное подпространство $A quad 2^n$ подпространств
+
+#def ультраинвариантное пространство\
+Пространство называется ультраинвариантно, если оно инвариантно и его дополнение также инвариантно\
+
+*Контрпример:*\
+$K[x]_n$\
+$<x^n> <= K[x]_n = K[x]_(n-1) xor <x^n>_K$\
+$phi: dif/(dif x)$\
+$dif/(dif x) x^n = n x^(n-1) in.not <x^n>_K$\
+$forall p in K[x]_(n-1) dif/(dif x) p in K[x]_(n-1)$\
+#nb
+$x = L_1 xor L_2 => L_1$ --- ультраинвариантное $=> L_2$ --- ультраинвариантное
+#proof
+Симметричность определения.\
+#def компонента оператора в УИПП\
+$make L <= X(K)$ --- УИПП $phi$\
+Оператор $phi_L$ называется компонентой оператора $phi$ в УИПП $L$, если $phi_L = phi lr(|, size: #200%)_#pad(bottom: -13pt)[$L$]$ --- сужение $phi$ на $L$\ \
+#lm
+$make X = L_1 xor L_2, L_1, L_2$ --- УИПП $phi$, $phi_i$ --- компонента $phi$ в $L_i$\
+Тогда $phi = phi cal(P)_1 + phi cal(P)_2 = phi_1 xor phi_2$
+#proof
+$forall x in X(K) quad x x^! x_1 + x_2, x_i in L_i$\
+$x = cal(P)_1 x+ cal(P)_2 x$, $cal(P)_i$ --- проектор на $L_i$\
+$phi(x) = phi(cal(P)_1 x + cal(P)_2 x) = phi(cal(P)_1 + cal(P)_2) x = (phi cal(P)_1 + phi cal(P)_2) x$\
+$phi = phi cal(P)_1 + phi cal(P)_2 = phi_1 xor phi_2$\
+$phi(x) = (phi_1 xor phi_2) (x_1 xor x_2)$\
+$forall x in X(K) quad x = (x_1, x_2), x_1 in L_1, x_2 in L_2$\
+$phi in "End" (X), phi = (phi_1, phi_2)$\ \
+$make phi in "End"_K (X)$\
+$p_phi (phi) = theta$\
+$make p_phi = p_1 p_2: gcd(p_1, p_2) = 1$\
+$=> X=L_1 xor L_2, L_i = "Ker" p_i (phi)$\
+#lm
+$L_1, L_2$ --- ИПП $phi$
+#proof
+$forall x in L_1 quad phi(x) in L_1 ?$\
+$x in L_1 = "Ker" p_1 (phi) => p_1 (phi) x = 0$\
+$see p_1 (phi) (phi x) = (p_1 (phi) phi)(x) = (phi p_1 (phi))x = 0 => phi x in L_1$\
+Для $L_2$ аналогично
+#nb
+$L_1$ и $L_2$ --- УИПП
+#lm
+$L_1$ и $L_2$ --- нетривиальные УИПП ($!= X, {0}$)\
+#proof
+От противного: $make L_1 = X => L_1 = "Ker" p_1 (phi) = X$\
+$forall x in X quad p_1 (phi) x = 0 => p_1 (phi) = 0, p_1 = min (phi), deg p_1 < deg p_phi$\
+$make L_1 = {0} => L_2 = X$, противоречие\ \
+#lm $X = L_1 xor L_2, L_1 = "Ker" p_1 (phi)$\
+$make phi_i$ --- компонента $phi$ в $L_1$\
+Тогда $p_i$ --- минимальный аннулирующий полином для $phi_i$\
+#proof
+$forall x in L_i quad p_i (phi_i) x = 0$\
+$arrow.curve "Ker" p_i (phi) => p_i (phi) x = 0$\
+$p_i (phi) x = p_i (phi) cal(P)_i x = p_i (phi_i) x$\
+$make tilde(p)_i - min (phi_i) => tilde(p)_i (phi_i) = 0$\
+$p_i, tilde(p_i) => exists g: p_i = g tilde(p)_i, deg g > 0$\
+$p_phi = p_1 p_2 = tilde(p)_1 g p_2, tilde(p)_1 p_2 - min(phi), deg tilde(p)_1 p_2 < deg p_phi$, противоречие\
+= Спектральная теорема
+#th
+$phi in "End"_K (X), p_phi = p_1 p_2: gcd(p_1, p_2) = 1$\
++ $X = L_1 xor L_2, L_i = "Ker" p_i (phi)$ --- УИПП
++ $cal(P)_i = p'_i (phi) q_i (phi)$ --- проектор на $L_i$\
+  Здесь $p'_1 (x) q_1 (x) + p'_2 (x) q_2 (x) = 1$
++ $phi = phi_1 cal(P)_1 + phi_2 cal(P)_2 = sum_(i=1)^2 phi_i cal(P)_i = phi_1 xor phi_2$\
+  $p_i = min(phi_i)$
+#nb
+Обобщение:\
+$make p_phi (x) = product_(i=1)^m (x - x_i)^(r_i) => p_i (x) = (x - x_i)^(r_i) => L_i = "Ker" p_i (phi) = "Ker" (phi - x_i cal(I))^(r_i)$\
+$X = limits(xor.big)_(i=1)^m L_i, quad cal(P_i) = p'_i (phi) q_i (phi)$\
+$phi = sum_(i=1)^m phi_i cal(P)_i$\
+$see L_i = "Ker" (phi - x_i cal(I))^(r_i)$\
+$forall x in L_i quad (phi - x_i cal(I))^(r_i) x = 0$\
+$arrow.curve (phi - x_i cal(I))^(r_i) x = 0 => (phi - x_i cal(I))^(r_i) = theta => phi_i - x_i cal(I) = cases(delim: "[", theta, tau_i\, tau_i^(r_i) = theta)$\
+($tau_i$ --- нильпотент)\
+$phi_i = tau_i + x_i cal(I)$\
+#box(inset: (x: 6pt, y: 10pt), stroke: 1pt)[$phi = sum_(i=1)^m (tau_i + x_i cal(I)) cal(P)_i$]\
+$p_phi = p_1 p_2 dots p_m$
+// dead (T=12:48)
+#pagebreak()
+
+_Напоминание:_\ \
+
+#th $phi in "End"_K (X)$\ #v(0.4cm)
+$make p_phi = product_(i = 1)^m p_i = product_(i = 1)^m (lambda - lambda_i), quad lambda_i eq.not lambda_(j eq.not i)$\ #v(0.4cm)
+Тогда: 
+
++ $exists {q_i}_(i=1)^m in K[lambda]: sum_(i=1)^m p'_i (phi) q_i (phi) = cal(I)$ #v(0.2cm)
+
++ $X = limits(xor.big)_(i=1)^m L_i, space L_i = "Ker"p_i (phi) = "Ker"(phi_i - lambda_i cal(I))$ --- УИПП #v(0.2cm)
++ $p_i - min(phi_i), space cal(P)_i = p'_i (phi) q_i (phi)$ #v(0.2cm)
++ $phi = sum_(i = 1)^m phi_i cal(P)_i = space sum_(i = 1)^m (tau_i + lambda_i cal(I)) cal(P)_i, space tau_i^r_i = theta$ #v(0.2cm)
+
+Два случая:
+
+1. $(phi_i - lambda_i cal(I))^(r_i) x = 0 cancel(0)?/ => (phi_i - lambda_i cal(I)) x = 0 quad (r_i = 1)$
+2. $(phi_i - lambda_i cal(I))^(r_i) = 0 => tau_i^(r_i) = theta$
+
+\ \
+= Спектральный анализ оператора
+$make r_i = 1 => "Ker"(phi_i - lambda_i cal(I)) = {x in X(K) | underline((phi_i - lambda_i cal(I)) x=0)} => phi x = lambda x <==> underline((phi - lambda cal(I))x = 0)$\ #v(0.4cm)
+
+$make {e_i}_(i = 1)^n$ --- базис $X(K) => phi <-> A_phi, space x <-> xi$\ #v(0.4cm)
+$(A_phi - lambda E)xi = 0$ --- СЛАУ (однородная)\ \
+#nb #v(0.2cm)Система $(A_phi - lambda E)xi = 0$ имеет нетривиальные решения, если $(A_phi - lambda E)$ --- вырождена $=>$\ $ det (A_phi - lambda E) = 0$\ \
+#def характеристический многочлен\
+Многочлен $chi_phi (lambda) = det (A_phi - lambda E)$ \ \ //называется характеристическим многочленом оператора $phi$\ \
+#lm #v(0.2cm)$make {tilde(e)_j}_(j=1)^n$ --- другой базис $X(K) => det (tilde(A)_phi - lambda E) = (A_phi - lambda E)$
+\ \
+#proof #v(0.2cm)
+$phi <-> tilde(A)_phi$\ #v(0.4cm)
+$det (tilde(A)_phi - lambda E) = det(S A_phi T - lambda E) =det(S A_phi T - lambda S T) =\ det[S (A_phi - lambda E) T] = det S space det (A_phi - lambda E) space det T = det(A_phi - lambda E)$\ \
+#nb #v(0.2cm) $cal(X) = det (phi-  lambda cal(I))$\ \
+
+#th _(Гамильтон-Кэли)_ $quad cal(X)_phi in (p_phi)$\ #v(0.4cm)
+$cal(X)_phi (phi) = 0 <=> cal(X)_phi dots.v p_phi$\ \
+
+#proof #v(0.2cm)
+$make cal(X)_phi (lambda) = a_0 + a_1 lambda + a_2 lambda^2 + dots + a_n lambda^n$\
+#box(stroke: 1pt, inset: 6pt)[$A^(-1) = 1/(det A) tilde(A)^T => det(A) E = A tilde(A)^T$]
+
+\ \
+
+$phi <-> A_phi$\ #v(0.4cm)
+$det(A_phi - lambda E) dot E - (A_phi - lambda E) tilde((A_phi - lambda E)^T)$\ #v(0.4cm)
+$tilde((A_phi - lambda E)^T) = C_0 + C_1 lambda + C_2 lambda_2 + dots + C_(n-1) lambda^(n-1)$\
+#ex
+$A_lambda = mat(delim: "[", lambda, lambda^2 + 1; lambda - lambda^2, 1) = mat(delim: "[", 0, 1; 0, 1) + lambda mat(delim: "[", 1, 0; 1, 0) + lambda^2 mat(delim: "[", 0, 1; -1, 0)$\
+$see (A_phi - lambda E) (C_0 + C_1 lambda + C_2 lambda^2 + dots + C_(n-1) lambda^(n-1))$\
+$lambda^0: A_phi C_0$\
+$lambda^1: A_phi C_1 - C_0$\
+$lambda^2: A_phi C_2 - C_1$\
+$dots.v$\
+$lambda^(n-1): A_phi C_(n-1) - C_(n-2)$\
+$lambda^n: - C_(n-1)$
+
+$cal(X) phi ()$
