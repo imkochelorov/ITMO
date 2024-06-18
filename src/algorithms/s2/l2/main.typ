@@ -99,10 +99,9 @@ def push(v):
   pr[2 * v + 2] += pr[v]
   pr[v] = 0
 
-MAX_INT = 1e12
 def get(v, l, r, ql, qr):
   if ql >= r or qr <= l:
-    return MAX_INT
+    return 0
   if ql <= l and r <= qr:
     return tree[x]
   push(v)
