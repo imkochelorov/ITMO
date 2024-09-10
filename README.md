@@ -5,6 +5,7 @@ _в процессе (а может и нет)_
 ## 2 семестр
 ### Математический анализ
 - [Конспект лекций](https://github.com/imkochelorov/ITMO/blob/main/notes/calculus/s2/main.pdf)
+- [Билеты к экзамену](https://github.com/imkochelorov/ITMO/blob/main/notes/calculus/s2/exam.pdf)
 ### Дискретная математика
 - [Конспект лекций](https://github.com/imkochelorov/ITMO/blob/main/notes/discrete-math/s2/main.pdf)
 ### Алгоритмы и структуры данных
