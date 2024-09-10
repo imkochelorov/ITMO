@@ -7,7 +7,7 @@ _в процессе (а может и нет)_
 - [Конспект лекций](https://github.com/imkochelorov/ITMO/blob/main/notes/calculus/s2/main.pdf)
 - [Билеты к экзамену](https://github.com/imkochelorov/ITMO/blob/main/notes/calculus/s2/exam.pdf)
 ### Дискретная математика
-- [Конспект лекций](https://github.com/imkochelorov/ITMO/blob/main/notes/discrete-math/s2/main.pdf)
+- [Конспект лекций](https://github.com/imkochelorov/ITMO/blob/main/notes/discrete-math/s2/main.pdf) - to refactor
 ### Алгоритмы и структуры данных
 - [1 лекция, дерево отрезков](https://github.com/imkochelorov/ITMO/blob/main/notes/algorithms/s2/l1.pdf)
 - [2 лекция, дерево отрезков - отложенные операции](https://github.com/ikochelorov/ITMO/blob/main/notes/algorithms/s2/l2.pdf)
